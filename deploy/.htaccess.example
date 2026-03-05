@@ -1,0 +1,26 @@
+RewriteEngine On
+
+# Force HTTPS (works for jegprofil.info and www.jegprofil.info)
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Hub shortcuts
+RewriteRule ^stocks/?$ /STOCK-MARKET/ [R=301,L,NC]
+RewriteRule ^hotel/?$ /HOTEL/ [R=301,L,NC]
+RewriteRule ^calendar/?$ /CALENDAR/ [R=301,L,NC]
+RewriteRule ^booking/?$ /BOOKING/ [R=301,L,NC]
+RewriteRule ^coffee/?$ /COFFEE/ [R=301,L,NC]
+RewriteRule ^dev/?$ /DEV/ [R=301,L,NC]
+
+# Optional deep path pass-through
+RewriteRule ^stocks/(.*)$ /STOCK-MARKET/$1 [L,NC,QSA]
+RewriteRule ^hotel/(.*)$ /HOTEL/$1 [L,NC,QSA]
+RewriteRule ^calendar/(.*)$ /CALENDAR/$1 [L,NC,QSA]
+RewriteRule ^booking/(.*)$ /BOOKING/$1 [L,NC,QSA]
+RewriteRule ^coffee/(.*)$ /COFFEE/$1 [L,NC,QSA]
+RewriteRule ^dev/(.*)$ /DEV/$1 [L,NC,QSA]
+
+# Serve real files/folders directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
