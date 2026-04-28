@@ -272,6 +272,14 @@ td {
   letter-spacing: -0.3px;
 }
 
+.chartHoverTextCentered {
+  text-anchor: middle;
+}
+
+.compareHoverText {
+  fill: #bfdbfe;
+}
+
 .chartAxis {
   margin-top: 6px;
   display: flex;
@@ -399,6 +407,40 @@ td {
   background: #f4f6f8;
 }
 
+.tickerContextMenu {
+  position: fixed;
+  z-index: 9999;
+  min-width: 130px;
+  padding: 6px;
+  background: #fff7f7;
+  border: 1px solid #f1d6d6;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+}
+
+.tickerDeleteMenu {
+  padding: 6px 8px;
+  background: #fff7f7;
+  border-bottom: 1px solid #f1d6d6;
+}
+
+.tickerDeleteButton {
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: #b00020;
+  border-color: #b00020;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.tickerDeleteButton:hover {
+  background: #8f001a;
+  border-color: #8f001a;
+}
+
 .tickerSymbol {
   font-size: 14px;
   font-weight: 600;
@@ -513,6 +555,27 @@ td {
   background: #111827;
   border-color: #111827;
   color: #fff;
+}
+
+.compareLabel {
+  margin-left: 8px;
+  color: #7a4a21;
+  font-weight: 700;
+}
+
+.compareSelect {
+  font-size: 12px;
+  padding: 4px 28px 4px 8px;
+  border-radius: 8px;
+  border: 1px solid #7aa5c7;
+  background: #d9ecfa;
+  color: #17324d;
+  font-weight: 700;
+}
+
+.compareSelect option {
+  background: #d9ecfa;
+  color: #17324d;
 }
 
 .serpChartWrap {
@@ -691,4 +754,3 @@ td {
     grid-template-columns: 1fr;
   }
 }
-

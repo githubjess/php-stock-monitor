@@ -42,16 +42,84 @@ Build output:
 - `web/dist/index.html`
 - `web/dist/assets/`
 
-### 2) Copy exact files from local repo to one.com
+### 2) Log in to one.com and open File Manager
+
+Use this flow when starting from the normal one.com website:
+
+1. Go to `https://www.one.com`.
+2. Click `Einloggen` / `Log in`.
+3. Select `File Manager` from the login menu.
+4. When one.com asks for credentials, use your one.com Control Panel login:
+   - email/contact address for the hosting account
+   - Control Panel password
+5. After File Manager opens, select the domain/webspace for this site if one.com asks.
+6. Open the website root folder: `public_html`.
+
+Alternative flow:
+
+1. Go directly to `https://login.one.com`.
+2. Log in to the one.com Control Panel.
+3. Open `Files & Security`.
+4. Click `File Manager`.
+5. Open `public_html`.
+
+Official one.com help pages:
+- Control Panel login: https://help.one.com/hc/en-us/articles/115005592505-Logging-in-to-the-one-com-Control-Panel
+- File Manager: https://help.one.com/hc/en-us/articles/115005585809-Using-One-com-File-Manager
+
+### 3) Prepare `public_html`
+
+In one.com File Manager, go to `public_html`.
+
+If this is a new site:
+- Upload the files listed in the next step directly into `public_html`.
+
+If `public_html` already contains an existing website:
+- Make a backup before replacing anything.
+- Be careful with an existing `index.html` and `.htaccess`; replacing them changes the live homepage and routing.
+
+Create these folders if they do not already exist:
+
+```text
+public_html/
+  assets/
+  php-api/
+    public/
+    src/
+```
+
+### 4) Copy exact files from local repo to one.com
 
 Copy these files/folders:
 - `web/dist/index.html` -> `public_html/index.html`
 - `web/dist/assets/` -> `public_html/assets/`
+- `web/public/favicon.ico` -> `public_html/favicon.ico`
 - `php-api/public/index.php` -> `public_html/php-api/public/index.php`
 - `php-api/src/MarketData.php` -> `public_html/php-api/src/MarketData.php`
 - create `public_html/.htaccess` with the content below
 
-### 3) `.htaccess` section (keep this in README)
+What each upload does:
+- `index.html` loads the React frontend.
+- `assets/` contains the built JavaScript and CSS from `web/src/App.jsx` and `web/src/styles.css`.
+- `favicon.ico` is the browser tab icon.
+- `php-api/public/index.php` is the PHP API entry point.
+- `php-api/src/MarketData.php` is the PHP backend logic.
+- `.htaccess` connects `/api/...` and `/health` to the PHP backend and sends frontend routes to `index.html`.
+
+Tip after frontend changes:
+- If you change anything in `web/src/App.jsx` or `web/src/styles.css`, run `npm run build` again.
+- Then replace `public_html/index.html` and the whole `public_html/assets/` folder with the new files from `web/dist/`.
+- Do not upload `web/src/`, `node_modules/`, or `package.json` to one.com.
+
+### 5) Configure `.htaccess`
+
+In one.com File Manager, create or edit this file:
+
+```text
+public_html/.htaccess
+```
+
+Paste this content:
 
 ```apache
 RewriteEngine On
@@ -83,12 +151,13 @@ RewriteRule ^ - [L]
 RewriteRule ^ /index.html [L]
 ```
 
-### 4) Final target on one.com
+### 6) Final target on one.com
 
 ```text
 public_html/
   .htaccess
   index.html
+  favicon.ico
   assets/
   STOCK-MARKET/                 # only if you use /stocks shortcut
     index.html
@@ -99,10 +168,23 @@ public_html/
       MarketData.php
 ```
 
-### 5) Verify
+### 7) Verify
+
+Open these URLs in your browser:
+
 - `https://jegprofil.info/health`
 - `https://jegprofil.info/api/history/AAPL?range=1m`
 - `https://jegprofil.info/`
+
+Expected result:
+- `/health` should show a backend health response.
+- `/api/history/AAPL?range=1m` should return JSON data.
+- `/` should load the Share Monitor app.
+
+If you still see old colors or old layout:
+- Hard-refresh the browser.
+- Replace `public_html/index.html` again.
+- Delete the old `public_html/assets/` files and upload the new `web/dist/assets/` files again.
 
 ## Where `php-api` Comes From
 
