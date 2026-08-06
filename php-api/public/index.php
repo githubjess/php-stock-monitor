@@ -55,7 +55,7 @@ if ($method === 'POST' && $path === '/api/quotes') {
             exit;
         }
 
-        $payload = MarketData::fetchQuotes($tickers);
+        $payload = MarketData::fetchQuotes(MarketData::expandRelatedTickers($tickers));
         $received = [];
         foreach ($payload['quotes'] as $quote) {
             if (isset($quote['ticker'])) {
@@ -75,6 +75,25 @@ if ($method === 'POST' && $path === '/api/quotes') {
             'error' => 'Failed to fetch quotes',
             'details' => shouldHideErrorDetails() ? null : $error->getMessage(),
         ], 500);
+    }
+    exit;
+}
+
+if ($method === 'GET' && preg_match('#^/api/resolve/([^/]+)$#', $path, $matches) === 1) {
+    try {
+        $candidateTicker = urldecode($matches[1]);
+        $tickers = MarketData::sanitizeTickers([$candidateTicker]);
+        if ($tickers === []) {
+            jsonResponse(['error' => 'Ticker is required'], 400);
+            exit;
+        }
+
+        jsonResponse(MarketData::resolveTicker($tickers[0]) + ['serverTime' => gmdate('c')]);
+    } catch (Throwable $error) {
+        jsonResponse([
+            'error' => 'Ticker does not exist or is not supported',
+            'details' => shouldHideErrorDetails() ? null : $error->getMessage(),
+        ], 404);
     }
     exit;
 }
@@ -140,4 +159,3 @@ if ($method === 'GET' && $path === '/api/fx') {
 }
 
 jsonResponse(['error' => 'Not found'], 404);
-

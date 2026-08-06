@@ -7,6 +7,17 @@ final class MarketData
     private const MAX_TICKERS = 50;
     private const MAX_CURRENCIES = 25;
     private const MAX_HISTORY_POINTS = 300;
+    private const RELATED_LISTING_GROUPS = [
+        ['DRH.F', 'DRO.AX', 'DRSHF'],
+        ['APC.F', 'AAPL'],
+        ['MSF.F', 'MSFT'],
+        ['NVD.F', 'NVDA'],
+        ['ABEA.F', 'GOOGL'],
+        ['TL0.F', 'TSLA'],
+        ['INL.F', 'INTC'],
+        ['SFT.F', '9984.T', 'SFTBF', 'SFTBY'],
+        ['BCY.F', 'BARC.L', 'BCS'],
+    ];
     private const HISTORY_RANGE_CONFIG = [
         '1d' => ['range' => '1d', 'interval' => '5m'],
         '1w' => ['range' => '5d', 'interval' => '30m'],
@@ -57,6 +68,98 @@ final class MarketData
     {
         $value = strtolower(trim((string) ($range ?? '')));
         return array_key_exists($value, self::HISTORY_RANGE_CONFIG) ? $value : '1m';
+    }
+
+    public static function expandRelatedTickers(array $tickers): array
+    {
+        $expanded = $tickers;
+
+        foreach (self::RELATED_LISTING_GROUPS as $group) {
+            if (array_intersect($tickers, $group) !== []) {
+                $expanded = array_merge($expanded, $group);
+            }
+        }
+
+        return array_slice(array_values(array_unique($expanded)), 0, self::MAX_TICKERS);
+    }
+
+    public static function resolveTicker(string $ticker): array
+    {
+        $normalizedTicker = self::normalizeTicker($ticker);
+        if ($normalizedTicker === '') {
+            throw new RuntimeException('Ticker is required');
+        }
+
+        $primaryQuote = self::fetchChartQuote($normalizedTicker);
+        $companyName = (string) ($primaryQuote['name'] ?? $normalizedTicker);
+        $candidateSymbols = self::expandRelatedTickers([$normalizedTicker]);
+        $rootSymbol = preg_replace('/\..*$/', '', $normalizedTicker) ?? $normalizedTicker;
+        $candidateSymbols[] = $rootSymbol;
+        foreach (['.F', '.DE', '.MU', '.L', '.PA', '.MI', '.AS', '.SW', '.T', '.AX'] as $suffix) {
+            $candidateSymbols[] = $rootSymbol . $suffix;
+        }
+
+        try {
+            $searchCandidates = self::searchYahooEquities($companyName);
+        } catch (Throwable $error) {
+            $searchCandidates = [];
+        }
+
+        foreach ($searchCandidates as $candidate) {
+            $symbol = self::normalizeTicker($candidate['symbol'] ?? '');
+            $candidateName = (string) ($candidate['name'] ?? '');
+            if (
+                $symbol !== '' &&
+                self::companyNamesMatch($companyName, $candidateName)
+            ) {
+                $candidateSymbols[] = $symbol;
+            }
+        }
+
+        $verifiedByRegion = [];
+        foreach (array_slice(array_values(array_unique($candidateSymbols)), 0, 20) as $symbol) {
+            try {
+                $quote = $symbol === $normalizedTicker ? $primaryQuote : self::fetchChartQuote($symbol);
+            } catch (Throwable $error) {
+                continue;
+            }
+
+            if (!self::companyNamesMatch($companyName, (string) ($quote['name'] ?? ''))) {
+                continue;
+            }
+
+            $region = self::classifyListingRegion((string) $quote['ticker'], (string) ($quote['exchange'] ?? ''));
+            if ($region === null) {
+                continue;
+            }
+            $score = self::listingPreferenceScore((string) $quote['ticker'], $region);
+            if (!isset($verifiedByRegion[$region]) || $score < $verifiedByRegion[$region]['score']) {
+                $verifiedByRegion[$region] = ['score' => $score, 'quote' => $quote];
+            }
+        }
+
+        $listings = array_values(array_map(
+            static fn(array $entry): array => $entry['quote'],
+            $verifiedByRegion
+        ));
+        if ($listings === []) {
+            $listings = [$primaryQuote];
+        }
+
+        $relatedTickers = array_values(array_map(
+            static fn(array $quote): string => (string) $quote['ticker'],
+            $listings
+        ));
+        if (!in_array((string) $primaryQuote['ticker'], $relatedTickers, true)) {
+            $relatedTickers[] = (string) $primaryQuote['ticker'];
+        }
+
+        return [
+            'ticker' => (string) $primaryQuote['ticker'],
+            'name' => $companyName,
+            'relatedTickers' => $relatedTickers,
+            'listings' => $listings,
+        ];
     }
 
     public static function fetchQuotes(array $tickers): array
@@ -213,6 +316,97 @@ final class MarketData
         );
     }
 
+    private static function searchYahooEquities(string $query): array
+    {
+        $url = sprintf(
+            'https://query2.finance.yahoo.com/v1/finance/search?q=%s&quotesCount=25&newsCount=0',
+            rawurlencode($query)
+        );
+        $json = self::httpGetJson($url);
+        $results = [];
+
+        foreach (($json['quotes'] ?? []) as $quote) {
+            if (!is_array($quote) || strtoupper((string) ($quote['quoteType'] ?? '')) !== 'EQUITY') {
+                continue;
+            }
+            $results[] = [
+                'symbol' => (string) ($quote['symbol'] ?? ''),
+                'name' => (string) ($quote['longname'] ?? ($quote['shortname'] ?? '')),
+            ];
+        }
+
+        return $results;
+    }
+
+    private static function companyNamesMatch(string $left, string $right): bool
+    {
+        $leftTokens = self::companyNameTokens($left);
+        $rightTokens = self::companyNameTokens($right);
+        if ($leftTokens === [] || $rightTokens === []) {
+            return false;
+        }
+
+        $common = array_intersect($leftTokens, $rightTokens);
+        $required = max(1, (int) ceil(max(count($leftTokens), count($rightTokens)) * 0.6));
+        return count($common) >= $required;
+    }
+
+    private static function companyNameTokens(string $name): array
+    {
+        $normalized = preg_replace('/[^A-Z0-9]+/', ' ', strtoupper($name)) ?? '';
+        $ignored = [
+            'AG', 'ADR', 'CO', 'COMPANY', 'CORP', 'CORPORATION', 'GROUP', 'HOLDING',
+            'HOLDINGS', 'INC', 'INCORPORATED', 'LIMITED', 'LTD', 'NV', 'ORD', 'PLC',
+            'R', 'SA', 'SE', 'SHARE', 'SHARES', 'SHS',
+        ];
+        $tokens = array_filter(
+            explode(' ', trim($normalized)),
+            static fn(string $token): bool =>
+                $token !== '' &&
+                preg_match('/\d/', $token) !== 1 &&
+                !in_array($token, $ignored, true)
+        );
+        return array_values(array_unique($tokens));
+    }
+
+    private static function classifyListingRegion(string $ticker, string $exchange): ?string
+    {
+        $symbol = strtoupper($ticker);
+        $exchangeText = strtolower($exchange);
+        if (
+            preg_match('/\.(AX|HK|SS|SZ|KS|KQ|SI|TW|TWO|NS|BO|BK|KL|JK|NZ|T)$/', $symbol) === 1 ||
+            preg_match('/asx|tokyo|hong kong|shanghai|shenzhen|singapore|korea|taiwan/', $exchangeText) === 1
+        ) {
+            return 'asia';
+        }
+        if (
+            preg_match('/\.(F|DE|MU|DU|HA|L|PA|AS|BR|MC|MI|SW|ST|CO|OL|HE|LS|VI|WA)$/', $symbol) === 1 ||
+            preg_match('/frankfurt|xetra|london|lse|euronext|milan|swiss/', $exchangeText) === 1
+        ) {
+            return 'europe';
+        }
+        if (
+            strpos($symbol, '.') === false ||
+            preg_match('/\.(TO|V|CN|MX|BA|SA)$/', $symbol) === 1 ||
+            preg_match('/nasdaq|nyse|otc|toronto|mexico|sao paulo/', $exchangeText) === 1
+        ) {
+            return 'americas';
+        }
+        return null;
+    }
+
+    private static function listingPreferenceScore(string $ticker, string $region): int
+    {
+        $symbol = strtoupper($ticker);
+        if ($region === 'europe') {
+            if (str_ends_with($symbol, '.F')) return 0;
+            if (str_ends_with($symbol, '.DE')) return 1;
+            if (preg_match('/\.(MU|DU|HA)$/', $symbol) === 1) return 2;
+            if (str_ends_with($symbol, '.L')) return 2;
+        }
+        return strpos($symbol, '.') === false ? 0 : 5;
+    }
+
     private static function fetchChartResult(string $ticker, string $interval, string $range): array
     {
         $url = self::buildYahooChartUrl($ticker, $interval, $range);
@@ -283,7 +477,7 @@ final class MarketData
             'change' => $change,
             'changePercent' => $changePercent,
             'marketTime' => self::toIsoFromEpoch($meta['regularMarketTime'] ?? null),
-            'marketState' => isset($meta['marketState']) ? (string) $meta['marketState'] : null,
+            'marketState' => self::resolveMarketState($meta),
             'bid' => (isset($meta['bid']) && is_numeric($meta['bid'])) ? (float) $meta['bid'] : null,
             'ask' => (isset($meta['ask']) && is_numeric($meta['ask'])) ? (float) $meta['ask'] : null,
             'open' => (isset($meta['regularMarketOpen']) && is_numeric($meta['regularMarketOpen'])) ? (float) $meta['regularMarketOpen'] : null,
@@ -297,6 +491,32 @@ final class MarketData
             'fiftyTwoWeekHigh' => (isset($meta['fiftyTwoWeekHigh']) && is_numeric($meta['fiftyTwoWeekHigh'])) ? (float) $meta['fiftyTwoWeekHigh'] : null,
             'fiftyTwoWeekLow' => (isset($meta['fiftyTwoWeekLow']) && is_numeric($meta['fiftyTwoWeekLow'])) ? (float) $meta['fiftyTwoWeekLow'] : null,
         ];
+    }
+
+    private static function resolveMarketState(array $meta): ?string
+    {
+        if (isset($meta['marketState']) && is_string($meta['marketState']) && $meta['marketState'] !== '') {
+            return strtoupper($meta['marketState']);
+        }
+
+        $periods = isset($meta['currentTradingPeriod']) && is_array($meta['currentTradingPeriod'])
+            ? $meta['currentTradingPeriod']
+            : [];
+        $now = time();
+
+        foreach (['regular' => 'REGULAR', 'pre' => 'PRE', 'post' => 'POST'] as $periodKey => $state) {
+            $period = isset($periods[$periodKey]) && is_array($periods[$periodKey])
+                ? $periods[$periodKey]
+                : [];
+            $start = isset($period['start']) && is_numeric($period['start']) ? (int) $period['start'] : null;
+            $end = isset($period['end']) && is_numeric($period['end']) ? (int) $period['end'] : null;
+
+            if ($start !== null && $end !== null && $now >= $start && $now < $end) {
+                return $state;
+            }
+        }
+
+        return $periods !== [] ? 'CLOSED' : null;
     }
 
     private static function fetchFxRateToEur(string $baseCurrency): float

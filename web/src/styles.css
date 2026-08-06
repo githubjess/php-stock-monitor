@@ -25,6 +25,112 @@
   flex-wrap: wrap;
 }
 
+.topBar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.topMenu {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+
+.topAddControl {
+  width: min(300px, 36vw);
+  min-width: 250px;
+}
+
+.topAddForm {
+  display: flex;
+  width: 100%;
+}
+
+.topAddInput {
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+  height: 38px;
+  border-radius: 8px 0 0 8px;
+  border-color: #aeb9c6;
+  background: #ffffff;
+}
+
+.topAddInput:focus {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid #2563eb;
+  outline-offset: -1px;
+}
+
+.topAddButton {
+  box-sizing: border-box;
+  height: 38px;
+  border-radius: 0 8px 8px 0;
+  margin-left: -1px;
+  padding-inline: 14px;
+  white-space: nowrap;
+}
+
+.topShortcutLink,
+.topRefreshSelect,
+.topRefreshButton {
+  box-sizing: border-box;
+  height: 38px;
+  min-height: 38px;
+}
+
+.topShortcutLink {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid #aeb9c6;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1f2937;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.topShortcutLink:hover {
+  border-color: #64748b;
+  background: #f8fafc;
+}
+
+.topRefreshSelect {
+  max-width: 104px;
+  height: 38px;
+  padding: 7px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  background: #ffffff;
+}
+
+.topRefreshButton {
+  height: 38px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 h1 {
   margin: 0 0 12px;
   font-size: 28px;
@@ -219,22 +325,190 @@ td {
   font-size: 12px;
   color: #555;
 }
-
-
-
-.topShortcutLink {
-  text-decoration: none;
-  color: #334155;
-  font-weight: 600;
-}
-
-.topShortcutLink:hover {
-  text-decoration: underline;
-}
-
 .error {
   margin-top: 10px;
   color: #b00020;
+}
+
+.addTickerStatus {
+  margin-top: 4px;
+  padding-left: 2px;
+  font-size: 12px;
+  line-height: 1.25;
+  color: #475569;
+}
+
+.addTickerStatus.success {
+  color: #0f6b2f;
+}
+
+.addTickerStatus.error {
+  color: #b00020;
+}
+
+.marketSessionStrip {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.marketSessionPill {
+  border: 0;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  min-height: 40px;
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms ease;
+}
+
+.marketSessionPill:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.1);
+}
+
+.marketSessionPill:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.marketSessionPill.selected {
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.1);
+}
+
+.marketSessionPill.active.selected {
+  background: #dff3e5;
+  box-shadow: 0 3px 8px rgba(21, 128, 61, 0.18);
+}
+
+.marketSessionPill.extended.selected,
+.marketSessionPill.closed.selected {
+  background: #ffedcc;
+  box-shadow: 0 3px 8px rgba(180, 83, 9, 0.18);
+}
+
+.marketSessionPill.notListed.selected,
+.marketSessionPill.unknown.selected {
+  background: #e9edf1;
+  box-shadow: 0 3px 8px rgba(100, 116, 139, 0.16);
+}
+
+.marketSessionPill.selected .marketSessionDot {
+  transform: scale(1.12);
+}
+
+.marketSessionPill.active {
+  background: #f3fbf5;
+}
+
+.marketSessionPill.extended {
+  background: #fffaed;
+}
+
+.marketSessionPill.closed {
+  background: #fff8ed;
+}
+
+.marketSessionPill.notListed,
+.marketSessionPill.unknown {
+  background: #f7f8fa;
+}
+
+.marketSessionIdentity {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.marketSessionDot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  border-radius: 50%;
+  background: #94a3b8;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.16);
+}
+
+.marketSessionPill.active .marketSessionDot {
+  background: #15803d;
+  box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.14);
+}
+
+.marketSessionPill.extended .marketSessionDot,
+.marketSessionPill.closed .marketSessionDot {
+  background: #d97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.14);
+}
+
+.marketSessionName {
+  font-size: 12px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.marketSessionCount {
+  font-size: 10px;
+  font-weight: 700;
+  color: #475569;
+  text-align: right;
+  line-height: 1.25;
+}
+
+.marketStatusBadge {
+  border: 1px solid #d9dee6;
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  color: #334155;
+  background: #f8fafc;
+}
+
+.marketStatusBadge.active {
+  border-color: #15803d;
+  background: #e9f8ee;
+  color: #0f6b2f;
+}
+
+.marketStatusBadge.extended {
+  border-color: #b7791f;
+  background: #fff7df;
+  color: #8a5a11;
+}
+
+.marketStatusBadge.closed,
+.marketStatusBadge.unknown {
+  border-color: #cbd5e1;
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.marketListStatus.active {
+  color: #15803d;
+}
+
+.marketListStatus.extended {
+  color: #9a6700;
+}
+
+.marketListStatus.closed,
+.marketListStatus.unknown {
+  color: #64748b;
 }
 
 .up {
@@ -266,10 +540,10 @@ td {
 
 .chartHoverText {
   fill: #ffffff;
-  font-size: 9px;
+  font-size: 18px;
   font-weight: 700;
   pointer-events: none;
-  letter-spacing: -0.3px;
+  letter-spacing: 0;
 }
 
 .chartHoverTextCentered {
@@ -292,6 +566,10 @@ td {
 .chartAxis span {
   white-space: nowrap;
   line-height: 1;
+}
+
+.panelChartAxis {
+  margin-top: 2px;
 }
 
 .chartTabs {
@@ -324,8 +602,8 @@ td {
 
 .tickerDropdown {
   position: relative;
-  width: 100%;
-  max-width: 200px;
+  width: min(260px, 100%);
+  max-width: 260px;
 }
 
 .tickerDropdown.disabled {
@@ -453,10 +731,10 @@ td {
 }
 .chartHoverTextSub {
   fill: #dbeafe;
-  font-size: 7px;
+  font-size: 13px;
   font-weight: 600;
   pointer-events: none;
-  letter-spacing: -0.2px;
+  letter-spacing: 0;
 }
 
 .serpPanelSection {
@@ -563,7 +841,43 @@ td {
   font-weight: 700;
 }
 
+.panelToolRow {
+  min-height: 28px;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.panelCurrencyButton,
+.panelRemoveButton {
+  box-sizing: border-box;
+  height: 28px;
+  padding: 4px 9px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.panelCurrencyButton:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
+
+.panelRemoveButton {
+  margin-left: auto;
+  border: 0;
+  background: #fee2e2;
+  color: #991b1b;
+  font-weight: 700;
+}
+
+.panelRemoveButton:hover {
+  background: #fecaca;
+}
+
 .compareSelect {
+  box-sizing: border-box;
+  height: 28px;
   font-size: 12px;
   padding: 4px 28px 4px 8px;
   border-radius: 8px;
@@ -598,7 +912,37 @@ td {
   color: #334155;
 }
 
+@media (max-width: 860px) {
+  .topBar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .topMenu {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
 @media (max-width: 640px) {
+  .chartHoverText {
+    font-size: 20px;
+  }
+
+  .chartHoverTextSub {
+    font-size: 15px;
+  }
+
+  .topAddControl {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .marketSessionStrip {
+    grid-template-columns: 1fr;
+  }
+
   .serpHeader {
     flex-direction: column;
     gap: 4px;
