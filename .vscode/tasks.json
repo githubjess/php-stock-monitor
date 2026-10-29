@@ -1,0 +1,31 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Share Monitor: Backend",
+      "type": "process",
+      "command": "${env:SystemRoot}/System32/WindowsPowerShell/v1.0/powershell.exe",
+      "args": ["-NoProfile", "-File", "${workspaceFolder}/php-api/start.ps1"],
+      "options": {
+        "cwd": "${workspaceFolder}/php-api",
+        "env": { "PATH": "D:\\DEV\\TOOLS\\php;C:\\WORK\\TOOLS\\nodejs;${env:PATH}" }
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": false },
+      "runOptions": { "instanceLimit": 1 },
+      "problemMatcher": []
+    },
+    {
+      "label": "Share Monitor: Frontend",
+      "type": "process",
+      "command": "${env:SystemRoot}/System32/WindowsPowerShell/v1.0/powershell.exe",
+      "args": ["-NoProfile", "-File", "${workspaceFolder}/web/start.ps1"],
+      "options": {
+        "cwd": "${workspaceFolder}/web",
+        "env": { "PATH": "C:\\WORK\\TOOLS\\nodejs;D:\\DEV\\TOOLS\\php;${env:PATH}" }
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": false },
+      "runOptions": { "instanceLimit": 1 },
+      "problemMatcher": []
+    }
+  ]
+}

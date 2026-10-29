@@ -12,7 +12,7 @@
     },
     {
       "text": "🛑 Stop Backend",
-      "tooltip": "Stop backend (sends Ctrl+C to active terminal)",
+      "tooltip": "Stop the Share Monitor backend task",
       "command": "extension.multiCommand.execute",
       "arguments": [
         {
@@ -32,7 +32,7 @@
     },
     {
       "text": "🛑 Stop Frontend",
-      "tooltip": "Stop frontend (sends Ctrl+C to active terminal)",
+      "tooltip": "Stop the Share Monitor frontend task",
       "command": "extension.multiCommand.execute",
       "arguments": [
         {
@@ -46,16 +46,8 @@
       "command": "multiCommand.startBackend",
       "sequence": [
         {
-          "command": "workbench.action.terminal.newWithCwd",
-          "args": {
-            "cwd": "${workspaceFolder}/php-api"
-          }
-        },
-        {
-          "command": "workbench.action.terminal.sendSequence",
-          "args": {
-            "text": "php -S localhost:8080 router.php\n"
-          }
+          "command": "workbench.action.tasks.runTask",
+          "args": "Share Monitor: Backend"
         }
       ]
     },
@@ -63,10 +55,8 @@
       "command": "multiCommand.stopBackend",
       "sequence": [
         {
-          "command": "workbench.action.terminal.sendSequence",
-          "args": {
-            "text": "\u0003"
-          }
+          "command": "workbench.action.tasks.terminate",
+          "args": "Share Monitor: Backend"
         }
       ]
     },
@@ -74,22 +64,8 @@
       "command": "multiCommand.startFrontend",
       "sequence": [
         {
-          "command": "workbench.action.terminal.newWithCwd",
-          "args": {
-            "cwd": "${workspaceFolder}/web"
-          }
-        },
-        {
-          "command": "workbench.action.terminal.sendSequence",
-          "args": {
-            "text": "npm install\n"
-          }
-        },
-        {
-          "command": "workbench.action.terminal.sendSequence",
-          "args": {
-            "text": "npm run dev\n"
-          }
+          "command": "workbench.action.tasks.runTask",
+          "args": "Share Monitor: Frontend"
         }
       ]
     },
@@ -97,10 +73,8 @@
       "command": "multiCommand.stopFrontend",
       "sequence": [
         {
-          "command": "workbench.action.terminal.sendSequence",
-          "args": {
-            "text": "\u0003"
-          }
+          "command": "workbench.action.tasks.terminate",
+          "args": "Share Monitor: Frontend"
         }
       ]
     }

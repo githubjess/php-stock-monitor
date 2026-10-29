@@ -9,6 +9,16 @@ Share Monitor is a stock dashboard with:
 ## Run Locally
 
 ### 1) Backend
+
+On Windows (PowerShell), use the launcher to enable HTTPS extensions bundled with PHP when no `php.ini` is loaded:
+
+```powershell
+cd php-api
+./start.ps1
+```
+
+On other platforms, with cURL or OpenSSL enabled in PHP:
+
 ```bash
 cd php-api
 php -S localhost:8080 router.php

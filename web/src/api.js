@@ -1,3 +1,8 @@
+function requestError(body, fallback) {
+  const message = body.error || fallback;
+  return new Error(body.details ? `${message}: ${body.details}` : message);
+}
+
 export async function fetchQuotes(tickers) {
   const res = await fetch("/api/quotes", {
     method: "POST",
@@ -7,7 +12,7 @@ export async function fetchQuotes(tickers) {
 
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    throw new Error(body.error || `Request failed (${res.status})`);
+    throw requestError(body, `Request failed (${res.status})`);
   }
 
   return res.json();
@@ -24,7 +29,7 @@ export async function resolveTicker(ticker) {
   const res = await fetch(`/api/resolve/${encodeURIComponent(symbol)}`);
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    throw new Error(body.error || `Ticker ${symbol} does not exist`);
+    throw requestError(body, `Ticker ${symbol} does not exist`);
   }
   return res.json();
 }
@@ -43,7 +48,7 @@ export async function fetchHistory(ticker, range = "1m") {
 
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    throw new Error(body.error || `Request failed (${res.status})`);
+    throw requestError(body, `Request failed (${res.status})`);
   }
 
   return res.json();
@@ -69,7 +74,7 @@ export async function fetchFxRates(currencies) {
 
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    throw new Error(body.error || `Request failed (${res.status})`);
+    throw requestError(body, `Request failed (${res.status})`);
   }
 
   return res.json();

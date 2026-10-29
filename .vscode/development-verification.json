@@ -1,0 +1,27 @@
+{
+    "ok":  true,
+    "results":  [
+                    "anweber.statusbar-commands activated",
+                    "ryuta46.multi-command activated",
+                    "Backend button starts PHP on 8080",
+                    "Frontend button starts Vite on 5173",
+                    "React JSX is transformed and served",
+                    "Frontend API proxy reaches PHP",
+                    "Live Yahoo quote and history via Vite proxy: 288 points",
+                    "Stop Backend stops PHP",
+                    "Stop Backend leaves frontend running",
+                    "Backend restarts",
+                    "Stop Frontend stops Vite",
+                    "Stop Frontend leaves backend running",
+                    "Backend cleanup completed"
+                ],
+    "checkedAt":  "2026-10-28T16:49:05.8599577Z",
+    "environment":  {
+                        "php":  "8.5.12",
+                        "node":  "20.18.0",
+                        "npm":  "10.8.2",
+                        "statusbarCommands":  "2.8.0",
+                        "multiCommand":  "1.6.0",
+                        "context":  "Actual VS Code extension host; isolated temporary profile; installed extension copies; configured button command arguments"
+                    }
+}

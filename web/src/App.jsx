@@ -1127,7 +1127,10 @@ function App() {
       setData(res);
       if (Array.isArray(res.failed) && res.failed.length) {
         const failedTickers = res.failed.map((f) => f.ticker).join(", ");
-        setErr(`Some tickers could not be loaded: ${failedTickers}`);
+        const reasons = [...new Set(res.failed.map((f) => f.error).filter(Boolean))];
+        setErr(
+          `Some tickers could not be loaded: ${failedTickers}${reasons.length === 1 ? `. ${reasons[0]}` : ""}`,
+        );
       }
     } catch (e) {
       setErr(e.message || "Failed to load");

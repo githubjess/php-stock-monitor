@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JM Authenticator Privacy Policy: local authentication codes, Apple Keychain protection, personal images, device authentication, encrypted backups and data retention.">
+  <meta name="referrer" content="no-referrer">
+  <!-- Remove noindex only after the publication checklist in ../README.md is complete. -->
+  <meta name="robots" content="noindex">
+  <title>Privacy Policy | JM Authenticator</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f7f6;
+      --surface: #fff;
+      --ink: #172d38;
+      --muted: #4c616b;
+      --accent: #245e67;
+      --line: #d7e2df;
+      --wash: #eaf2ef;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 1.5rem; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: 1.75;
+      overflow-wrap: anywhere;
+    }
+    a { color: var(--accent); text-underline-offset: .2em; }
+    a:hover { text-decoration-thickness: .15em; }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; border-radius: 2px; }
+    .skip-link { position: absolute; top: -8rem; left: 1rem; padding: .7rem 1rem; background: white; z-index: 2; }
+    .skip-link:focus { top: 1rem; }
+    .wrap { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+    .masthead { padding-block: 1.4rem; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: .85rem; font-weight: 700; letter-spacing: -.02em; }
+    .brand-mark {
+      display: grid; place-items: center; width: 2.8rem; height: 3.1rem;
+      background: var(--accent); color: white; font-size: .85rem; letter-spacing: .04em;
+      clip-path: polygon(0 0, 100% 0, 100% 68%, 50% 100%, 0 68%);
+      padding-bottom: .35rem;
+    }
+    .hero { padding-block: clamp(2.5rem, 7vw, 5rem) 2rem; }
+    .eyebrow { margin: 0 0 .7rem; color: var(--accent); text-transform: uppercase; font-size: .75rem; font-weight: 750; letter-spacing: .16em; }
+    h1 { margin: 0; font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.1; letter-spacing: -.055em; }
+    .intro { max-width: 44rem; margin: 1.4rem 0; font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--muted); }
+    .status { padding: .8rem 1rem; border-left: 3px solid var(--accent); background: var(--wash); font-size: .9rem; }
+    .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-block: 1.8rem 3.5rem; }
+    .fact { padding: 1.3rem; background: var(--surface); border: 1px solid var(--line); border-radius: .7rem; }
+    .fact strong { display: block; font-size: 1rem; margin-bottom: .3rem; }
+    .fact p { color: var(--muted); margin: 0; font-size: .92rem; }
+    .layout { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; padding-bottom: 4rem; }
+    nav { position: sticky; top: 1.5rem; padding-block: .4rem; }
+    nav h2 { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; margin: 0 0 1rem; }
+    nav ol { list-style: none; margin: 0; padding: 0; }
+    nav a { display: block; padding: .4rem 0; font-size: .9rem; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    article { min-width: 0; }
+    article section { padding-block: 1.8rem; border-top: 1px solid var(--line); }
+    article section:first-child { padding-top: 0; border-top: 0; }
+    h2 { font-size: 1.45rem; line-height: 1.35; letter-spacing: -.025em; margin: 0 0 1rem; }
+    h3 { font-size: 1.05rem; margin: 1.5rem 0 .5rem; }
+    p { margin: 0 0 1rem; }
+    p:last-child { margin-bottom: 0; }
+    ul { padding-left: 1.3rem; }
+    li + li { margin-top: .45rem; }
+    dl { margin: 1.2rem 0; }
+    dt { font-weight: 650; margin-top: 1rem; }
+    dd { margin: .25rem 0 0; color: var(--muted); }
+    .placeholder { font-weight: 600; color: var(--accent); }
+    .note { background: var(--wash); padding: 1.2rem; border-radius: .5rem; }
+    footer { border-top: 1px solid var(--line); padding-block: 1.6rem; color: var(--muted); font-size: .85rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    @media (max-width: 760px) {
+      .wrap { width: calc(100% - 2rem); }
+      .facts { grid-template-columns: 1fr; gap: .65rem; margin-bottom: 2rem; }
+      .fact { padding: 1rem; }
+      .layout { grid-template-columns: 1fr; gap: 2rem; }
+      nav { position: static; border-block: 1px solid var(--line); padding-block: 1.2rem; }
+      nav ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem 1rem; }
+    }
+    @media (max-width: 380px) { nav ol { grid-template-columns: 1fr; } }
+    @media print {
+      body { background: white; color: black; font-size: 11pt; }
+      .wrap { width: 100%; }
+      nav, .skip-link, .back-top { display: none; }
+      .layout { display: block; }
+      .hero { padding-top: 1.5rem; }
+      .facts { margin-bottom: 2rem; }
+      h2, h3 { break-after: avoid; }
+      a { color: inherit; }
+    }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#policy">Skip to privacy policy</a>
+  <header class="masthead">
+    <div class="wrap brand"><span class="brand-mark" aria-hidden="true">JM</span><span>JM Authenticator</span></div>
+  </header>
+  <main class="wrap">
+    <div class="hero">
+      <p class="eyebrow">Privacy &amp; data handling</p>
+      <h1>Privacy Policy</h1>
+      <p class="intro">Your authentication codes are generated on your device. This policy explains what JM Authenticator stores, how optional features handle your data, and what stays under your control.</p>
+      <p class="status"><strong>Publication details pending.</strong> The publisher’s legal identity, privacy contact email and effective date must be completed before publication or App Store submission.</p>
+    </div>
+    <div class="facts" aria-label="Privacy at a glance">
+      <div class="fact"><strong>Local code generation</strong><p>Authentication codes are generated locally. No JM account or registration is required.</p></div>
+      <div class="fact"><strong>No developer-operated tracking identified</strong><p>The privacy audit identified no analytics, advertising, tracking, telemetry or remote crash reporting operated by the developer.</p></div>
+      <div class="fact"><strong>You choose export destinations</strong><p>JM backups are password-encrypted. Cloud file providers apply their own policies.</p></div>
+    </div>
+    <div class="layout">
+      <nav aria-label="Policy contents">
+        <h2>On this page</h2>
+        <ol>
+          <li><a href="#scope">01 · Scope &amp; publisher</a></li>
+          <li><a href="#local-data">02 · Local authentication data</a></li>
+          <li><a href="#storage">03 · Secure storage</a></li>
+          <li><a href="#camera-photos">04 · Camera &amp; photos</a></li>
+          <li><a href="#device-auth">05 · Face ID &amp; Touch ID</a></li>
+          <li><a href="#backups">06 · Encrypted backups</a></li>
+          <li><a href="#transfers">07 · Transfers &amp; QR codes</a></li>
+          <li><a href="#clipboard">08 · Clipboard</a></li>
+          <li><a href="#retention">09 · Retention &amp; deletion</a></li>
+          <li><a href="#providers">10 · Third-party providers</a></li>
+          <li><a href="#contact">11 · Contact &amp; changes</a></li>
+        </ol>
+      </nav>
+      <article id="policy" aria-label="JM Authenticator privacy policy" tabindex="-1">
+        <section id="scope" aria-labelledby="scope-title">
+          <h2 id="scope-title">01. Scope &amp; publisher</h2>
+          <p>This policy describes how JM Authenticator handles information on Apple devices, including local authentication, account icons, device authentication, backups and transfers. It reflects the findings of the app’s privacy audit. File providers and services you choose have their own privacy policies.</p>
+          <dl>
+            <dt>Publisher’s legal identity</dt><dd class="placeholder">[PUBLISHER LEGAL IDENTITY — TO BE CONFIRMED]</dd>
+            <dt>Privacy contact email</dt><dd class="placeholder">[PRIVACY CONTACT EMAIL — TO BE CONFIRMED]</dd>
+            <dt>Effective date</dt><dd class="placeholder">[EFFECTIVE DATE — TO BE CONFIRMED]</dd>
+          </dl>
+          <p>No JM account or registration is required. Authentication codes are generated locally. No developer-operated analytics, advertising, tracking, telemetry or remote crash reporting was identified in the audited version.</p>
+        </section>
+        <section id="local-data" aria-labelledby="local-data-title">
+          <h2 id="local-data-title">02. Local authentication data</h2>
+          <p>The app processes authentication secrets and associated account information to generate authentication codes on your device. If you create custom account icons, the processed icons are also part of your stored account data.</p>
+          <p>App preferences and backup-history information are stored locally. Backup passwords are not saved by the app.</p>
+        </section>
+        <section id="storage" aria-labelledby="storage-title">
+          <h2 id="storage-title">03. Secure storage</h2>
+          <p>Authentication secrets, account information and processed custom icons are stored in the secure vault using Apple Keychain protection. Keychain synchronization is disabled.</p>
+          <p>App preferences and backup-history information are stored locally. Secure storage does not mean that deleting an active account removes every previous snapshot or backup; see <a href="#retention">Retention &amp; deletion</a>.</p>
+        </section>
+        <section id="camera-photos" aria-labelledby="camera-photos-title">
+          <h2 id="camera-photos-title">04. Camera &amp; photos</h2>
+          <p>You may select existing images or take photographs to create account icons. Processed icons are stored in the secure vault and included in encrypted JM backups.</p>
+          <p>Taking a photo for an account icon creates a temporary image file. The app attempts to clean up this file, but crashes, interruptions or deletion failures may leave temporary files behind. Cleanup is not guaranteed, and temporary files are not guaranteed to be deleted immediately.</p>
+          <p>Selected original photos are not deleted by the app. Deleting an account or its processed icon does not delete the original photo you selected.</p>
+        </section>
+        <section id="device-auth" aria-labelledby="device-auth-title">
+          <h2 id="device-auth-title">05. Face ID, Touch ID &amp; device authentication</h2>
+          <p>The app uses Apple’s device authentication and supports optional app locking. JM Authenticator does not access or store biometric templates.</p>
+          <p>Google-compatible QR export requires fresh device authentication. The separate single-account setup QR screen relies on the existing app lock without an additional authentication prompt.</p>
+        </section>
+        <section id="backups" aria-labelledby="backups-title">
+          <h2 id="backups-title">06. Encrypted backups</h2>
+          <p>JM backup files are password-encrypted. Backup passwords are not saved by the app. Store your backup password carefully.</p>
+          <p>Internal encrypted backups are stored locally. External exports are saved to destinations you select. If you choose a cloud-backed file provider, that provider may upload files according to its own settings and privacy policy.</p>
+          <p>Processed custom account icons are included in encrypted JM backups. Internal backups and backup-history information have no automatic expiry in the audited version.</p>
+        </section>
+        <section id="transfers" aria-labelledby="transfers-title">
+          <h2 id="transfers-title">07. Transfers &amp; exported QR codes</h2>
+          <p>Exported QR codes can contain authentication secrets. Anyone who receives or captures those secrets may be able to generate authentication codes for the corresponding accounts. Treat exported QR codes as sensitive credentials.</p>
+          <p>QR exports and password-encrypted JM backup files are different transfer formats. The fresh-authentication requirement for Google-compatible QR export and the separate single-account setup QR screen are described under <a href="#device-auth">device authentication</a>.</p>
+        </section>
+        <section id="clipboard" aria-labelledby="clipboard-title">
+          <h2 id="clipboard-title">08. Clipboard</h2>
+          <p>When you copy a verification code, it is placed on the system clipboard. On iOS, copied codes are marked local-only and have an expiry of at most 30 seconds.</p>
+          <p>Other applications may retain codes you paste into them. Clipboard expiry does not remove copies already pasted elsewhere.</p>
+        </section>
+        <section id="retention" aria-labelledby="retention-title">
+          <h2 id="retention-title">09. Retention &amp; deletion</h2>
+          <p class="note"><strong>Deleting an account removes it from the active account list. Previous encrypted snapshots and backups may retain account information.</strong></p>
+          <p>Internal encrypted backups and backup-history information have no automatic expiry in the audited version. External exports, original photos and copies retained by other apps or file providers have separate lifecycles.</p>
+          <p>Temporary-file cleanup is best-effort. Interruptions, crashes or deletion failures can leave temporary files behind. Deleting an account or a file does not establish comprehensive secure erasure, and this policy does not promise it.</p>
+        </section>
+        <section id="providers" aria-labelledby="providers-title">
+          <h2 id="providers-title">10. Third-party file providers &amp; this website</h2>
+          <p>Cloud-backed file providers may upload exported files according to their own settings and privacy policies. Review the provider and destination you select when saving or sharing an export.</p>
+          <p>This privacy webpage contains no analytics, tracking scripts, cookies, external fonts or third-party content dependencies. When served online, the hosting provider may process request information such as IP addresses and access/error logs. The host’s logging settings and retention are separate from the app’s offline operation.</p>
+        </section>
+        <section id="contact" aria-labelledby="contact-title">
+          <h2 id="contact-title">11. Contact &amp; policy changes</h2>
+          <p>For privacy questions, contact <span class="placeholder">[PRIVACY CONTACT EMAIL — TO BE CONFIRMED]</span>. Do not send authentication secrets, backup passwords, recovery codes or credential QR codes with your inquiry.</p>
+          <p>This policy may be updated when the app’s data handling changes. The effective date above identifies when the published policy takes effect.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+  <footer><div class="wrap footer-inner"><span>JM Authenticator · Privacy Policy</span><a class="back-top" href="#top">Back to top ↑</a></div></footer>
+</body>
+</html>

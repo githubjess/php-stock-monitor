@@ -608,9 +608,12 @@ final class MarketData
             $status = 0;
             $responseHeaders = function_exists('http_get_last_response_headers')
                 ? http_get_last_response_headers()
-                : [];
-            if (is_array($responseHeaders) && isset($responseHeaders[0]) && preg_match('/\s(\d{3})\s/', (string) $responseHeaders[0], $matches) === 1) {
-                $status = (int) $matches[1];
+                : ($http_response_header ?? []);
+            foreach (($responseHeaders ?? []) as $responseHeader) {
+                // Redirects include multiple status lines; use the final response.
+                if (preg_match('/^HTTP\/\S+\s+(\d{3})(?:\s|$)/i', (string) $responseHeader, $matches) === 1) {
+                    $status = (int) $matches[1];
+                }
             }
 
             if ($status < 200 || $status >= 300) {
