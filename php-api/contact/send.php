@@ -63,7 +63,7 @@ try {
     // UTF-8 encoded words are folded by us; visitor-supplied header controls are rejected above.
     $words = [];
     $chunk = '';
-    foreach (preg_split('//u', '[JM Auth] ' . $fields['subject'], -1, PREG_SPLIT_NO_EMPTY) as $character) {
+    foreach (preg_split('//u', $fields['subject'], -1, PREG_SPLIT_NO_EMPTY) as $character) {
         if (strlen($chunk . $character) > 42) {
             $words[] = '=?UTF-8?B?' . base64_encode($chunk) . '?=';
             $chunk = '';
