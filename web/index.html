@@ -4,23 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
-    <meta name="description" content="A privacy-first authenticator app for iPhone and iPad. Generate TOTP codes offline, keep your accounts secure and organised." />
+    <meta data-i18n-content="hero.description" name="description" content="A privacy-first authenticator app for iPhone and iPad. Generate TOTP codes offline, keep your accounts secure and organised." />
     <meta name="color-scheme" content="light" />
     <title>JM Authenticator — Your security. In your hands.</title>
     <link rel="stylesheet" href="/homepage.css" />
   </head>
   <body class="jm-home">
-    <a class="jm-skip" href="#main">Skip to content</a>
+    <a data-i18n="a11y.skip" class="jm-skip" href="#main">Skip to content</a>
     <header class="jm-header jm-container">
-      <a class="jm-brand" href="/" aria-label="JM Authenticator home">
+      <a data-i18n-aria-label="a11y.home" class="jm-brand" href="/" aria-label="JM Authenticator home">
         <img src="/jm-authenticator/branding/jm-shield.png" alt="" width="52" height="52" />
-        <span>JM Authenticator</span>
+        <span data-i18n="common.product">JM Authenticator</span>
       </a>
-      <nav class="jm-nav" aria-label="Main navigation">
-        <a href="#features">Features</a>
-        <a href="/jm-authenticator/privacy/">Privacy</a>
-        <span class="jm-pending">Impressum <span>Pending</span></span>
-        <a href="/share-monitor/">Share Monitor <span aria-hidden="true">↗</span></a>
+      <nav class="jm-nav" data-i18n-aria-label="a11y.mainNav" aria-label="Main navigation">
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="/jm-authenticator/privacy/" data-legal-page="privacy" data-i18n="nav.privacy">Privacy</a>
+        <a class="jm-pending" href="/impressum/" data-legal-page="impressum" data-i18n-text="nav.impressum">Impressum <span data-i18n="nav.pending">Pending</span></a>
+        <a href="/share-monitor/" data-i18n-text="nav.shareMonitor">Share Monitor <span aria-hidden="true">↗</span></a>
+        <div class="jm-language" hidden>
+          <label class="jm-sr-only" for="jm-language" data-i18n="a11y.language">Website language</label>
+          <select id="jm-language" data-i18n-aria-label="a11y.language" aria-label="Website language">
+            <option value="en" lang="en">🇬🇧 English</option>
+            <option value="de" lang="de">🇩🇪 Deutsch</option>
+            <option value="es" lang="es">🇪🇸 Español</option>
+            <option value="fr" lang="fr">🇫🇷 Français</option>
+            <option value="vi" lang="vi">🇻🇳 Tiếng Việt</option>
+            <option value="zh-Hans" lang="zh-Hans">🇨🇳 简体中文</option>
+            <option value="zh-Hant" lang="zh-Hant">🇹🇼 繁體中文</option>
+          </select>
+        </div>
       </nav>
     </header>
 
@@ -28,72 +40,72 @@
       <section class="jm-hero" aria-labelledby="hero-title">
         <div class="jm-hero-inner jm-container">
           <div class="jm-hero-copy">
-            <p class="jm-eyebrow"><span aria-hidden="true"></span> For iPhone and iPad</p>
-            <h1 id="hero-title">JM Authenticator</h1>
-            <p class="jm-tagline">Your security.<br /><span>In your hands.</span></p>
-            <p class="jm-description">A privacy-first authenticator app for iPhone and iPad. Generate TOTP codes offline, keep your accounts secure and organised.</p>
-            <div class="jm-availability" role="note" aria-label="Coming Soon on the App Store. The app is not yet available to download.">
+            <p class="jm-eyebrow" data-i18n-text="hero.platform"><span aria-hidden="true"></span> For iPhone and iPad</p>
+            <h1 id="hero-title" data-i18n="common.product">JM Authenticator</h1>
+            <p class="jm-tagline" data-i18n-text="hero.taglineStart">Your security.<br /><span data-i18n="hero.taglineAccent">In your hands.</span></p>
+            <p class="jm-description" data-i18n="hero.description">A privacy-first authenticator app for iPhone and iPad. Generate TOTP codes offline, keep your accounts secure and organised.</p>
+            <div class="jm-availability" data-i18n-aria-label="a11y.availability" role="note" aria-label="Coming Soon on the App Store. The app is not yet available to download.">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 5h4M11 19h2"/></svg>
-              <div><span>Coming Soon</span><strong>on the App Store</strong></div>
+              <div><span data-i18n="availability.soon">Coming Soon</span><strong data-i18n="availability.store">on the App Store</strong></div>
               <span class="jm-soon-dot" aria-hidden="true"></span>
             </div>
           </div>
 
-          <figure class="jm-preview" aria-label="JM Authenticator on iPhone, with anonymized demo account labels.">
+          <figure class="jm-preview" data-i18n-aria-label="a11y.preview" aria-label="JM Authenticator on iPhone, with anonymized demo account labels.">
             <div class="jm-preview-orbit" aria-hidden="true"></div>
             <div class="jm-preview-stage">
               <div class="jm-phone jm-phone-gallery">
-                <img class="jm-screen" src="/jm-authenticator/screenshots/gallery-demo.png" alt="JM Authenticator Gallery view, showing a grid of account icons with demo account labels." width="852" height="1846" />
+                <img class="jm-screen" src="/jm-authenticator/screenshots/gallery-demo.png" data-i18n-alt="a11y.gallery" alt="JM Authenticator Gallery view, showing a grid of account icons with demo account labels." width="852" height="1846" />
               </div>
               <div class="jm-phone jm-phone-list">
-                <img class="jm-screen" src="/jm-authenticator/screenshots/list-demo.png" alt="JM Authenticator List view, showing account cards, authentication codes and countdown timers with demo account labels." width="852" height="1846" />
+                <img class="jm-screen" src="/jm-authenticator/screenshots/list-demo.png" data-i18n-alt="a11y.list" alt="JM Authenticator List view, showing account cards, authentication codes and countdown timers with demo account labels." width="852" height="1846" />
               </div>
             </div>
-            <figcaption>JM Authenticator on iPhone · Demo account labels</figcaption>
+            <figcaption data-i18n="preview.caption">JM Authenticator on iPhone · Demo account labels</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="jm-features jm-container" id="features" aria-labelledby="features-title">
         <div class="jm-section-heading">
-          <p class="jm-eyebrow">Features</p>
-          <h2 id="features-title">Your accounts, under your control.</h2>
+          <p class="jm-eyebrow" data-i18n="nav.features">Features</p>
+          <h2 id="features-title" data-i18n="features.heading">Your accounts, under your control.</h2>
         </div>
         <div class="jm-feature-grid">
           <article class="jm-feature">
             <div class="jm-feature-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 3 10 4v8c0 7-10 14-10 14S6 22 6 15V7z"/><path d="m11 15 3.5 3.5L21 12"/></svg></div>
-            <h3>Offline TOTP</h3>
-            <p>Generate secure codes without an internet connection.</p>
+            <h3 data-i18n="features.offline.title">Offline TOTP</h3>
+            <p data-i18n="features.offline.description">Generate secure codes without an internet connection.</p>
           </article>
           <article class="jm-feature">
             <div class="jm-feature-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="14" width="20" height="14" rx="3"/><path d="M10 14V9a6 6 0 0 1 12 0v5M16 20v3"/></svg></div>
-            <h3>Encrypted Backup</h3>
-            <p>Keep your accounts safe with encrypted backup and restore.</p>
+            <h3 data-i18n="features.backup.title">Encrypted Backup</h3>
+            <p data-i18n="features.backup.description">Keep your accounts safe with encrypted backup and restore.</p>
           </article>
           <article class="jm-feature">
             <div class="jm-feature-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h22m-6-6 6 6-6 6M27 22H5m6-6-6 6 6 6"/></svg></div>
-            <h3>Easy Transfer</h3>
-            <p>Import and export between supported authenticator apps.</p>
+            <h3 data-i18n="features.transfer.title">Easy Transfer</h3>
+            <p data-i18n="features.transfer.description">Import and export between supported authenticator apps.</p>
           </article>
           <article class="jm-feature">
             <div class="jm-feature-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="9" height="9" rx="2.5"/><rect x="19" y="4" width="9" height="9" rx="2.5"/><rect x="4" y="19" width="9" height="9" rx="2.5"/><path d="M23.5 19v9M19 23.5h9"/></svg></div>
-            <h3>Custom Icons</h3>
-            <p>Choose from the icon library or use your own images.</p>
+            <h3 data-i18n="features.icons.title">Custom Icons</h3>
+            <p data-i18n="features.icons.description">Choose from the icon library or use your own images.</p>
           </article>
           <article class="jm-feature">
             <div class="jm-feature-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H7a3 3 0 0 0-3 3v4M21 4h4a3 3 0 0 1 3 3v4M28 21v4a3 3 0 0 1-3 3h-4M11 28H7a3 3 0 0 1-3-3v-4M11 11v3M21 11v3M16 14v4h-2M11 21c3 3 7 3 10 0"/></svg></div>
-            <h3>App Lock &amp; Privacy</h3>
-            <p>Protect access with Face ID or Touch ID, optional app locking, and privacy controls.</p>
+            <h3 data-i18n="features.lock.title">App Lock &amp; Privacy</h3>
+            <p data-i18n="features.lock.description">Protect access with Face ID or Touch ID, optional app locking, and privacy controls.</p>
           </article>
           <article class="jm-feature">
             <div class="jm-feature-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 3 4 8 9 1.3-6.5 6.3L24 28l-8-4.4L8 28l1.5-9.4L3 12.3l9-1.3z"/></svg></div>
-            <h3>Favorites &amp; Organization</h3>
-            <p>Find your accounts quickly with favorites, search, and flexible list and gallery views.</p>
+            <h3 data-i18n="features.favorites.title">Favorites &amp; Organization</h3>
+            <p data-i18n="features.favorites.description">Find your accounts quickly with favorites, search, and flexible list and gallery views.</p>
           </article>
           <article class="jm-feature">
             <div class="jm-feature-icon"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="16" r="12"/><ellipse cx="16" cy="16" rx="5" ry="12"/><path d="M4 16h24M7 8.5a20 20 0 0 0 18 0M7 23.5a20 20 0 0 1 18 0"/></svg></div>
-            <h3>Multiple Languages</h3>
-            <p>Use JM Authenticator in English, German, Spanish, French, Vietnamese, Simplified Chinese, or Traditional Chinese.</p>
+            <h3 data-i18n="features.languages.title">Multiple Languages</h3>
+            <p data-i18n="features.languages.description">Use JM Authenticator in English, German, Spanish, French, Vietnamese, Simplified Chinese, or Traditional Chinese.</p>
           </article>
         </div>
       </section>
@@ -103,15 +115,16 @@
       <div class="jm-footer-inner jm-container">
         <a class="jm-brand jm-footer-brand" href="/">
           <img src="/jm-authenticator/branding/jm-shield.png" alt="" width="36" height="36" />
-          <span>JM Authenticator</span>
+          <span data-i18n="common.product">JM Authenticator</span>
         </a>
-        <nav class="jm-nav" aria-label="Footer navigation">
-          <a href="#features">Features</a>
-          <a href="/jm-authenticator/privacy/">Privacy Policy</a>
-          <span class="jm-pending">Impressum <span>Pending</span></span>
-          <a href="/share-monitor/">Share Monitor</a>
+        <nav class="jm-nav" data-i18n-aria-label="a11y.footerNav" aria-label="Footer navigation">
+          <a href="#features" data-i18n="nav.features">Features</a>
+          <a href="/jm-authenticator/privacy/" data-legal-page="privacy" data-i18n="nav.privacyPolicy">Privacy Policy</a>
+          <a class="jm-pending" href="/impressum/" data-legal-page="impressum" data-i18n-text="nav.impressum">Impressum <span data-i18n="nav.pending">Pending</span></a>
+          <a href="/share-monitor/" data-i18n="nav.shareMonitor">Share Monitor</a>
         </nav>
       </div>
     </footer>
+    <script type="module" src="/i18n/homepage.js"></script>
   </body>
 </html>

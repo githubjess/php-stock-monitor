@@ -9,6 +9,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         home: fileURLToPath(new URL("./index.html", import.meta.url)),
+        impressum: fileURLToPath(new URL("./impressum/index.html", import.meta.url)),
         shareMonitor: fileURLToPath(new URL("./share-monitor/index.html", import.meta.url)),
       },
     },
