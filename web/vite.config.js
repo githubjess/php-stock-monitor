@@ -1,6 +1,17 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { fileURLToPath } from "node:url";
+import { readFileSync, readdirSync, unlinkSync } from "node:fs";
+import { join } from "node:path";
+import { deploymentFiles } from "./deployment-files.js";
+
+function removeFinderMetadata(directory) {
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const path = join(directory, entry.name);
+    if (entry.isDirectory()) removeFinderMetadata(path);
+    else if (entry.name === ".DS_Store") unlinkSync(path);
+  }
+}
 
 export default defineConfig({
   base: "/",
@@ -22,6 +33,22 @@ export default defineConfig({
   },
   plugins: [
     react(),
+    {
+      name: "jegprofil-release-package",
+      apply: "build",
+      generateBundle() {
+        for (const file of deploymentFiles) {
+          this.emitFile({
+            type: "asset",
+            fileName: file.destination,
+            source: readFileSync(new URL(file.source, import.meta.url)),
+          });
+        }
+      },
+      writeBundle(output) {
+        if (output.dir) removeFinderMetadata(output.dir);
+      },
+    },
     {
       name: "jm-authenticator-privacy-local-preview",
       apply: "serve",

@@ -58,14 +58,16 @@ the domain document root, retaining old hashed assets for cached pages. Include
 the new `/contact/index.html`, the refreshed `/impressum/index.html`, and the
 complete current `/assets/` folder: translation code is shared across pages.
 
-Additionally upload these PHP files beside the built contact HTML:
+The production build automatically packages these PHP files beside the built contact HTML:
 
 | Repository file | Destination under domain document root |
 | --- | --- |
 | `php-api/contact/send.php` | `contact/send.php` |
 | `php-api/contact/rate-limit.php` | `contact/rate-limit.php` |
 
-These PHP files are **not** included automatically in `web/dist`. Do not upload
+Both PHP files are included automatically in `web/dist/contact/`, using the
+release allowlist in `web/deployment-files.js`. No separate source-file upload
+is required. Do not upload
 this README, source catalogs, development scripts or node_modules. The two PHP
 files must remain in the same directory. Hosting must support PHP 8.1+, `mail()`,
 and private writable system temporary storage with file locking.
