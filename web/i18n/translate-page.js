@@ -1,8 +1,8 @@
 import { resolveLegalPage } from "./legal-pages.js";
 
-export function initTranslations(catalogs, { titleKey = "page.title", queryLanguage = false } = {}) {
+export function initTranslations(catalogs, { titleKey = "page.title", queryLanguage = false, root = document, updateDocument = true } = {}) {
   const preferenceKey = "jm-authenticator:website-language";
-  const selector = document.getElementById("jm-language");
+  const selector = root.querySelector("#jm-language");
 
   function supported(language) {
     return Object.hasOwn(catalogs, language) ? language : "en";
@@ -12,23 +12,25 @@ export function initTranslations(catalogs, { titleKey = "page.title", queryLangu
     const language = supported(requested);
     const messages = catalogs[language];
     const message = (key) => messages[key] ?? catalogs.en[key];
-    document.documentElement.lang = language;
-    document.title = message(titleKey);
-    document.querySelectorAll("[data-i18n]").forEach((element) => {
+    if (updateDocument) {
+      document.documentElement.lang = language;
+      document.title = message(titleKey);
+    } else root.lang = language;
+    root.querySelectorAll("[data-i18n]").forEach((element) => {
       element.textContent = message(element.dataset.i18n);
     });
     // Update only the direct text node, keeping icons, line breaks and accents.
-    document.querySelectorAll("[data-i18n-text]").forEach((element) => {
+    root.querySelectorAll("[data-i18n-text]").forEach((element) => {
       const node = [...element.childNodes].find((child) =>
         child.nodeType === Node.TEXT_NODE && child.textContent.trim());
       if (node) node.textContent = `${message(element.dataset.i18nText)} `;
     });
     for (const attribute of ["aria-label", "alt", "content"]) {
-      document.querySelectorAll(`[data-i18n-${attribute}]`).forEach((element) => {
+      root.querySelectorAll(`[data-i18n-${attribute}]`).forEach((element) => {
         element.setAttribute(attribute, message(element.getAttribute(`data-i18n-${attribute}`)));
       });
     }
-    document.querySelectorAll("a[data-legal-page]").forEach((link) => {
+    root.querySelectorAll("a[data-legal-page]").forEach((link) => {
       const target = resolveLegalPage(link.dataset.legalPage, language);
       if (target) {
         link.setAttribute("href", target.href);

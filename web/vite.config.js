@@ -9,8 +9,13 @@ export default defineConfig({
     rollupOptions: {
       input: {
         home: fileURLToPath(new URL("./index.html", import.meta.url)),
+        navigation: fileURLToPath(new URL("./i18n/navigation.js", import.meta.url)),
         impressum: fileURLToPath(new URL("./impressum/index.html", import.meta.url)),
         shareMonitor: fileURLToPath(new URL("./share-monitor/index.html", import.meta.url)),
+      },
+      output: {
+        entryFileNames: (chunk) => chunk.name === "navigation"
+          ? "jm-authenticator/navigation.js" : "assets/[name]-[hash].js",
       },
     },
   },
@@ -22,6 +27,9 @@ export default defineConfig({
       configureServer(server) {
         // Vite's public-file middleware does not resolve directory index pages.
         server.middlewares.use((req, _res, next) => {
+          if (req.url?.split("?")[0] === "/jm-authenticator/navigation.js") {
+            req.url = req.url.replace("/jm-authenticator/navigation.js", "/i18n/navigation.js");
+          }
           if (req.url?.split("?")[0] === "/jm-authenticator/privacy/") {
             req.url = req.url.replace(
               "/jm-authenticator/privacy/",

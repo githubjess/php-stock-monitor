@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="JM Authenticator Privacy Policy: local authentication codes, Apple Keychain protection, personal images, device authentication, encrypted backups and data retention.">
   <meta name="referrer" content="no-referrer">
-  <!-- Remove noindex only after the publication checklist in ../README.md is complete. -->
-  <meta name="robots" content="noindex">
   <title>Privacy Policy | JM Authenticator</title>
   <style>
     :root {
@@ -94,19 +92,58 @@
       h2, h3 { break-after: avoid; }
       a { color: inherit; }
     }
+
+    /* Shared website navigation; the policy article retains its approved styles. */
+    .jm-policy-navigation { width: min(1184px, calc(100% - 48px)); margin-inline: auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; padding-block: 25px; color: #172f50; line-height: 1.6; }
+    .jm-policy-navigation a { color: inherit; text-decoration: none; }
+    .jm-policy-navigation a:hover { color: #7053c6; }
+    .jm-policy-navigation :focus-visible { outline: 3px solid #7053c6; outline-offset: 5px; }
+    .jm-policy-navigation .jm-brand { display: inline-flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 650; letter-spacing: -.6px; }
+    .jm-policy-navigation img { display: block; object-fit: contain; }
+    .jm-policy-navigation .jm-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 28px; font-size: 14px; font-weight: 550; min-width: 0; }
+    .jm-policy-navigation .jm-nav a { display: inline-flex; align-items: center; min-height: 44px; gap: 5px; }
+    .jm-policy-navigation .jm-pending { color: #536178; }
+    .jm-policy-navigation .jm-pending > span { font-size: 10px; background: #f1f0f7; border: 1px solid #e8e5f0; border-radius: 5px; padding: 1px 5px; }
+    .jm-policy-navigation .jm-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .jm-policy-navigation .jm-language { position: relative; }
+    .jm-policy-navigation select { appearance: none; -webkit-appearance: none; min-height: 44px; max-width: 100%; padding: 8px 34px 8px 10px; border: 1px solid #dedbef; border-radius: 10px; background: white; color: #172f50; font: inherit; cursor: pointer; }
+    .jm-policy-navigation .jm-language::after { content: ""; position: absolute; right: 14px; top: calc(50% - 4px); width: 7px; height: 7px; border-right: 1.5px solid #7053c6; border-bottom: 1.5px solid #7053c6; transform: rotate(45deg); pointer-events: none; }
+    @media (max-width: 760px) { .jm-policy-navigation .jm-nav { gap: 4px 18px; font-size: 13px; } .jm-policy-navigation .jm-brand { font-size: 19px; } }
+    @media print { .jm-policy-navigation .jm-nav { display: none; } }
   </style>
 </head>
 <body id="top">
   <a class="skip-link" href="#policy">Skip to privacy policy</a>
-  <header class="masthead">
-    <div class="wrap brand"><span class="brand-mark" aria-hidden="true">JM</span><span>JM Authenticator</span></div>
-  </header>
+  <header class="jm-header jm-container jm-policy-navigation">
+      <a data-i18n-aria-label="a11y.home" class="jm-brand" href="/" aria-label="JM Authenticator home">
+        <img src="/jm-authenticator/branding/jm-shield.png" alt="" width="52" height="52" />
+        <span data-i18n="common.product">JM Authenticator</span>
+      </a>
+      <nav class="jm-nav" data-i18n-aria-label="a11y.mainNav" aria-label="Main navigation">
+        <a href="/" data-i18n="nav.home">Home</a>
+        <a href="/#features" data-i18n="nav.features">Features</a>
+        <a href="/jm-authenticator/privacy/" data-legal-page="privacy" data-i18n="nav.privacy">Privacy</a>
+        <a class="jm-pending" href="/impressum/" data-legal-page="impressum" data-i18n-text="nav.impressum">Impressum <span data-i18n="nav.pending">Pending</span></a>
+        <a href="/share-monitor/" data-i18n-text="nav.shareMonitor">Share Monitor <span aria-hidden="true">↗</span></a>
+        <div class="jm-language" hidden>
+          <label class="jm-sr-only" for="jm-language" data-i18n="a11y.language">Website language</label>
+          <select id="jm-language" data-i18n-aria-label="a11y.language" aria-label="Website language">
+            <option value="en" lang="en">🇬🇧 English</option>
+            <option value="de" lang="de">🇩🇪 Deutsch</option>
+            <option value="es" lang="es">🇪🇸 Español</option>
+            <option value="fr" lang="fr">🇫🇷 Français</option>
+            <option value="vi" lang="vi">🇻🇳 Tiếng Việt</option>
+            <option value="zh-Hans" lang="zh-Hans">🇨🇳 简体中文</option>
+            <option value="zh-Hant" lang="zh-Hant">🇹🇼 繁體中文</option>
+          </select>
+        </div>
+      </nav>
+    </header>
   <main class="wrap">
     <div class="hero">
       <p class="eyebrow">Privacy &amp; data handling</p>
       <h1>Privacy Policy</h1>
       <p class="intro">Your authentication codes are generated on your device. This policy explains what JM Authenticator stores, how optional features handle your data, and what stays under your control.</p>
-      <p class="status"><strong>Publication details pending.</strong> The publisher’s legal identity and effective date must be completed before publication or App Store submission.</p>
     </div>
     <div class="facts" aria-label="Privacy at a glance">
       <div class="fact"><strong>Local code generation</strong><p>Authentication codes are generated locally. No JM account or registration is required.</p></div>
@@ -135,9 +172,9 @@
           <h2 id="scope-title">01. Scope &amp; publisher</h2>
           <p>This policy describes how JM Authenticator handles information on Apple devices, including local authentication, account icons, device authentication, backups and transfers. It reflects the findings of the app’s privacy audit. File providers and services you choose have their own privacy policies.</p>
           <dl>
-            <dt>Publisher’s legal identity</dt><dd class="placeholder">[PUBLISHER LEGAL IDENTITY — TO BE CONFIRMED]</dd>
+            <dt>Publisher’s legal identity</dt><dd class="placeholder">Jesus Gerardo Macias De La Rosa</dd>
             <dt>Privacy contact email</dt><dd><a href="mailto:privacy@jegprofil.info">privacy@jegprofil.info</a></dd>
-            <dt>Effective date</dt><dd class="placeholder">[EFFECTIVE DATE — TO BE CONFIRMED]</dd>
+            <dt>Effective date</dt><dd class="placeholder">31 October 2026</dd>
           </dl>
           <p>No JM account or registration is required. Authentication codes are generated locally. No developer-operated analytics, advertising, tracking, telemetry or remote crash reporting was identified in the audited version.</p>
         </section>
@@ -200,5 +237,6 @@
     </div>
   </main>
   <footer><div class="wrap footer-inner"><span>JM Authenticator · Privacy Policy</span><a href="/impressum/">Impressum (draft)</a><a class="back-top" href="#top">Back to top ↑</a></div></footer>
+  <script type="module" src="/jm-authenticator/navigation.js"></script>
 </body>
 </html>

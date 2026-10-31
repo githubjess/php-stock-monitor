@@ -37,5 +37,6 @@
   "features.favorites.title": "收藏与整理",
   "features.favorites.description": "借助收藏、搜索以及灵活的列表和图库视图，快速找到你的账户。",
   "features.languages.title": "多语言支持",
-  "features.languages.description": "JM Authenticator 支持英语、德语、西班牙语、法语、越南语、简体中文和繁体中文。"
+  "features.languages.description": "JM Authenticator 支持英语、德语、西班牙语、法语、越南语、简体中文和繁体中文。",
+  "nav.home": "首页"
 }

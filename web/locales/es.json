@@ -37,5 +37,6 @@
   "features.favorites.title": "Favoritos y organización",
   "features.favorites.description": "Encuentra tus cuentas rápidamente con favoritos, búsqueda y vistas flexibles de lista y galería.",
   "features.languages.title": "Varios idiomas",
-  "features.languages.description": "Usa JM Authenticator en inglés, alemán, español, francés, vietnamita, chino simplificado o chino tradicional."
+  "features.languages.description": "Usa JM Authenticator en inglés, alemán, español, francés, vietnamita, chino simplificado o chino tradicional.",
+  "nav.home": "Inicio"
 }

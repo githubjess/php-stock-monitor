@@ -37,5 +37,6 @@
   "features.favorites.title": "Yêu thích và sắp xếp",
   "features.favorites.description": "Tìm tài khoản nhanh chóng bằng mục yêu thích, tìm kiếm và các chế độ danh sách, thư viện linh hoạt.",
   "features.languages.title": "Nhiều ngôn ngữ",
-  "features.languages.description": "Sử dụng JM Authenticator bằng tiếng Anh, Đức, Tây Ban Nha, Pháp, Việt, Trung giản thể hoặc Trung phồn thể."
+  "features.languages.description": "Sử dụng JM Authenticator bằng tiếng Anh, Đức, Tây Ban Nha, Pháp, Việt, Trung giản thể hoặc Trung phồn thể.",
+  "nav.home": "Trang chủ"
 }

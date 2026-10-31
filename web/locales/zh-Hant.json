@@ -37,5 +37,6 @@
   "features.favorites.title": "最愛與整理",
   "features.favorites.description": "透過最愛、搜尋及靈活的清單和圖庫檢視，快速找到你的帳戶。",
   "features.languages.title": "多語言支援",
-  "features.languages.description": "JM Authenticator 支援英語、德語、西班牙語、法語、越南語、簡體中文和繁體中文。"
+  "features.languages.description": "JM Authenticator 支援英語、德語、西班牙語、法語、越南語、簡體中文和繁體中文。",
+  "nav.home": "首頁"
 }
