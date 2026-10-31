@@ -18,7 +18,7 @@
   "legal.emailLabel": "Email",
   "legal.emailValue": "business@jegprofil.info",
   "legal.channelLabel": "Additional channel for prompt, direct communication",
-  "legal.channelValue": "Contact form",
+  "legal.channelValue": "Send us a message",
   "legal.taxTitle": "Tax identification details, where required",
   "legal.taxValue": "pending",
   "legal.home": "Back to the JM Authenticator homepage"
