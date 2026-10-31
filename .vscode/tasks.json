@@ -4,28 +4,102 @@
     {
       "label": "Share Monitor: Backend",
       "type": "process",
-      "command": "${env:SystemRoot}/System32/WindowsPowerShell/v1.0/powershell.exe",
-      "args": ["-NoProfile", "-File", "${workspaceFolder}/php-api/start.ps1"],
-      "options": {
-        "cwd": "${workspaceFolder}/php-api",
-        "env": { "PATH": "D:\\DEV\\TOOLS\\php;C:\\WORK\\TOOLS\\nodejs;${env:PATH}" }
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false
       },
-      "presentation": { "reveal": "always", "panel": "dedicated", "clear": false },
-      "runOptions": { "instanceLimit": 1 },
-      "problemMatcher": []
+      "runOptions": {
+        "instanceLimit": 1
+      },
+      "problemMatcher": [],
+      "command": "php",
+      "args": [
+        "-S",
+        "localhost:8080",
+        "router.php"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/php-api"
+      },
+      "windows": {
+        "command": "${env:SystemRoot}/System32/WindowsPowerShell/v1.0/powershell.exe",
+        "args": [
+          "-NoProfile",
+          "-File",
+          "${workspaceFolder}/php-api/start.ps1"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}/php-api",
+          "env": {
+            "PATH": "D:\\DEV\\TOOLS\\php;C:\\WORK\\TOOLS\\nodejs;${env:PATH}"
+          }
+        }
+      },
+      "osx": {
+        "command": "php",
+        "args": [
+          "-S",
+          "localhost:8080",
+          "router.php"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}/php-api"
+        }
+      }
     },
     {
       "label": "Share Monitor: Frontend",
       "type": "process",
-      "command": "${env:SystemRoot}/System32/WindowsPowerShell/v1.0/powershell.exe",
-      "args": ["-NoProfile", "-File", "${workspaceFolder}/web/start.ps1"],
-      "options": {
-        "cwd": "${workspaceFolder}/web",
-        "env": { "PATH": "C:\\WORK\\TOOLS\\nodejs;D:\\DEV\\TOOLS\\php;${env:PATH}" }
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": false
       },
-      "presentation": { "reveal": "always", "panel": "dedicated", "clear": false },
-      "runOptions": { "instanceLimit": 1 },
-      "problemMatcher": []
+      "runOptions": {
+        "instanceLimit": 1
+      },
+      "problemMatcher": [],
+      "command": "npm",
+      "args": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5173",
+        "--strictPort"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/web"
+      },
+      "windows": {
+        "command": "${env:SystemRoot}/System32/WindowsPowerShell/v1.0/powershell.exe",
+        "args": [
+          "-NoProfile",
+          "-File",
+          "${workspaceFolder}/web/start.ps1"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}/web",
+          "env": {
+            "PATH": "C:\\WORK\\TOOLS\\nodejs;D:\\DEV\\TOOLS\\php;${env:PATH}"
+          }
+        }
+      },
+      "osx": {
+        "command": "npm",
+        "args": [
+          "run",
+          "dev",
+          "--",
+          "--port",
+          "5173",
+          "--strictPort"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}/web"
+        }
+      }
     }
   ]
 }

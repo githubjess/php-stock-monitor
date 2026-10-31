@@ -1,0 +1,21 @@
+{
+  "name": "share-monitor-dev-controls",
+  "displayName": "Share Monitor Development Controls",
+  "description": "Workspace-scoped PHP and Vite controls for macOS and Windows.",
+  "publisher": "jm-local",
+  "version": "0.1.0",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other"],
+  "main": "./extension.cjs",
+  "extensionKind": ["workspace"],
+  "activationEvents": ["workspaceContains:.vscode/tasks.json"],
+  "capabilities": { "untrustedWorkspaces": { "supported": false } },
+  "contributes": {
+    "commands": [
+      { "command": "shareMonitorDev.startBackend", "title": "Share Monitor: Start Backend" },
+      { "command": "shareMonitorDev.stopBackend", "title": "Share Monitor: Stop Backend" },
+      { "command": "shareMonitorDev.startFrontend", "title": "Share Monitor: Start Frontend" },
+      { "command": "shareMonitorDev.stopFrontend", "title": "Share Monitor: Stop Frontend" }
+    ]
+  }
+}

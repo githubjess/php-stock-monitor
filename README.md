@@ -6,6 +6,23 @@ Share Monitor is a stock dashboard with:
 - Rule-based `Invest / Risk Signal` panel
 - Optional EUR conversion for panel values
 
+## VS Code development controls (macOS and Windows)
+
+Install the repository's private [Development Controls extension](tools/vscode-dev-controls/README.md)
+once on each computer. From the repository root, run
+`node tools/vscode-dev-controls/package.cjs`, then use **Extensions: Install from
+VSIX...** with the printed path. Open and trust this repository in VS Code.
+
+The four existing Backend / Stop Backend / Frontend / Stop Frontend buttons
+automatically use the task-executing host's OS. No OS configuration switching is
+needed. Shared tasks preserve the Windows PowerShell launchers and tool paths;
+macOS uses PHP/npm from PATH. Stops target only the corresponding workspace task.
+No Apache or PHP-FPM service is required.
+
+On a fresh Mac checkout, install the existing frontend dependencies with
+`npm ci` inside `web` before starting Frontend. After extension source updates,
+repackage and reinstall the VSIX. The private extension is not on the Marketplace.
+
 ## Run Locally
 
 ### 1) Backend
