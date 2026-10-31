@@ -9,6 +9,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         home: fileURLToPath(new URL("./index.html", import.meta.url)),
+        contact: fileURLToPath(new URL("./contact/index.html", import.meta.url)),
         navigation: fileURLToPath(new URL("./i18n/navigation.js", import.meta.url)),
         impressum: fileURLToPath(new URL("./impressum/index.html", import.meta.url)),
         shareMonitor: fileURLToPath(new URL("./share-monitor/index.html", import.meta.url)),
@@ -44,6 +45,7 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
+      "/contact/send.php": "http://localhost:8080",
       "/api": "http://localhost:8080",
       "/health": "http://localhost:8080"
     }

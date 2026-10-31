@@ -1,0 +1,28 @@
+.jm-contact-content { max-width: 840px; padding-block: 38px 70px; }
+.jm-contact-intro { max-width: 650px; margin-bottom: 28px; color: var(--jm-copy); }
+.jm-contact-card { padding: 32px; border: 1px solid var(--jm-border); border-radius: 20px; background: var(--jm-surface, #fff); box-shadow: 0 8px 28px #243b6906; }
+.jm-contact-card > p { margin-top: 0; color: var(--jm-copy); font-size: 14px; }
+.jm-contact-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 20px; }
+.jm-contact-toolbar[hidden] { display: none; }
+.jm-contact-toolbar > label { font-size: 14px; font-weight: 600; }
+.jm-contact-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.jm-contact-field { min-width: 0; }
+.jm-contact-field label { display: block; margin-bottom: 7px; color: var(--jm-navy); font-weight: 600; }
+.jm-contact-field input, .jm-contact-field textarea { width: 100%; min-height: 48px; padding: 12px 14px; border: 1px solid var(--jm-border); border-radius: 10px; background: var(--jm-input, #fff); color: var(--jm-navy); font: inherit; line-height: 1.5; }
+.jm-contact-field textarea { display: block; resize: vertical; }
+.jm-contact-field input:focus-visible, .jm-contact-field textarea:focus-visible { border-color: var(--jm-violet); outline: 2px solid var(--jm-violet); outline-offset: 2px; }
+.jm-contact-subject, .jm-contact-message { grid-column: 1 / -1; }
+.jm-contact-note { margin: 18px 0 0; color: var(--jm-copy); font-size: 13px; line-height: 1.8; }
+.jm-contact-submit { min-height: 48px; margin-top: 24px; padding: 12px 24px; border: 0; border-radius: 12px; background: var(--jm-violet); color: white; font: inherit; font-weight: 600; cursor: pointer; }
+.jm-contact-submit:hover { filter: brightness(.95); }
+.jm-contact-submit:disabled { cursor: wait; opacity: .65; }
+.jm-contact-status { margin: 20px 0 0; padding: 14px 16px; border: 1px solid var(--jm-border); border-radius: 10px; background: #f8f6fd; overflow-wrap: anywhere; }
+.jm-contact-status[data-state="error"] { border-color: #b93a4c; color: #912d3e; background: #fff8f9; }
+.jm-contact-back { display: inline-flex; align-items: center; min-height: 44px; margin-top: 24px; color: var(--jm-violet); }
+.jm-contact-honeypot { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 600px) {
+  .jm-contact-content { padding-block: 25px 45px; }
+  .jm-contact-card { padding: 22px; }
+  .jm-contact-fields { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .jm-contact-submit { width: 100%; }
+}

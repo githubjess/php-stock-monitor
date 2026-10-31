@@ -18,18 +18,8 @@
   "legal.emailLabel": "Email",
   "legal.emailValue": "business@jegprofil.info",
   "legal.channelLabel": "Kênh bổ sung để liên lạc nhanh chóng và trực tiếp",
-  "legal.channelValue": "pending",
-  "legal.registerTitle": "Thông tin đăng ký, nếu áp dụng",
-  "legal.registerValue": "pending",
+  "legal.channelValue": "Biểu mẫu liên hệ",
   "legal.taxTitle": "Mã số định danh thuế, nếu bắt buộc",
   "legal.taxValue": "pending",
-  "legal.additionalTitle": "Thông tin bắt buộc bổ sung, nếu áp dụng",
-  "legal.additionalValue": "pending",
-  "legal.conditionalNote": "Trước khi xuất bản, cần xác nhận những thông tin có điều kiện nào thực sự bắt buộc. Sau khi rà soát, hãy xóa các mục không áp dụng khỏi bản nháp.",
-  "legal.home": "Quay lại trang chủ JM Authenticator",
-  "legal.supervisoryLabel": "Cơ quan giám sát, nếu áp dụng",
-  "legal.supervisoryValue": "pending",
-  "legal.professionLabel": "Thông tin nghề nghiệp có điều kiện, nếu áp dụng",
-  "legal.professionValue": "pending",
-  "legal.otherLabel": "Thông tin bắt buộc khác theo pháp luật, nếu áp dụng"
+  "legal.home": "Quay lại trang chủ JM Authenticator"
 }

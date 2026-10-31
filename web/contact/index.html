@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <meta name="color-scheme" content="light" />
+  <meta name="description" data-i18n-content="contact.description" content="Contact the publisher of JM Authenticator and Share Monitor." />
+  <title>Contact | JM Authenticator</title>
+  <link rel="stylesheet" href="/homepage.css" />
+  <link rel="stylesheet" href="/contact/contact.css" />
+</head>
+<body class="jm-home jm-contact">
+  <a class="jm-skip" href="#main" data-i18n="a11y.skip">Skip to content</a>
+    <header class="jm-header jm-container">
+      <a class="jm-brand" href="/" data-i18n-aria-label="a11y.home" aria-label="JM Authenticator home">
+        <img src="/jm-authenticator/branding/jm-shield.png" alt="" width="52" height="52" />
+        <span data-i18n="common.product">JM Authenticator</span>
+      </a>
+      <nav class="jm-nav" data-i18n-aria-label="a11y.mainNav" aria-label="Main navigation">
+        <a href="/" data-i18n="nav.home">Home</a>
+        <a href="/#features" data-i18n="nav.features">Features</a>
+        <a href="/jm-authenticator/privacy/" data-legal-page="privacy" data-i18n="nav.privacy">Privacy</a>
+        <a href="/impressum/" data-legal-page="impressum" data-i18n="nav.impressum">Impressum</a>
+        <a href="/share-monitor/" data-i18n="nav.shareMonitor">Share Monitor</a>
+        <div class="jm-language" hidden>
+          <label class="jm-sr-only" for="jm-language" data-i18n="a11y.language">Website language</label>
+          <select id="jm-language" data-i18n-aria-label="a11y.language" aria-label="Website language">
+            <option value="en" lang="en" selected>🇬🇧 English</option>
+            <option value="de" lang="de">🇩🇪 Deutsch</option>
+            <option value="es" lang="es">🇪🇸 Español</option>
+            <option value="fr" lang="fr">🇫🇷 Français</option>
+            <option value="vi" lang="vi">🇻🇳 Tiếng Việt</option>
+            <option value="zh-Hans" lang="zh-Hans">🇨🇳 简体中文</option>
+            <option value="zh-Hant" lang="zh-Hant">🇹🇼 繁體中文</option>
+          </select>
+        </div>
+      </nav>
+    </header>
+  <main id="main" tabindex="-1" class="jm-contact-content jm-container">
+<h1 data-i18n="contact.heading">Contact</h1><p data-i18n="contact.intro" class="jm-contact-intro">Send an enquiry about JM Authenticator or Share Monitor. You can also email business@jegprofil.info.</p>
+    <div class="jm-contact-card">
+      <form id="jm-contact-form" action="/contact/send.php" method="post">
+        <div class="jm-contact-toolbar" hidden>
+          <label for="jm-form-language" data-form-i18n="contact.formLanguage">Form language</label>
+          <div class="jm-language">
+            <select id="jm-form-language" data-form-i18n-aria-label="contact.formLanguage" aria-label="Form language">
+            <option value="en" lang="en" selected>🇬🇧 English</option>
+            <option value="de" lang="de">🇩🇪 Deutsch</option>
+            <option value="es" lang="es">🇪🇸 Español</option>
+            <option value="fr" lang="fr">🇫🇷 Français</option>
+            <option value="vi" lang="vi">🇻🇳 Tiếng Việt</option>
+            <option value="zh-Hans" lang="zh-Hans">🇨🇳 简体中文</option>
+            <option value="zh-Hant" lang="zh-Hant">🇹🇼 繁體中文</option>
+          </select>
+          </div>
+        </div>
+        <p data-form-i18n="contact.required">All fields are required.</p>
+        <div class="jm-contact-fields">
+<div class="jm-contact-field jm-contact-name"><label data-form-i18n="contact.name" for="contact-name">Name</label><input id="contact-name" name="name" data-form-i18n-placeholder="contact.namePlaceholder" placeholder="Your name" type="text" maxlength="100" autocomplete="name" required /></div>
+<div class="jm-contact-field jm-contact-email"><label data-form-i18n="contact.email" for="contact-email">Email</label><input id="contact-email" name="email" data-form-i18n-placeholder="contact.emailPlaceholder" placeholder="name@example.com" type="email" maxlength="254" autocomplete="email" required /></div>
+<div class="jm-contact-field jm-contact-subject"><label data-form-i18n="contact.subject" for="contact-subject">Subject</label><input id="contact-subject" name="subject" data-form-i18n-placeholder="contact.subjectPlaceholder" placeholder="How can we help?" type="text" maxlength="160" autocomplete="off" required /></div>
+<div class="jm-contact-field jm-contact-message"><label data-form-i18n="contact.message" for="contact-message">Message</label><textarea id="contact-message" name="message" data-form-i18n-placeholder="contact.messagePlaceholder" placeholder="Write your message…" maxlength="5000" rows="7" required></textarea></div>
+        </div>
+        <div class="jm-contact-honeypot" aria-hidden="true">
+<label data-form-i18n="contact.honeypot" for="contact-website">Leave this field empty</label>
+          <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+<p data-form-i18n="contact.privacy" class="jm-contact-note">We use the details you provide to reply to your enquiry. Your message is sent by email to business@jegprofil.info.</p><p data-form-i18n="contact.noSecrets" class="jm-contact-note">Do not include passwords, authentication codes or account secrets.</p>
+        <button class="jm-contact-submit" type="submit" disabled data-form-i18n="contact.send">Send message</button>
+        <p id="contact-status" class="jm-contact-status" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden></p>
+      </form>
+      <noscript><p data-form-i18n="contact.noScript">JavaScript is needed to submit this form. You can email business@jegprofil.info instead.</p><a href="mailto:business@jegprofil.info">business@jegprofil.info</a></noscript>
+    </div>
+<a data-i18n="contact.back" class="jm-contact-back" href="/impressum/">Back to the legal notice</a>
+  </main>
+  <footer class="jm-footer">
+    <nav class="jm-nav jm-container" style="padding-block: 20px;" data-i18n-aria-label="a11y.footerNav" aria-label="Footer navigation">
+      <a href="/" data-i18n="nav.home">Home</a>
+      <a href="/jm-authenticator/privacy/" data-legal-page="privacy" data-i18n="nav.privacyPolicy">Privacy Policy</a>
+      <a href="/impressum/" data-legal-page="impressum" data-i18n="nav.impressum">Impressum</a>
+      <a href="/share-monitor/" data-i18n="nav.shareMonitor">Share Monitor</a>
+    </nav>
+  </footer>
+  <script type="module" src="/i18n/contact.js"></script>
+</body>
+</html>

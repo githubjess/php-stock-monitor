@@ -12,17 +12,18 @@ have been inferred. No generic liability, copyright or dispute boilerplate is ad
 
 The Captain has supplied the legal name, postal address and public email.
 
-Before publication, the Captain must supply and approve:
+Before publication, confirm:
 
-- Another suitable direct contact channel; the approved public contact email is `business@jegprofil.info`.
-- Applicable registration information and VAT/business identification details.
-- Any applicable supervisory, professional or other mandatory information.
+- The new `/contact/` form provides the additional contact route; confirm mail acceptance and receipt on one.com before publication.
+- Whether a VAT ID or Wirtschafts-ID has been assigned; if so, provide the applicable identifier. Never use a personal tax number.
 - Final German wording and legal applicability, followed by review of translations.
 
-Six missing-information fields display exactly `pending` in every language. Remove inapplicable
-conditional fields only after applicability is confirmed. The company-form/authorized-representative field was removed after confirmation that the publisher is a natural person. Registration, tax IDs, supervisory authority, regulated-profession and other disclosures remain unresolved. Apple Developer Individual enrollment alone does not settle those questions. Retain the draft notice,
-`noindex, nofollow`, and the empty reviewed-route map until approval. Search-engine
-directives are not access protection; do not upload this incomplete page.
+The publisher confirms that he is an individual, not a registered company.
+Company-form/representative fields and empty generic registration, supervisory,
+regulated-profession and catch-all sections were removed. No registration,
+qualification, authority, tax exemption or absence of an assigned tax identifier
+has been invented. One field remains `pending`: conditional VAT/business identification. The contact field now links to `/contact/`. Keep the draft notice, `noindex, nofollow`, and empty
+reviewed-route map until these publication questions are resolved.
 
 Privacy Policy changes in this mission are limited to a footer link in its two
 source copies. Share Monitor adds a static footer link outside its React root;

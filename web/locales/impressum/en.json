@@ -18,18 +18,8 @@
   "legal.emailLabel": "Email",
   "legal.emailValue": "business@jegprofil.info",
   "legal.channelLabel": "Additional channel for prompt, direct communication",
-  "legal.channelValue": "pending",
-  "legal.registerTitle": "Registration details, where applicable",
-  "legal.registerValue": "pending",
+  "legal.channelValue": "Contact form",
   "legal.taxTitle": "Tax identification details, where required",
   "legal.taxValue": "pending",
-  "legal.additionalTitle": "Additional mandatory information, where applicable",
-  "legal.additionalValue": "pending",
-  "legal.conditionalNote": "Confirm which conditional disclosures are actually required before publication. Remove inapplicable draft fields after that review.",
-  "legal.home": "Back to the JM Authenticator homepage",
-  "legal.supervisoryLabel": "Supervisory authority, where applicable",
-  "legal.supervisoryValue": "pending",
-  "legal.professionLabel": "Regulated-profession disclosures, where applicable",
-  "legal.professionValue": "pending",
-  "legal.otherLabel": "Other legally required disclosures, where applicable"
+  "legal.home": "Back to the JM Authenticator homepage"
 }

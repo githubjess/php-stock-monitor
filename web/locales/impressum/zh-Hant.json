@@ -18,18 +18,8 @@
   "legal.emailLabel": "電子郵件",
   "legal.emailValue": "business@jegprofil.info",
   "legal.channelLabel": "可進行快速、直接溝通的其他聯絡管道",
-  "legal.channelValue": "pending",
-  "legal.registerTitle": "登記資訊（如適用）",
-  "legal.registerValue": "pending",
+  "legal.channelValue": "聯絡表單",
   "legal.taxTitle": "稅務識別資訊（如有要求）",
   "legal.taxValue": "pending",
-  "legal.additionalTitle": "其他法定資訊（如適用）",
-  "legal.additionalValue": "pending",
-  "legal.conditionalNote": "發布前須確認哪些附條件資訊確實屬於法定要求。審核後，應移除不適用的草稿欄位。",
-  "legal.home": "返回 JM Authenticator 首頁",
-  "legal.supervisoryLabel": "主管監管機關（如適用）",
-  "legal.supervisoryValue": "pending",
-  "legal.professionLabel": "受規管職業的揭露資訊（如適用）",
-  "legal.professionValue": "pending",
-  "legal.otherLabel": "其他法定揭露資訊（如適用）"
+  "legal.home": "返回 JM Authenticator 首頁"
 }

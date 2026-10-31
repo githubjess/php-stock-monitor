@@ -49,7 +49,7 @@ test("all seven legal drafts cover the German template and retain safeguards", (
     const messages = JSON.parse(read(`../locales/impressum/${code}.json`));
     assert.deepEqual(Object.keys(messages).sort(), Object.keys(german).sort());
     assert.ok(Object.values(messages).every((value) => typeof value === "string" && value.trim()));
-    assert.equal(Object.values(messages).filter((value) => value === "pending").length, 6);
+    assert.equal(Object.values(messages).filter((value) => value === "pending").length, 1);
     assert.equal(messages["legal.emailValue"], "business@jegprofil.info");
     assert.ok(!Object.values(messages).some((value) => value.startsWith("[")));
   }

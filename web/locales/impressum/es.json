@@ -18,18 +18,8 @@
   "legal.emailLabel": "Correo electrónico",
   "legal.emailValue": "business@jegprofil.info",
   "legal.channelLabel": "Canal adicional para una comunicación rápida y directa",
-  "legal.channelValue": "pending",
-  "legal.registerTitle": "Datos registrales, cuando proceda",
-  "legal.registerValue": "pending",
+  "legal.channelValue": "Formulario de contacto",
   "legal.taxTitle": "Identificación fiscal, cuando sea necesaria",
   "legal.taxValue": "pending",
-  "legal.additionalTitle": "Información obligatoria adicional, cuando proceda",
-  "legal.additionalValue": "pending",
-  "legal.conditionalNote": "Antes de publicar, confirme qué datos condicionales son realmente obligatorios. Elimine después los campos del borrador que no sean aplicables.",
-  "legal.home": "Volver al inicio de JM Authenticator",
-  "legal.supervisoryLabel": "Autoridad supervisora, cuando proceda",
-  "legal.supervisoryValue": "pending",
-  "legal.professionLabel": "Información de profesiones reguladas, cuando proceda",
-  "legal.professionValue": "pending",
-  "legal.otherLabel": "Otra información legalmente obligatoria, cuando proceda"
+  "legal.home": "Volver al inicio de JM Authenticator"
 }
