@@ -1,11 +1,9 @@
 {
-  "legal.pageTitle": "Thông tin pháp lý — Bản nháp | JM Authenticator & Share Monitor",
-  "legal.description": "Bản nháp thông tin nhà cung cấp chung cho jegprofil.info, JM Authenticator và Share Monitor. Các chi tiết đang chờ xác nhận.",
+  "legal.pageTitle": "Thông tin pháp lý | JM Authenticator & Share Monitor",
+  "legal.description": "Thông tin nhà cung cấp chung cho jegprofil.info, JM Authenticator và Share Monitor.",
   "legal.heading": "Thông tin pháp lý",
   "legal.scope": "Thông tin pháp lý này áp dụng cho jegprofil.info, bao gồm JM Authenticator và Share Monitor.",
-  "legal.draftTitle": "Bản nháp — không xuất bản",
-  "legal.draftNotice": "Thông tin nhà cung cấp chưa đầy đủ. Trước khi xuất bản, đơn vị vận hành phải kiểm tra và phê duyệt mọi thông tin, tính áp dụng pháp lý và các bản dịch.",
-  "legal.authority": "Bản nháp tiếng Đức là bản có giá trị chính thức. Các bản dịch chỉ nhằm hỗ trợ người đọc và chưa được rà soát pháp lý.",
+  "legal.authority": "Bản tiếng Đức là bản có giá trị chính thức. Các bản dịch chỉ nhằm hỗ trợ người đọc.",
   "legal.germanLink": "Đọc bản tiếng Đức có giá trị chính thức",
   "legal.providerTitle": "Thông tin nhận diện nhà cung cấp theo § 5 DDG",
   "legal.nameLabel": "Họ tên pháp lý đầy đủ",
@@ -19,7 +17,5 @@
   "legal.emailValue": "business@jegprofil.info",
   "legal.channelLabel": "Kênh bổ sung để liên lạc nhanh chóng và trực tiếp",
   "legal.channelValue": "Gửi tin nhắn cho chúng tôi",
-  "legal.taxTitle": "Mã số định danh thuế, nếu bắt buộc",
-  "legal.taxValue": "pending",
   "legal.home": "Quay lại trang chủ JM Authenticator"
 }

@@ -1,11 +1,9 @@
 {
-  "legal.pageTitle": "Aviso legal — Borrador | JM Authenticator & Share Monitor",
-  "legal.description": "Borrador de la identificación central del prestador de jegprofil.info, JM Authenticator y Share Monitor. Los datos están pendientes de confirmación.",
+  "legal.pageTitle": "Aviso legal | JM Authenticator & Share Monitor",
+  "legal.description": "Identificación del prestador de jegprofil.info, JM Authenticator y Share Monitor.",
   "legal.heading": "Aviso legal",
   "legal.scope": "Este aviso legal se aplica a jegprofil.info, incluidos JM Authenticator y Share Monitor.",
-  "legal.draftTitle": "Borrador — no publicar",
-  "legal.draftNotice": "Los datos del prestador están incompletos. Antes de publicar, el operador debe revisar y aprobar todos los datos, su aplicabilidad legal y las traducciones.",
-  "legal.authority": "La versión alemana del borrador es la autoritativa. Las traducciones se facilitan como ayuda y aún no han sido revisadas jurídicamente.",
+  "legal.authority": "La versión alemana es la autoritativa. Las traducciones se facilitan como ayuda.",
   "legal.germanLink": "Leer la versión alemana autoritativa",
   "legal.providerTitle": "Identificación del prestador según el § 5 DDG",
   "legal.nameLabel": "Nombre legal completo",
@@ -19,7 +17,5 @@
   "legal.emailValue": "business@jegprofil.info",
   "legal.channelLabel": "Canal adicional para una comunicación rápida y directa",
   "legal.channelValue": "Envíanos un mensaje",
-  "legal.taxTitle": "Identificación fiscal, cuando sea necesaria",
-  "legal.taxValue": "pending",
   "legal.home": "Volver al inicio de JM Authenticator"
 }

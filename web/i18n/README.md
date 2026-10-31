@@ -17,20 +17,18 @@ selection still works for the current page. Share Monitor preferences are separa
 
 ## Legal content integration
 
-`legal-pages.js` separates reviewed routes from local draft routes. A locale
-falls back to a reviewed document's authoritative language when necessary. The
-Privacy Policy keeps its existing English URL and publication placeholders.
-The Impressum has local draft routes at `/impressum/?lang=<code>`; its reviewed
-route map remains empty. Navigation retains a pending badge.
+`legal-pages.js` lists reviewed routes only. A locale falls back to a reviewed
+document's authoritative language when necessary. The Privacy Policy keeps its
+existing English URL. The Impressum's reviewed routes are `/impressum/?lang=<code>`
+for all seven languages.
 
 `impressum.js` combines shared navigation messages with the separate, manually
-authored draft catalogs in `locales/impressum/`. No runtime translation service is
-used. These legal translations are not claimed to be legally reviewed. The German
-draft is authoritative and directly available at `/impressum/?lang=de`, even when
+authored catalogs in `locales/impressum/`. No runtime translation service is
+used. The operator approved all seven versions; they are not claimed to be
+certified translations. The German version is authoritative and directly available at `/impressum/?lang=de`, even when
 another website language is saved. An explicit legal-page query controls that
 visit without overwriting the saved preference; using the selector saves it and
 updates the query so refresh preserves the selection.
 
-All legal versions retain a draft notice, placeholders and `noindex, nofollow`.
-See `impressum/README.md` for the publication blockers. Adding a local draft route
-does not approve publication; move it to reviewed routes only after approval.
+The Impressum is published without draft notices, placeholders or robots
+restrictions. See `impressum/README.md` for its confirmed content.

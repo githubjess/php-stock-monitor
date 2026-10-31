@@ -1,6 +1,6 @@
 # Website contact form
 
-Local page: `/contact/`. Impressum links to it without removing its draft notice.
+Local page: `/contact/`. The Impressum links to it.
 The page reuses the site's Light design and seven-language selector. No Dark/Navy
 website appearance currently exists; this page adds no theme switcher. Form
 controls inherit the site's CSS variables. No external services or dependencies

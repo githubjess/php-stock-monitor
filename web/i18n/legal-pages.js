@@ -1,5 +1,6 @@
-// Reviewed documents and local-only drafts are deliberately separate.
-// A draft route is not approval to publish its legal text or translations.
+// Only reviewed routes are linked. Each language opens the same page in that language.
+const impressumLanguages = ["en", "de", "es", "fr", "vi", "zh-Hans", "zh-Hant"];
+
 export const legalPages = {
   privacy: {
     authoritativeLanguage: "en",
@@ -9,8 +10,7 @@ export const legalPages = {
   impressum: {
     authoritativeLanguage: "de",
     canonicalPath: "/impressum/",
-    reviewedRoutes: {},
-    draftLanguages: ["en", "de", "es", "fr", "vi", "zh-Hans", "zh-Hant"],
+    reviewedRoutes: Object.fromEntries(impressumLanguages.map((code) => [code, `/impressum/?lang=${code}`])),
   },
 };
 
@@ -20,10 +20,5 @@ export function resolveLegalPage(page, language) {
   const resolvedLanguage = entry.reviewedRoutes[language]
     ? language : entry.authoritativeLanguage;
   const href = entry.reviewedRoutes[resolvedLanguage];
-  if (href) return { href, language: resolvedLanguage };
-  if (entry.draftLanguages) {
-    const draftLanguage = entry.draftLanguages.includes(language) ? language : entry.authoritativeLanguage;
-    return { href: `${entry.canonicalPath}?lang=${draftLanguage}`, language: draftLanguage, draft: true };
-  }
-  return null;
+  return href ? { href, language: resolvedLanguage } : null;
 }

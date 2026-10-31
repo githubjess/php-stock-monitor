@@ -1,8 +1,8 @@
 import { catalogs as websiteCatalogs } from "./catalogs.js";
 import { initTranslations } from "./translate-page.js";
 
-// These are manually authored draft resources, not runtime machine translations.
-// Legal/language review and the operator's approval remain publication blockers.
+// These are manually authored resources, not runtime machine translations.
+// The German version is authoritative; the operator approved all seven versions.
 const legalCatalogs = import.meta.glob("../locales/impressum/*.json", {
   eager: true, import: "default",
 });

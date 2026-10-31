@@ -1,11 +1,9 @@
 {
-  "legal.pageTitle": "Impressum — Entwurf | JM Authenticator & Share Monitor",
-  "legal.description": "Entwurf der zentralen Anbieterkennzeichnung für jegprofil.info, JM Authenticator und Share Monitor. Angaben sind noch zu bestätigen.",
+  "legal.pageTitle": "Impressum | JM Authenticator & Share Monitor",
+  "legal.description": "Anbieterkennzeichnung für jegprofil.info, JM Authenticator und Share Monitor.",
   "legal.heading": "Impressum",
   "legal.scope": "Dieses Impressum gilt für jegprofil.info einschließlich JM Authenticator und Share Monitor.",
-  "legal.draftTitle": "Entwurf — nicht zur Veröffentlichung",
-  "legal.draftNotice": "Die Anbieterangaben sind unvollständig. Vor Veröffentlichung müssen alle Angaben, ihre rechtliche Anwendbarkeit und die Übersetzungen geprüft und vom Betreiber freigegeben werden.",
-  "legal.authority": "Die deutsche Entwurfsfassung ist maßgeblich. Übersetzungen dienen der Orientierung und sind noch nicht rechtlich geprüft.",
+  "legal.authority": "Die deutsche Fassung ist maßgeblich. Übersetzungen dienen der Orientierung.",
   "legal.germanLink": "Deutsche maßgebliche Fassung lesen",
   "legal.providerTitle": "Anbieterkennzeichnung gemäß § 5 DDG",
   "legal.nameLabel": "Vollständiger rechtlicher Name",
@@ -19,7 +17,5 @@
   "legal.emailValue": "business@jegprofil.info",
   "legal.channelLabel": "Weiterer Kontaktweg für schnelle, unmittelbare Kommunikation",
   "legal.channelValue": "Nachricht senden",
-  "legal.taxTitle": "Steuerliche Identifikationsangaben, soweit erforderlich",
-  "legal.taxValue": "pending",
   "legal.home": "Zur JM Authenticator Startseite"
 }

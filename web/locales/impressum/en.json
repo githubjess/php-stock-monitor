@@ -1,11 +1,9 @@
 {
-  "legal.pageTitle": "Legal Notice — Draft | JM Authenticator & Share Monitor",
-  "legal.description": "Draft central provider information for jegprofil.info, JM Authenticator and Share Monitor. Details remain to be confirmed.",
+  "legal.pageTitle": "Legal Notice | JM Authenticator & Share Monitor",
+  "legal.description": "Provider information for jegprofil.info, JM Authenticator and Share Monitor.",
   "legal.heading": "Legal Notice",
   "legal.scope": "This legal notice covers jegprofil.info, including JM Authenticator and Share Monitor.",
-  "legal.draftTitle": "Draft — not for publication",
-  "legal.draftNotice": "Provider details are incomplete. Before publication, all details, their legal applicability and the translations must be reviewed and approved by the operator.",
-  "legal.authority": "The German draft is authoritative. Translations are provided for convenience and have not yet undergone legal review.",
+  "legal.authority": "The German version is authoritative. Translations are provided for convenience.",
   "legal.germanLink": "Read the authoritative German version",
   "legal.providerTitle": "Provider identification under § 5 DDG",
   "legal.nameLabel": "Full legal name",
@@ -19,7 +17,5 @@
   "legal.emailValue": "business@jegprofil.info",
   "legal.channelLabel": "Additional channel for prompt, direct communication",
   "legal.channelValue": "Send us a message",
-  "legal.taxTitle": "Tax identification details, where required",
-  "legal.taxValue": "pending",
   "legal.home": "Back to the JM Authenticator homepage"
 }

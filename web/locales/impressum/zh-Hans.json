@@ -1,11 +1,9 @@
 {
-  "legal.pageTitle": "法律声明 — 草稿 | JM Authenticator & Share Monitor",
-  "legal.description": "jegprofil.info、JM Authenticator 和 Share Monitor 的统一服务提供者信息草稿。具体信息有待确认。",
+  "legal.pageTitle": "法律声明 | JM Authenticator & Share Monitor",
+  "legal.description": "jegprofil.info、JM Authenticator 和 Share Monitor 的统一服务提供者信息。",
   "legal.heading": "法律声明",
   "legal.scope": "本法律声明适用于 jegprofil.info，包括 JM Authenticator 和 Share Monitor。",
-  "legal.draftTitle": "草稿 — 请勿发布",
-  "legal.draftNotice": "服务提供者信息尚不完整。发布前，运营者须审核并批准全部信息、法律适用情况及译文。",
-  "legal.authority": "德语草稿为权威版本。译文仅为方便访客阅读而提供，尚未经法律审核。",
+  "legal.authority": "德语版本为权威版本。译文仅为方便访客阅读而提供。",
   "legal.germanLink": "阅读德语权威版本",
   "legal.providerTitle": "根据《德国数字服务法》（DDG）第 5 条的提供者信息",
   "legal.nameLabel": "完整法定姓名",
@@ -19,7 +17,5 @@
   "legal.emailValue": "business@jegprofil.info",
   "legal.channelLabel": "可进行快速、直接沟通的其他联系渠道",
   "legal.channelValue": "给我们留言",
-  "legal.taxTitle": "税务识别信息（如有要求）",
-  "legal.taxValue": "pending",
   "legal.home": "返回 JM Authenticator 首页"
 }

@@ -23,9 +23,7 @@
 .jm-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 25px; }
 .jm-brand { display: inline-flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 650; letter-spacing: -.6px; flex-shrink: 0; }
 .jm-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 28px; font-size: 14px; font-weight: 550; }
-.jm-nav a, .jm-pending { display: inline-flex; align-items: center; gap: 5px; min-height: 44px; }
-.jm-pending { color: var(--jm-copy); }
-.jm-pending > span { font-size: 10px; font-weight: 550; background: #f1f0f7; border: 1px solid #e8e5f0; border-radius: 5px; padding: 1px 5px; }
+.jm-nav a { display: inline-flex; align-items: center; gap: 5px; min-height: 44px; }
 .jm-hero { position: relative; isolation: isolate; }
 .jm-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 88% 35%, #f0edfc 0, transparent 48%), radial-gradient(ellipse at 8% 90%, #f0f7fe 0, transparent 46%); }
 .jm-hero-inner { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 60px; padding-block: 62px 72px; }
