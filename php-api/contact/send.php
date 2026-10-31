@@ -63,7 +63,7 @@ try {
     // UTF-8 encoded words are folded by us; visitor-supplied header controls are rejected above.
     $words = [];
     $chunk = '';
-    foreach (preg_split('//u', '[jegprofil.info] ' . $fields['subject'], -1, PREG_SPLIT_NO_EMPTY) as $character) {
+    foreach (preg_split('//u', '[JM Authenticator] ' . $fields['subject'], -1, PREG_SPLIT_NO_EMPTY) as $character) {
         if (strlen($chunk . $character) > 42) {
             $words[] = '=?UTF-8?B?' . base64_encode($chunk) . '?=';
             $chunk = '';
@@ -72,7 +72,7 @@ try {
     }
     if ($chunk !== '') $words[] = '=?UTF-8?B?' . base64_encode($chunk) . '?=';
     $subject = implode("\r\n ", $words);
-    $body = "Website: jegprofil.info\nName: {$fields['name']}\nEmail: {$fields['email']}\nSubject: {$fields['subject']}\n\n{$fields['message']}\n";
+    $body = "New website contact message\n\nFrom: {$fields['name']}\nEmail: {$fields['email']}\n\n{$fields['message']}\n";
     $accepted = @mail('business@jegprofil.info', $subject, chunk_split(base64_encode($body)), [
         'From' => 'JM Authenticator <business@jegprofil.info>',
         'Reply-To' => $fields['email'],

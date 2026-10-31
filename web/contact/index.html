@@ -72,6 +72,20 @@
       </form>
       <noscript><p data-form-i18n="contact.noScript">JavaScript is needed to submit this form. You can email business@jegprofil.info instead.</p><a href="mailto:business@jegprofil.info">business@jegprofil.info</a></noscript>
     </div>
+    <dialog id="contact-dialog" class="jm-contact-dialog" aria-labelledby="contact-dialog-title" aria-describedby="contact-dialog-text">
+      <button class="jm-contact-dialog-close" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+      </button>
+      <div class="jm-contact-dialog-icon jm-contact-dialog-success" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="30" height="30" focusable="false"><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </div>
+      <div class="jm-contact-dialog-icon jm-contact-dialog-error" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="30" height="30" focusable="false"><path d="M12 7v6.5M12 17h.01" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></svg>
+      </div>
+      <h2 id="contact-dialog-title"></h2>
+      <p id="contact-dialog-text"></p>
+      <button class="jm-contact-dialog-ok" type="button" autofocus>OK</button>
+    </dialog>
 <a data-i18n="contact.back" class="jm-contact-back" href="/impressum/">Back to the legal notice</a>
   </main>
   <footer class="jm-footer">
