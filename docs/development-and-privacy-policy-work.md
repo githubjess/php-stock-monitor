@@ -62,15 +62,16 @@ The retained [development verification report](../.vscode/development-verificati
 
 | Item | Location |
 | --- | --- |
-| Original deployment page | [deploy/jm-authenticator/privacy/index.html](../deploy/jm-authenticator/privacy/index.html) |
-| Vite public copy | [web/public/jm-authenticator/privacy/index.html](../web/public/jm-authenticator/privacy/index.html) |
-| Standalone upload guide | [deploy/jm-authenticator/README.md](../deploy/jm-authenticator/README.md) |
+| Authoritative source | [web/public/jm-authenticator/privacy/index.html](../web/public/jm-authenticator/privacy/index.html) |
+| Generated release copy | `web/dist/jm-authenticator/privacy/index.html` (produced by `npm run build`; not tracked by Git) |
+| Reference mirror | [deploy/jm-authenticator/privacy/index.html](../deploy/jm-authenticator/privacy/index.html) |
+| Page and upload guide | [deploy/jm-authenticator/README.md](../deploy/jm-authenticator/README.md) |
 | Local preview | `http://localhost:5173/jm-authenticator/privacy/` |
-| Intended publication address | `https://jegprofil.info/jm-authenticator/privacy/` |
+| Publication address | `https://jegprofil.info/jm-authenticator/privacy/` |
 
-The intended publication address is a target, not confirmation of a live deployment.
+The page was originally implemented as a standalone file in `deploy/`; the source of truth is now the Vite public copy.
 
-The page uses inline CSS, system fonts, responsive layouts, section navigation, a keyboard skip link and print styling. It requires no JavaScript, third-party resources, analytics, trackers, additional dependencies, React or PHP.
+The page uses inline CSS, system fonts, responsive layouts, section navigation, a keyboard skip link and print styling. It requires no third-party resources, analytics, trackers, additional dependencies, React or PHP. Since the shared website header was added, it loads the same-origin `/jm-authenticator/navigation.js` (header translation and language selector) and `/jm-authenticator/branding/jm-shield.png`. Both are produced by the website build and must be deployed with the page.
 
 ### Policy content
 
@@ -94,12 +95,7 @@ On 29 October 2026, both email placeholders in each HTML file were replaced with
 
 The link appears in the publisher/contact details and in the contact section. Both HTML copies were verified to match after the update. The publication notice now identifies only the publisher’s legal identity and effective date as pending.
 
-Before publication, confirm and replace these remaining placeholders in both files:
-
-- `[PUBLISHER LEGAL IDENTITY — TO BE CONFIRMED]`
-- `[EFFECTIVE DATE — TO BE CONFIRMED]`
-
-Once those details are complete, remove the visible pending-publication notice and the `noindex` meta tag/comment as described in the upload guide. That guide’s earlier references to an unconfirmed email and three pending publication details predate the confirmed-email update; only legal identity and effective date remain pending.
+The remaining details were later completed: the publisher’s legal identity is Jesus Gerardo Macias De La Rosa (matching the Impressum) and the original effective date was 31 October 2026. The pending-publication notice and `noindex` tag were removed, and the page was published. No placeholders remain.
 
 ### Local Vite access
 
@@ -109,7 +105,25 @@ Vite served the explicit `/jm-authenticator/privacy/index.html` path, but the tr
 
 The plugin uses `apply: "serve"` and `configureServer`; it does not change production build configuration or one.com routing. The existing server on port 5173 was reused, and the requested URL was opened and verified in Edge. Share Monitor’s root homepage remained available.
 
-There is no automatic synchronization between the two HTML copies. For future policy edits, update both and compare them so local review matches the intended deployment page. The email update intentionally changed both copies; the earlier instruction to preserve the original applied to the local-access copy operation.
+There is no automatic synchronization between the source and the `deploy/` mirror. For future policy edits, edit the `web/public/` source, run the website build to regenerate `web/dist`, and copy the source byte-for-byte to the `deploy/` mirror. The email update intentionally changed both copies; the earlier instruction to preserve the original applied to the local-access copy operation.
+
+### Corrections of 1 November 2026
+
+A final audit compared the published policy with the JM Authenticator implementation in the separate `authenticator` Flutter project. No contradictions were found, but some behavior was undocumented. The source was corrected, `web/dist` was regenerated with `npm run build` (only the privacy page changed), and the `deploy/` mirror was re-copied.
+
+Content changes, each verified against the app source:
+
+- Data collection: replaced audit-style wording with direct statements (no collection or transmission of accounts, secrets or codes; no analytics, advertising, tracking, telemetry or crash-reporting services), plus a note on Apple’s optional developer sharing. This is consistent with `PrivacyInfo.xcprivacy`, which declares no tracking and no collected data.
+- Secure storage: vault items are device-only, available only while unlocked, and not synchronized through iCloud Keychain. Preferences and backup history use the same protected storage; the welcome-screen preference uses standard app preferences.
+- App lock and privacy: optional lock with Face ID, Touch ID or device passcode, lock on return, inactivity auto-lock (only with app lock enabled), optional hidden codes, and the app-switcher privacy cover. Timeout values are deliberately not listed.
+- Backups: Internal, External and Both destinations. Internal backups are excluded from iCloud and device backups, are removed with the app, and do not protect against device loss.
+- Imports and restore: Google Authenticator transfer QR codes and supported 2FAS and Ente Auth files are processed locally and read in place, without keeping a copy. Restore and import are additive; existing accounts are not replaced and duplicates are skipped.
+- Clipboard: expiry after at most 30 seconds or at code expiry; an immediate clear on manual or security lock; no immediate clear on backgrounding; no guarantee under every system condition.
+- App deletion: interim wording states that Keychain data *may* remain after deletion and that reinstalling should not be relied on for recovery. Keychain persistence after deletion has not been verified on a physical device.
+
+Website fixes: the obsolete `placeholder` class was removed from the publisher identity and effective date. The contents-navigation styles were scoped to `.toc` so they no longer apply to the shared header’s `nav` (on mobile, the header previously inherited a border and padding).
+
+Rendering was checked in WebKit at 320, 390, 768 and 1440 CSS pixels without horizontal overflow. The page is light-only (`color-scheme: light`); dark mode shows the same light design.
 
 ### Page verification
 
@@ -128,4 +142,4 @@ These checks do not verify live one.com hosting, email delivery, a physical iPho
 
 This document is stored under `docs/` so the work record can be versioned with the project. Git tracks files rather than empty directories; tracking this Markdown file includes the directory without a `.gitkeep` file.
 
-No hosting credentials were used, no `.htaccess` files or Flutter files were changed, and no one.com upload was performed. Publication remains a separate action after the outstanding identity and date are confirmed.
+No hosting credentials were used, no `.htaccess` files or Flutter files were changed, and no one.com upload was performed as part of this documented work. Publishing the 1 November 2026 corrections is a separate action requiring approval.
