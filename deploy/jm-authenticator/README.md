@@ -71,7 +71,7 @@ No PHP or hosting-configuration change is required. The page has no placeholders
 
 Intended address: `https://jegprofil.info/jm-authenticator/guide/`.
 
-**Status: draft — do not publish.** The page carries a visible draft notice, `<meta name="robots" content="noindex">` and dashed screenshot placeholders. Publish only after genuine screenshots (iPhone 14 Pro Max, demo accounts only) have been inserted and approved.
+**Status: published (Chapters 01–03).** The draft notice and `noindex` were removed on 2 November 2026. Unfinished Chapters 04–07 (with their screenshot placeholders) are kept outside the published page in `web/guide-drafts/chapters-04-07.html`, which is not built or uploaded; move a chapter back into the page only when it is complete.
 
 The guide follows the same workflow and conventions as the Support page:
 
@@ -94,7 +94,7 @@ Each placeholder is a `<div class="shot-placeholder" data-screenshot="…">` ins
 | `images/advanced-totp-settings.png`, `images/confirm-enrollment.png` | **In place (chapter 01):** Advanced TOTP settings expanded and the Confirm enrollment dialog — genuine iPhone screenshots with the demo account; the secret key is masked by the app |
 | `images/account-ready.png` | **In place (chapter 01):** Home screen with the new Demo Mail account — genuine iPhone screenshot; the other accounts' identifiers are replaced by demo text, the Demo Mail card is unchanged |
 | `images/open-settings.png`, `images/settings.png`, `images/security-app-lock.png` | **In place (chapter 02):** Home screen gear (annotated crop), Settings, and the complete Security & app lock screen — genuine iPhone screenshots; the last joined from two captures at a matched overlap |
-| `images/codes-list.png`, `codes-revealed.png`, `codes-copied.png`, `codes-search.png`, `codes-grid.png` | **In place (chapter 03):** genuine iPhone screenshots with account identifiers replaced by demo text (`demo-user`, `shop@example.com`, `demo.user@example.com`, `demo@example.com`, `demo`, `demo-account`) and the visible codes replaced by example digits. `codes-search.png` and `codes-grid.png` were replaced with watermark-free captures. **`codes-copied.png` still shows faint “Free Trial / Created by Paint S” watermarks from the annotation app and is not publication-ready** until a clean capture replaces it |
+| `images/codes-list.png`, `codes-revealed.png`, `codes-copied.png`, `codes-search.png`, `codes-grid.png` | **In place (chapter 03):** genuine iPhone screenshots with account identifiers replaced by demo text (`demo-user`, `shop@example.com`, `demo.user@example.com`, `demo@example.com`, `demo`, `demo-account`) and the visible codes replaced by example digits. `codes-search.png` and `codes-grid.png` were replaced with watermark-free captures. `codes-copied.png` was replaced by a watermark-free composite of two genuine captures (the clean revealed-code screen with the confirmation banner from the copied-code capture) and the red arrow |
 | `05-backup-type.png` | Encrypted backup: Choose your backup type |
 | `06-save-external-backup.png` | Save your external backup guidance |
 | `07-encrypted-backups.png` | Encrypted backups screen with history |
