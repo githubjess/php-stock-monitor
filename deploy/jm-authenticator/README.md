@@ -93,7 +93,8 @@ Each placeholder is a `<div class="shot-placeholder" data-screenshot="…">` ins
 | `images/manual-enrollment.png` | **In place (chapter 01):** the complete Manual enrollment screen — two genuine iPhone screenshots with demo details, joined at a pixel-identical overlap; the secret key is masked by the app |
 | `images/advanced-totp-settings.png`, `images/confirm-enrollment.png` | **In place (chapter 01):** Advanced TOTP settings expanded and the Confirm enrollment dialog — genuine iPhone screenshots with the demo account; the secret key is masked by the app |
 | `images/account-ready.png` | **In place (chapter 01):** Home screen with the new Demo Mail account — genuine iPhone screenshot; the other accounts' identifiers are replaced by demo text, the Demo Mail card is unchanged |
-| `04-code-copied.png` | Account list with a code, countdown and copy confirmation |
+| `images/open-settings.png`, `images/settings.png`, `images/security-app-lock.png` | **In place (chapter 02):** Home screen gear (annotated crop), Settings, and the complete Security & app lock screen — genuine iPhone screenshots; the last joined from two captures at a matched overlap |
+| `images/codes-list.png`, `codes-revealed.png`, `codes-copied.png`, `codes-search.png`, `codes-grid.png` | **In place (chapter 03):** genuine iPhone screenshots with account identifiers replaced by demo text (`demo-user`, `shop@example.com`, `demo.user@example.com`, `demo@example.com`, `demo`, `demo-account`) and the visible codes replaced by example digits. `codes-copied.png` and `codes-grid.png` still show faint “Free Trial / Created by Paint S” watermarks from the annotation app and should be re-exported before publication |
 | `05-backup-type.png` | Encrypted backup: Choose your backup type |
 | `06-save-external-backup.png` | Save your external backup guidance |
 | `07-encrypted-backups.png` | Encrypted backups screen with history |

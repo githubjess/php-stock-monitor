@@ -50,6 +50,13 @@
     .toc ol { list-style: none; margin: 0; padding: 0; }
     .toc a { display: block; padding: .4rem 0; font-size: .9rem; text-decoration: none; }
     .toc a:hover { text-decoration: underline; }
+    /* Chapter icons and the current-chapter state. Negative margins keep the labels where they were. */
+    .toc a { display: flex; align-items: flex-start; gap: .55rem; margin-inline: -.5rem; padding-inline: .5rem; border-radius: .45rem; }
+    .toc-icon { flex: none; width: 16px; height: 16px; margin-top: .22rem; }
+    .toc a[aria-current] { background: var(--wash); color: var(--ink); }
+    /* One chapter at a time (set by the script below): no divider above the shown chapter. */
+    .guide-chapters #guide > section { padding-top: 0; border-top: 0; }
+    .guide-chapters #guide h2[tabindex="-1"]:focus { outline: none; }
     article { min-width: 0; }
     article section { padding-block: 1.8rem; border-top: 1px solid var(--line); }
     article section:first-child { padding-top: 0; border-top: 0; }
@@ -95,10 +102,12 @@
     .shot-wide { max-width: 15rem; margin-block: 1.2rem 1.6rem; }
     .shot img, .shot-placeholder { display: block; width: 100%; height: auto; aspect-ratio: 1290 / 2796; border: 1px solid var(--line); border-radius: 1.6rem; background: var(--surface); }
     .shot img.shot-tall { aspect-ratio: auto; }
-    .chapter-nav { margin: 1.2rem 0 1.6rem; padding: .9rem 1.1rem; border: 1px solid var(--line); border-radius: .7rem; background: var(--surface); }
+    .shot img.shot-crop { aspect-ratio: auto; border-radius: .9rem; }
+    /* Chapter contents sit directly on the page background, without a card. */
+    .chapter-nav { margin: 1.5rem 0 2rem; }
     .chapter-nav h3 { margin: 0 0 .4rem; font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; }
     .chapter-nav ol { margin: 0; padding-left: 1.3rem; }
-    .chapter-nav li + li { margin-top: .15rem; }
+    .chapter-nav li + li { margin-top: .25rem; }
     .back-link { margin: .4rem 0 1.6rem; font-size: .9rem; }
     .back-link a { text-decoration: none; }
     .back-link a:hover { text-decoration: underline; }
@@ -193,12 +202,13 @@
       <nav class="toc" aria-label="User Guide contents">
         <h2>On this page</h2>
         <ol>
-          <li><a href="#add-account">01 · Home screen &amp; adding accounts</a></li>
-          <li><a href="#codes">02 · Use verification codes</a></li>
-          <li><a href="#backup">03 · Create a backup</a></li>
-          <li><a href="#restore">04 · Restore a backup</a></li>
-          <li><a href="#import">05 · Import accounts</a></li>
-          <li><a href="#help">06 · Need more help?</a></li>
+          <li><a href="#add-account"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/></svg>01 · Home screen &amp; adding accounts</a></li>
+          <li><a href="#security"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.2c2.2 1.5 4.6 2.3 7 2.5v5.6c0 4.6-2.9 8-7 9.5-4.1-1.5-7-4.9-7-9.5V5.7c2.4-.2 4.8-1 7-2.5z"/><path d="m9 12 2 2 4-4"/></svg>02 · Security &amp; app lock</a></li>
+          <li><a href="#codes"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 8.7-8.7"/><path d="m16 7 2.5 2.5"/><path d="m13.5 9.5 2 2"/></svg>03 · Use verification codes</a></li>
+          <li><a href="#backup"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 19H6.5a4 4 0 0 1-.4-7.98 6 6 0 0 1 11.6-1.5A4.5 4.5 0 0 1 17.5 19H16"/><path d="M12 12v8"/><path d="m9 15 3-3 3 3"/></svg>04 · Create a backup</a></li>
+          <li><a href="#restore"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 19H6.5a4 4 0 0 1-.4-7.98 6 6 0 0 1 11.6-1.5A4.5 4.5 0 0 1 17.5 19H16"/><path d="M12 12v8"/><path d="m9 17 3 3 3-3"/></svg>05 · Restore a backup</a></li>
+          <li><a href="#import"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M12 10v7"/><path d="m9 14 3 3 3-3"/></svg>06 · Import accounts</a></li>
+          <li><a href="#help"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .8-1 1.5v.6"/><path d="M12 17.2h.01"/></svg>07 · Need more help?</a></li>
         </ol>
       </nav>
       <article id="guide" aria-label="JM Authenticator user guide" tabindex="-1">
@@ -206,7 +216,7 @@
           <h2 id="add-account-title">01. The Home screen &amp; adding accounts</h2>
           <p>The Home screen lists all your accounts and their current verification codes. From here you can search, organize and copy codes, and add new accounts.</p>
           <nav class="chapter-nav" id="chapter-01-overview" aria-label="Chapter 01 sections">
-            <h3>In this chapter</h3>
+            <h3>Content</h3>
             <ol>
               <li><a href="#home-screen">The Home screen</a></li>
               <li><a href="#open-add-account">Opening Add an account</a></li>
@@ -335,26 +345,181 @@
           <p>Standard <code>otpauth</code> TOTP setup codes are supported. Counter-based (HOTP) codes are not supported. Keep the service’s own recovery codes in a safe place, separately from JM Authenticator.</p>
           <p class="back-link"><a href="#chapter-01-overview">↑ Back to chapter overview</a></p>
         </section>
-        <section id="codes" aria-labelledby="codes-title">
-          <h2 id="codes-title">02. Use verification codes</h2>
+        <section id="security" aria-labelledby="security-title">
+          <h2 id="security-title">02. Security &amp; app lock</h2>
+          <p>JM Authenticator can require Face ID or your device passcode before it shows your accounts. All security options are on one screen: <em>Home → Settings (gear icon) → Security &amp; app lock</em>.</p>
+          <nav class="chapter-nav" id="chapter-02-overview" aria-label="Chapter 02 sections">
+            <h3>Content</h3>
+            <ol>
+              <li><a href="#open-security">Opening Security &amp; app lock</a></li>
+              <li><a href="#app-lock">App Lock</a></li>
+              <li><a href="#face-id">Face ID</a></li>
+              <li><a href="#auto-lock">Auto-lock after inactivity</a></li>
+              <li><a href="#lock-on-return">Lock when returning to the app</a></li>
+              <li><a href="#hide-codes">Hide authentication codes by default</a></li>
+              <li><a href="#security-information">Security information</a></li>
+            </ol>
+          </nav>
+          <h3 id="open-security">Opening Security &amp; app lock</h3>
           <div class="step-block">
             <ol class="steps">
-              <li>Find the account in your list. Its current code and a countdown are shown.</li>
-              <li>If codes are hidden, tap the code to reveal it.</li>
-              <li>Tap the copy button next to the code. <em>Code copied successfully!</em> confirms the copy.</li>
-              <li>Paste the code into the service that asks for it before the countdown ends.</li>
+              <li>On the Home screen, tap the gear icon at the top right to open <em>Settings</em>.</li>
             </ol>
             <figure class="shot">
-              <div class="shot-placeholder" data-screenshot="04-code-copied.png" role="img" aria-label="Screenshot placeholder: Account list with a copied code">
-                <span>Screenshot placeholder</span><strong>Copying a code</strong><code>04-code-copied.png</code>
-              </div>
-              <figcaption>A code with its countdown and the copy confirmation.</figcaption>
+              <img class="shot-crop" src="images/open-settings.png" width="652" height="530" alt="Top of the JM Authenticator Home screen with a red arrow pointing to the gear icon that opens Settings, next to the padlock icon." loading="lazy">
+              <figcaption>The gear icon opens <em>Settings</em>.</figcaption>
             </figure>
           </div>
-          <p>A copied code is cleared from the clipboard within 30 seconds or when the code expires. If a service rejects valid-looking codes, check that your device’s date, time and time zone are set automatically.</p>
+          <div class="step-block">
+            <ol class="steps" start="2">
+              <li>In <em>Settings</em>, under <em>Security</em>, tap <em>Security &amp; app lock</em>.</li>
+            </ol>
+            <figure class="shot">
+              <img src="images/settings.png" width="720" height="1560" alt="Settings screen with Language, Appearance, the Security section containing Security &amp; app lock, Backup &amp; Restore with Encrypted backups and Import &amp; Export Accounts, and About with Animated Welcome." loading="lazy">
+              <figcaption><em>Settings</em>, with <em>Security &amp; app lock</em> under <em>Security</em>.</figcaption>
+            </figure>
+          </div>
+          <p>Next to the gear, the padlock icon locks JM Authenticator immediately.</p>
+          <p class="back-link"><a href="#chapter-02-overview">↑ Back to chapter overview</a></p>
+          <div class="step-block">
+            <div>
+              <p>The <em>Security &amp; app lock</em> screen starts with <em>Protect your codes</em> and lists these settings from top to bottom:</p>
+              <h3 id="app-lock">App Lock</h3>
+              <p><em>Require authentication to open JM Authenticator.</em> When App Lock is on, JM Authenticator shows its lock screen and asks for Face ID or your device passcode before it shows your accounts. Turning App Lock on or off also asks you to authenticate.</p>
+              <p class="back-link"><a href="#chapter-02-overview">↑ Back to chapter overview</a></p>
+              <h3 id="face-id">Face ID</h3>
+              <p>This card shows whether Face ID can be used. When it is available, it reads <em>Face ID is available on this device and will be used to unlock the app.</em> On iPhone and iPad models with Touch ID, the card shows Touch ID instead.</p>
+              <p>The authentication itself is performed by iOS. You can also unlock with your device passcode — for example, if Face ID does not recognise you or becomes unavailable. There is no bypass or remote reset, so keep your device passcode available.</p>
+              <p class="back-link"><a href="#chapter-02-overview">↑ Back to chapter overview</a></p>
+              <h3 id="auto-lock">Auto-lock after inactivity</h3>
+              <p><em>Require authentication after a period of inactivity, even when the app remains open.</em> Choose when JM Authenticator locks itself:</p>
+              <ul>
+                <li><strong>Immediately</strong> — locks as soon as you leave the app.</li>
+                <li><strong>After 30 seconds</strong>, <strong>After 1 minute (recommended)</strong>, <strong>After 5 minutes</strong> or <strong>After 10 minutes</strong> — lock after that time without interaction, also while the app stays open.</li>
+                <li><strong>Never</strong> — no automatic lock after inactivity.</li>
+              </ul>
+              <p>Auto-lock applies only while App Lock is on. If JM Authenticator was installed before this setting existed, it may show <em>Use existing lock behavior</em>, as in the screenshot, until you choose one of the options.</p>
+              <p class="back-link"><a href="#chapter-02-overview">↑ Back to chapter overview</a></p>
+              <h3 id="lock-on-return">Lock when returning to the app</h3>
+              <p><em>Require authentication after leaving JM Authenticator.</em> When this and App Lock are on, the app asks for Face ID or your device passcode each time you come back to it from another app or the Home Screen.</p>
+              <p>After you unlock, JM Authenticator returns to the screen you were using, with any information you had entered but not yet saved — as long as the app kept running in the background. If iOS has closed the app, or you closed it yourself, it starts again on the Home screen.</p>
+              <p class="back-link"><a href="#chapter-02-overview">↑ Back to chapter overview</a></p>
+              <h3 id="hide-codes">Hide authentication codes by default</h3>
+              <p><em>When enabled, authentication codes remain hidden until you tap to reveal them. Countdown timers remain visible.</em> Hidden codes appear as dots on the Home screen. Tap a code to show it.</p>
+              <p class="back-link"><a href="#chapter-02-overview">↑ Back to chapter overview</a></p>
+              <h3 id="security-information">Security information</h3>
+              <p><em>App Lock protects access. Learn about storage, clipboard privacy, and recovery limitations.</em> Tap this section to expand it. It explains that:</p>
+              <ul>
+                <li><strong>Storage</strong> — your secrets are stored with iOS Keychain protection and are never sent to a server.</li>
+                <li><strong>App Lock limits</strong> — App Lock controls access within the app. It does not add biometric-bound encryption to the storage key, and a compromised device may bypass app controls.</li>
+                <li><strong>Device authentication</strong> — if Face ID changes or becomes unavailable, use your device passcode. Removing your device passcode may prevent unlocking until it is restored.</li>
+                <li><strong>Clipboard privacy</strong> — copied codes go to the system clipboard. JM Authenticator clears a code it copied after 30 seconds when it can do so safely; other apps may keep copies.</li>
+                <li><strong>Recovery</strong> — keep each service’s recovery codes separately and use password-protected encrypted backups. No cloud backup is provided.</li>
+              </ul>
+            </div>
+            <figure class="shot">
+              <img class="shot-tall" src="images/security-app-lock.png" width="720" height="2280" alt="The complete Security &amp; app lock screen: Protect your codes, App Lock switched on, Face ID available, Auto-lock after inactivity set to Use existing lock behavior, Lock when returning to the app switched on, Hide authentication codes by default switched on, and the collapsed Security information section." loading="lazy">
+              <figcaption>The complete <em>Security &amp; app lock</em> screen.</figcaption>
+            </figure>
+          </div>
+          <p class="back-link"><a href="#chapter-02-overview">↑ Back to chapter overview</a></p>
+        </section>
+        <section id="codes" aria-labelledby="codes-title">
+          <h2 id="codes-title">03. Use verification codes</h2>
+          <p>JM Authenticator generates time-based verification codes locally on your iPhone, so they also work when your device is offline. Each code is valid for a short time and is then replaced automatically by a new one.</p>
+          <nav class="chapter-nav" id="chapter-03-overview" aria-label="Chapter 03 sections">
+            <h3>Content</h3>
+            <ol>
+              <li><a href="#codes-home">Understanding the Home screen</a></li>
+              <li><a href="#codes-reveal">Revealing a verification code</a></li>
+              <li><a href="#codes-copy">Copying a verification code</a></li>
+              <li><a href="#codes-search">Searching for an account</a></li>
+              <li><a href="#codes-views">Switching between List and Grid views</a></li>
+            </ol>
+          </nav>
+          <h3 id="codes-home">Understanding the Home screen</h3>
+          <div class="step-block">
+            <div>
+              <p>In <em>List view</em>, every account has its own card:</p>
+              <dl>
+                <dt>Account name and identifier</dt><dd>The service name in bold, with the account name below — for example <em>GitHub</em> and <em>demo-user</em>. A star marks a favorite.</dd>
+                <dt>Hidden code</dt><dd>When <em>Hide authentication codes by default</em> is on, codes appear as dots until you reveal them.</dd>
+                <dt>Copy icon</dt><dd>Copies the account’s current code.</dd>
+                <dt>Countdown</dt><dd>The ring shows how many seconds the current code remains valid.</dd>
+              </dl>
+              <p>When the countdown ends, JM Authenticator generates the next code automatically. You don’t need to refresh anything.</p>
+            </div>
+            <figure class="shot">
+              <img src="images/codes-list.png" width="720" height="1560" alt="Home screen in List view with GitHub, Amazon and ChatGPT OPENAI demo accounts, each with hidden code dots, a copy icon and a countdown ring showing 25 seconds." loading="lazy">
+              <figcaption>The Home screen in <em>List view</em>, with demo details.</figcaption>
+            </figure>
+          </div>
+          <p class="back-link"><a href="#chapter-03-overview">↑ Back to chapter overview</a></p>
+          <h3 id="codes-reveal">Revealing a verification code</h3>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Tap the dots of the account whose code you need. The code appears.</li>
+              <li>The codes of all other accounts stay hidden.</li>
+              <li>The countdown shows how many seconds the code remains valid. When it ends, a new code is generated and hidden again until you tap it.</li>
+            </ol>
+            <figure class="shot">
+              <img src="images/codes-revealed.png" width="720" height="1560" alt="Home screen with the Amazon demo code 275 064 revealed while the GitHub and ChatGPT codes remain hidden, all with a countdown of 7 seconds." loading="lazy">
+              <figcaption>Only the tapped code is revealed. The digits are an example.</figcaption>
+            </figure>
+          </div>
+          <p>Revealed codes are hidden again when JM Authenticator moves to the background.</p>
+          <p class="back-link"><a href="#chapter-03-overview">↑ Back to chapter overview</a></p>
+          <h3 id="codes-copy">Copying a verification code</h3>
+          <div class="step-block">
+            <div>
+              <ol class="steps">
+                <li>Tap the copy icon beside the account. You don’t need to reveal the code first.</li>
+                <li>A confirmation shows the account name and <em>Code copied successfully!</em></li>
+                <li>Switch to the app or website that asks for the code and paste it into the sign-in form before the countdown ends.</li>
+              </ol>
+              <p>As the confirmation says, the clipboard clears within 30 seconds or when the code expires. Copied codes are not shared with your other devices.</p>
+            </div>
+            <figure class="shot">
+              <img src="images/codes-copied.png" width="720" height="1560" alt="Home screen with a red arrow pointing to the Amazon copy icon and the confirmation: Amazon — Code copied successfully! Clipboard clears within 30 seconds or when the code expires." loading="lazy">
+              <figcaption>The copy icon and the confirmation.</figcaption>
+            </figure>
+          </div>
+          <p class="back-link"><a href="#chapter-03-overview">↑ Back to chapter overview</a></p>
+          <h3 id="codes-search">Searching for an account</h3>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Tap <em>Search codes</em> at the top of the Home screen.</li>
+              <li>Type the service or account name, for example <em>Amazon</em>.</li>
+              <li>Only matching accounts are shown, with their codes, copy icon and countdown.</li>
+              <li>Delete the search text to show all accounts again.</li>
+            </ol>
+            <figure class="shot">
+              <img src="images/codes-search.png" width="720" height="1560" alt="Search codes field containing Amazon, with a red arrow pointing to it, showing only the Amazon demo account with its hidden code, copy icon and countdown." loading="lazy">
+              <figcaption>Searching for <em>Amazon</em>.</figcaption>
+            </figure>
+          </div>
+          <p>While a search is active, <em>Reorder codes</em> is unavailable.</p>
+          <p class="back-link"><a href="#chapter-03-overview">↑ Back to chapter overview</a></p>
+          <h3 id="codes-views">Switching between List and Grid views</h3>
+          <div class="step-block">
+            <div>
+              <p>Use the view selector — the two buttons next to <em>Reorder codes</em> — to change the layout:</p>
+              <dl>
+                <dt>List view</dt><dd>Shows account cards with their codes, copy icons and countdowns, as in the previous screenshots.</dd>
+                <dt>Grid view</dt><dd>Shows a compact overview of all accounts in three columns, with their icons and names, and the number of accounts at the top. Tap an account to see its full identifier and code.</dd>
+              </dl>
+              <p>In <em>Grid view</em>, the magnifying glass opens the search, and the same view selector switches back to <em>List view</em>. JM Authenticator remembers your choice.</p>
+            </div>
+            <figure class="shot">
+              <img src="images/codes-grid.png" width="720" height="1560" alt="Home screen in Grid view showing 14 accounts in three columns with icons, service names and demo identifiers, and a red arrow pointing to the selected Grid view button." loading="lazy">
+              <figcaption><em>Grid view</em>, selected with the view selector.</figcaption>
+            </figure>
+          </div>
+          <p>If a service rejects valid-looking codes, check that your device’s date, time and time zone are set automatically.</p>
+          <p class="back-link"><a href="#chapter-03-overview">↑ Back to chapter overview</a></p>
         </section>
         <section id="backup" aria-labelledby="backup-title">
-          <h2 id="backup-title">03. Create an encrypted backup</h2>
+          <h2 id="backup-title">04. Create an encrypted backup</h2>
           <p>JM Authenticator does not provide a cloud backup. Create encrypted backups so that you can recover your accounts if your device is lost or replaced.</p>
           <div class="step-block">
             <ol class="steps">
@@ -393,7 +558,7 @@
           <p class="note"><strong>Keep your backup file and its password safe. Backup passwords are not saved by the app, and a forgotten backup password cannot be recovered.</strong></p>
         </section>
         <section id="restore" aria-labelledby="restore-title">
-          <h2 id="restore-title">04. Restore a backup</h2>
+          <h2 id="restore-title">05. Restore a backup</h2>
           <p>Restoring adds accounts from a JM Authenticator encrypted backup. Existing accounts are kept, and exact duplicates are skipped.</p>
           <div class="step-block">
             <ol class="steps">
@@ -423,7 +588,7 @@
           <p>If the password is incorrect or the file is damaged, no accounts are imported.</p>
         </section>
         <section id="import" aria-labelledby="import-title">
-          <h2 id="import-title">05. Import accounts</h2>
+          <h2 id="import-title">06. Import accounts</h2>
           <p>Open <em>Settings → Import &amp; Export Accounts</em> and choose a source under <em>Import into JM</em>. Imports are processed on your device. Only the accounts you select are added; existing accounts and backups remain unchanged, and duplicates are skipped.</p>
           <figure class="shot shot-wide">
             <div class="shot-placeholder" data-screenshot="09-import-export.png" role="img" aria-label="Screenshot placeholder: Import and Export Accounts screen">
@@ -479,7 +644,7 @@
           <p class="note"><strong>QR screenshots and export files contain your authentication secrets.</strong> After you have checked the import, delete them, including from <em>Recently Deleted</em> in Photos.</p>
         </section>
         <section id="help" aria-labelledby="help-title">
-          <h2 id="help-title">06. Need more help?</h2>
+          <h2 id="help-title">07. Need more help?</h2>
           <p>Visit <a href="/jm-authenticator/support/">JM Authenticator Support</a> or email <a href="mailto:support@jegprofil.info">support@jegprofil.info</a>. Never send secret keys, codes, backup files, backup passwords or QR codes.</p>
           <p>To learn how your data is handled, read the <a href="/jm-authenticator/privacy/">JM Authenticator Privacy Policy</a>.</p>
         </section>
@@ -487,6 +652,50 @@
     </div>
   </main>
   <footer><div class="wrap footer-inner"><span>JM Authenticator · User Guide</span><a href="/jm-authenticator/support/">Support</a><a href="/jm-authenticator/privacy/">Privacy Policy</a><a href="/impressum/">Impressum</a><a class="back-top" href="#top">Back to top ↑</a></div></footer>
+  <script>
+    // Shows one chapter at a time, chosen by the URL anchor. Without JavaScript all chapters stay visible.
+    (() => {
+      const chapters = [...document.querySelectorAll("#guide > section")];
+      const menu = [...document.querySelectorAll(".toc a[href^='#']")];
+      const aliases = { home: "add-account" };
+      const resolve = () => {
+        const id = decodeURIComponent(location.hash.slice(1));
+        return id ? document.getElementById(aliases[id] ?? id) : null;
+      };
+      let current = null;
+
+      function show({ scroll }) {
+        const target = resolve();
+        const owner = target && chapters.find((chapter) => chapter.contains(target));
+        // No anchor shows Chapter 01; anchors outside the chapters (skip link, back to top)
+        // keep the current chapter.
+        const chapter = owner ?? (location.hash ? current : null) ?? chapters[0];
+        const changed = chapter !== current;
+        current = chapter;
+        for (const section of chapters) section.hidden = section !== chapter;
+        for (const link of menu) {
+          if (link.getAttribute("href") === `#${chapter.id}`) link.setAttribute("aria-current", "page");
+          else link.removeAttribute("aria-current");
+        }
+        if (!scroll || !owner) return;
+        // Instant scrolling only, so reduced-motion preferences are respected.
+        target.scrollIntoView({ block: "start" });
+        if (changed && target === chapter) {
+          const heading = chapter.querySelector("h2");
+          heading.tabIndex = -1;
+          heading.focus({ preventScroll: true });
+        }
+      }
+
+      document.documentElement.classList.add("guide-chapters");
+      show({ scroll: false });
+      if (location.hash) {
+        show({ scroll: true });
+        window.addEventListener("load", () => show({ scroll: true }), { once: true });
+      }
+      window.addEventListener("hashchange", () => show({ scroll: true }));
+    })();
+  </script>
   <script type="module" src="/jm-authenticator/navigation.js"></script>
 </body>
 </html>
