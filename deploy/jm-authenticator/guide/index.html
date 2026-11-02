@@ -90,9 +90,18 @@
     .steps { margin: 0; padding-left: 1.4rem; }
     .steps > li + li { margin-top: .7rem; }
     .steps ul { margin-top: .5rem; }
+    .steps + p { margin-top: 1rem; }
     .shot { margin: 0; }
     .shot-wide { max-width: 15rem; margin-block: 1.2rem 1.6rem; }
-    .shot img, .shot-placeholder { display: block; width: 100%; aspect-ratio: 1290 / 2796; border: 1px solid var(--line); border-radius: 1.6rem; background: var(--surface); }
+    .shot img, .shot-placeholder { display: block; width: 100%; height: auto; aspect-ratio: 1290 / 2796; border: 1px solid var(--line); border-radius: 1.6rem; background: var(--surface); }
+    .shot img.shot-tall { aspect-ratio: auto; }
+    .chapter-nav { margin: 1.2rem 0 1.6rem; padding: .9rem 1.1rem; border: 1px solid var(--line); border-radius: .7rem; background: var(--surface); }
+    .chapter-nav h3 { margin: 0 0 .4rem; font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; }
+    .chapter-nav ol { margin: 0; padding-left: 1.3rem; }
+    .chapter-nav li + li { margin-top: .15rem; }
+    .back-link { margin: .4rem 0 1.6rem; font-size: .9rem; }
+    .back-link a { text-decoration: none; }
+    .back-link a:hover { text-decoration: underline; }
     .shot-placeholder { box-sizing: border-box; display: grid; place-content: center; gap: .35rem; padding: 1rem; text-align: center; border: 2px dashed var(--accent); background: var(--wash); color: var(--muted); font-size: .85rem; line-height: 1.4; }
     .shot-placeholder span { text-transform: uppercase; letter-spacing: .12em; font-size: .7rem; font-weight: 750; color: var(--accent); }
     .shot-placeholder strong { color: var(--ink); }
@@ -173,7 +182,7 @@
       <h1>JM Authenticator User Guide</h1>
       <p class="intro">Step-by-step instructions for adding accounts, using verification codes, backing up and restoring your accounts, and importing accounts from other authenticator apps.</p>
       <!-- DRAFT: remove this notice and the robots noindex tag only after the real screenshots have been inserted and approved. -->
-      <p class="status"><strong>Draft — not yet published.</strong> Screenshots are placeholders and will be replaced with genuine app screenshots before publication.</p>
+      <p class="status"><strong>Draft — not yet published.</strong> Dashed screenshot placeholders will be replaced with genuine app screenshots before publication.</p>
     </div>
     <div class="facts" aria-label="User Guide at a glance">
       <div class="fact"><strong>Add accounts</strong><p>Scan a QR code, choose an image or enter a setup key.</p></div>
@@ -184,7 +193,7 @@
       <nav class="toc" aria-label="User Guide contents">
         <h2>On this page</h2>
         <ol>
-          <li><a href="#add-account">01 · Add an account</a></li>
+          <li><a href="#add-account">01 · Home screen &amp; adding accounts</a></li>
           <li><a href="#codes">02 · Use verification codes</a></li>
           <li><a href="#backup">03 · Create a backup</a></li>
           <li><a href="#restore">04 · Restore a backup</a></li>
@@ -194,55 +203,137 @@
       </nav>
       <article id="guide" aria-label="JM Authenticator user guide" tabindex="-1">
         <section id="add-account" aria-labelledby="add-account-title">
-          <h2 id="add-account-title">01. Add an account</h2>
-          <p>When you turn on two-factor authentication for a service, it shows a setup QR code or a text setup key. Use it to add the account to JM Authenticator.</p>
-          <div class="step-block">
-            <ol class="steps">
-              <li>On the accounts screen, tap <em>Add account</em>. If you have no accounts yet, tap <em>Add your first account</em>.</li>
-              <li>In <em>Add an account</em>, choose how to add it:
-                <ul>
-                  <li><strong>Scan QR code</strong> — point your camera at the setup QR code shown by the service. Scanning stays on your device.</li>
-                  <li><strong>Choose from Photos</strong> — select a screenshot or photo of the setup QR code.</li>
-                  <li><strong>Choose from Files</strong> — select a saved QR code image (PNG, JPEG or HEIC, up to 8 MB).</li>
-                  <li><strong>Enter setup key</strong> — enter the account details manually.</li>
-                </ul>
-              </li>
+          <h2 id="add-account-title">01. The Home screen &amp; adding accounts</h2>
+          <p>The Home screen lists all your accounts and their current verification codes. From here you can search, organize and copy codes, and add new accounts.</p>
+          <nav class="chapter-nav" id="chapter-01-overview" aria-label="Chapter 01 sections">
+            <h3>In this chapter</h3>
+            <ol>
+              <li><a href="#home-screen">The Home screen</a></li>
+              <li><a href="#open-add-account">Opening Add an account</a></li>
+              <li><a href="#add-methods">The four ways to add an account</a></li>
+              <li><a href="#setup-key">Entering a setup key</a></li>
+              <li><a href="#advanced-totp">Advanced TOTP settings</a></li>
+              <li><a href="#confirm-account">Confirming the account</a></li>
+              <li><a href="#account-ready">Your account is ready</a></li>
             </ol>
+          </nav>
+          <h3 id="home-screen">The Home screen</h3>
+          <div class="step-block">
+            <dl>
+              <dt>Top bar</dt><dd>The padlock locks JM Authenticator immediately. The gear opens <em>Settings</em>.</dd>
+              <dt>Authentication Codes</dt><dd>Shows how many accounts are enrolled. All codes are generated offline on your iPhone.</dd>
+              <dt>Search codes</dt><dd>Find an account by service or account name.</dd>
+              <dt>View and order</dt><dd>Switch between grid view and list view, or tap <em>Reorder codes</em> to arrange your accounts.</dd>
+              <dt>Account cards</dt><dd>Each card shows the service icon and name, the account name and the current code. When codes are hidden, they appear as dots until you reveal them.</dd>
+              <dt>Copy and countdown</dt><dd>The copy button copies the current code. The ring shows how many seconds remain before a new code appears.</dd>
+              <dt>More actions</dt><dd>The <em>•••</em> button opens the account’s actions, such as viewing and editing details, adding it to Favorites or deleting it. Favorites are marked with a star.</dd>
+            </dl>
             <figure class="shot">
-              <div class="shot-placeholder" data-screenshot="01-add-account-sheet.png" role="img" aria-label="Screenshot placeholder: Add an account sheet">
-                <span>Screenshot placeholder</span><strong>Add an account sheet</strong><code>01-add-account-sheet.png</code>
-              </div>
-              <figcaption>The four ways to add an account.</figcaption>
+              <img src="images/home-screen.png" width="720" height="1562" alt="JM Authenticator Home screen listing five demo accounts, each with a service icon, account name, hidden code, copy button and countdown ring, and the Add account button at the bottom." loading="lazy">
+              <figcaption>The Home screen, with demo account names.</figcaption>
             </figure>
           </div>
-          <h3>Entering a setup key</h3>
+          <p class="back-link"><a href="#chapter-01-overview">↑ Back to chapter overview</a></p>
+          <h3 id="open-add-account">Opening Add an account</h3>
           <div class="step-block">
             <ol class="steps">
-              <li>Enter the <em>Service / issuer</em> and <em>Account name</em>. A <em>Descriptive label</em> is optional.</li>
-              <li>Enter the setup key from the service in <em>Base32 secret key</em>. Spaces are allowed.</li>
-              <li>Open <em>Advanced TOTP settings</em> only if the service asks for a different algorithm, code length or validity period.</li>
+              <li>On the Home screen, tap <em>+ Add account</em> at the bottom. If you have no accounts yet, tap <em>Add your first account</em>.</li>
+              <li>The <em>Add an account</em> sheet opens over the Home screen and shows four ways to add an account.</li>
             </ol>
             <figure class="shot">
-              <div class="shot-placeholder" data-screenshot="02-manual-enrollment.png" role="img" aria-label="Screenshot placeholder: Manual enrollment form with demo details">
-                <span>Screenshot placeholder</span><strong>Manual enrollment</strong><code>02-manual-enrollment.png</code>
-              </div>
-              <figcaption>Manual enrollment with demo account details.</figcaption>
+              <img src="images/add-account-sheet.png" width="720" height="1562" alt="The Add an account sheet with four options: Scan QR code, Choose from Photos, Choose from Files and Enter setup key." loading="lazy">
+              <figcaption>The <em>Add an account</em> sheet.</figcaption>
             </figure>
           </div>
-          <h3>Confirming the account</h3>
+          <p class="back-link"><a href="#chapter-01-overview">↑ Back to chapter overview</a></p>
+          <h3 id="add-methods">The four ways to add an account</h3>
+          <p>When you turn on two-factor authentication for a service, it shows a setup QR code or a text setup key. Choose the option that matches what you have:</p>
+          <dl>
+            <dt>Scan QR code — <em>Use your camera</em></dt><dd>Point your iPhone camera at the setup QR code shown by the service. Scanning stays on your device. Then continue with <a href="#confirm-account">Confirming the account</a>.</dd>
+            <dt>Choose from Photos — <em>Select a QR code screenshot or photo</em></dt><dd>Use a screenshot or photo of the setup QR code that is already in your photo library. Then continue with <a href="#confirm-account">Confirming the account</a>.</dd>
+            <dt>Choose from Files — <em>Select a saved QR code image</em></dt><dd>Select a QR code image saved in Files (PNG, JPEG or HEIC, up to 8 MB). Then continue with <a href="#confirm-account">Confirming the account</a>.</dd>
+            <dt>Enter setup key — <em>Enter account details manually</em></dt><dd>Type the service name, account name and setup key yourself, as described in <a href="#setup-key">Entering a setup key</a>.</dd>
+          </dl>
+          <p class="note"><strong>Setup QR codes and setup keys contain your account secret.</strong> After adding an account, delete any QR code screenshots from Photos, including <em>Recently Deleted</em>.</p>
+          <p class="back-link"><a href="#chapter-01-overview">↑ Back to chapter overview</a></p>
+          <h3 id="setup-key">Entering a setup key</h3>
+          <p>Choosing <em>Enter setup key</em> opens <em>Manual enrollment</em>. Everything you enter stays on your device.</p>
           <div class="step-block">
             <ol class="steps">
-              <li>Check the details, then tap <em>Review and add</em>.</li>
-              <li>In <em>Confirm enrollment</em>, review the service, account and code settings, then tap <em>Add account</em>.</li>
+              <li>In <em>Service / issuer</em>, enter the name of the service, for example the website or company.</li>
+              <li>In <em>Account name</em>, enter the account you use with that service, usually your email address or username.</li>
+              <li>Optionally, add a <em>Descriptive label</em> to tell similar accounts apart.</li>
+              <li>Optionally, tap <em>Change Icon</em> to choose an icon for the account. By default, the icon is set automatically.</li>
+              <li>Enter the setup key from the service in <em>Base32 secret key</em>. It uses the letters A–Z and the digits 2–7; spaces are allowed. The key is hidden as you type.</li>
+              <li>Open <em>Advanced TOTP settings</em> only if the service asks for a different algorithm, code length or validity period. See <a href="#advanced-totp">Advanced TOTP settings</a>.</li>
+              <li>Tap <em>Review and add</em>, then continue with <a href="#confirm-account">Confirming the account</a>.</li>
             </ol>
             <figure class="shot">
-              <div class="shot-placeholder" data-screenshot="03-confirm-enrollment.png" role="img" aria-label="Screenshot placeholder: Confirm enrollment dialog">
-                <span>Screenshot placeholder</span><strong>Confirm enrollment</strong><code>03-confirm-enrollment.png</code>
-              </div>
-              <figcaption>Review the account before it is added.</figcaption>
+              <img class="shot-tall" src="images/manual-enrollment.png" width="720" height="1802" alt="The complete Manual enrollment screen with demo details: Demo Mail as service, demo@example.com as account name, Demo Account as descriptive label, Change Icon set to Automatic, a hidden Base32 secret key, Advanced TOTP settings and the Review and add button." loading="lazy">
+              <figcaption>The complete <em>Manual enrollment</em> screen, with demo details.</figcaption>
+            </figure>
+          </div>
+          <p class="back-link"><a href="#chapter-01-overview">↑ Back to chapter overview</a></p>
+          <h3 id="advanced-totp">Advanced TOTP settings</h3>
+          <div class="step-block">
+            <div>
+              <p>Tap <em>Advanced TOTP settings</em> on the <em>Manual enrollment</em> screen to show three settings. Most services use the defaults shown here. Change them only when your service tells you to use different values.</p>
+              <dl>
+                <dt>Algorithm — default <em>HMAC-SHA1</em></dt><dd>The cryptographic algorithm used to generate the codes. You can also choose <em>HMAC-SHA256</em> or <em>HMAC-SHA512</em>, but only select them when your service explicitly requires it.</dd>
+                <dt>Code length — default <em>6 digits</em></dt><dd>How many digits each code contains. You can choose 6, 7 or 8 digits.</dd>
+                <dt>Validity period (seconds) — default <em>30</em></dt><dd>How long each code remains valid before the next one is generated. You can enter a value from 1 to 3600 seconds.</dd>
+              </dl>
+              <p>When the settings are correct, tap <em>Review and add</em> and continue with <a href="#confirm-account">Confirming the account</a>.</p>
+            </div>
+            <figure class="shot">
+              <img src="images/advanced-totp-settings.png" width="720" height="1562" alt="Manual enrollment screen with Advanced TOTP settings expanded, showing Algorithm HMAC-SHA1, Code length 6 digits and Validity period 30 seconds, below a hidden Base32 secret key." loading="lazy">
+              <figcaption><em>Advanced TOTP settings</em> with the default values.</figcaption>
+            </figure>
+          </div>
+          <p class="back-link"><a href="#chapter-01-overview">↑ Back to chapter overview</a></p>
+          <h3 id="confirm-account">Confirming the account</h3>
+          <div class="step-block">
+            <div>
+              <ol class="steps">
+                <li>After you tap <em>Review and add</em>, <em>Confirm enrollment</em> shows the service, the account name, the descriptive label and the code settings — for example <em>SHA1 · 6 digits · 30 seconds</em>. When you add an account from a QR code, the app first shows <em>Review QR enrollment</em>, where you check the details and tap <em>Review and add</em>.</li>
+                <li>Check that everything is correct:
+                  <ul>
+                    <li><strong>Review</strong> returns to the form so you can correct the information.</li>
+                    <li><strong>Add account</strong> confirms the enrollment and saves the account. It then appears on the Home screen — see <a href="#account-ready">Your account is ready</a>.</li>
+                  </ul>
+                </li>
+              </ol>
+              <p>The dialog also reminds you to keep the service’s recovery codes in a safe place. JM Authenticator has no cloud recovery, so these codes and your encrypted backups are the way back into your accounts if you lose your device.</p>
+            </div>
+            <figure class="shot">
+              <img src="images/confirm-enrollment.png" width="720" height="1562" alt="Confirm enrollment dialog for the demo account Demo Mail, demo@example.com, Demo Account, with SHA1 · 6 digits · 30 seconds, a recovery-code reminder and the buttons Review and Add account." loading="lazy">
+              <figcaption><em>Confirm enrollment</em> with the demo account.</figcaption>
+            </figure>
+          </div>
+          <p class="back-link"><a href="#chapter-01-overview">↑ Back to chapter overview</a></p>
+          <h3 id="account-ready">Your account is ready</h3>
+          <div class="step-block">
+            <div>
+              <p>After you tap <em>Add account</em>, JM Authenticator returns to the Home screen and shows the newly enrolled account. In this example, the Demo Mail card appears at the end of the list:</p>
+              <dl>
+                <dt>Demo Mail</dt><dd>The service name.</dd>
+                <dt>demo@example.com</dt><dd>The account name.</dd>
+                <dt>Demo Account</dt><dd>The descriptive label.</dd>
+                <dt>DM icon</dt><dd>An automatically generated account icon, created from the service name. You can change it later.</dd>
+                <dt>Hidden dots</dt><dd>The concealed authentication code. Tap it to reveal the code.</dd>
+                <dt>Copy icon</dt><dd>Copies the current code, so you can paste it into the service.</dd>
+                <dt>Circular countdown</dt><dd>The number of seconds the current code remains valid. The number in the screenshot is only an example.</dd>
+                <dt>Three-dot menu</dt><dd>Additional account actions, such as viewing and editing details, adding the account to Favorites or deleting it.</dd>
+              </dl>
+              <p>The six-digit authentication code refreshes automatically every 30 seconds, as set in the account’s TOTP settings. Enter the current code when your service asks for it to finish turning on two-factor authentication.</p>
+            </div>
+            <figure class="shot">
+              <img src="images/account-ready.png" width="720" height="1560" alt="Home screen after enrollment, with the new Demo Mail account at the end of the list showing demo@example.com, the label Demo Account, the DM icon, a hidden code, a copy button, a countdown ring and the three-dot menu." loading="lazy">
+              <figcaption>The new Demo Mail account on the Home screen. Other accounts show demo details.</figcaption>
             </figure>
           </div>
           <p>Standard <code>otpauth</code> TOTP setup codes are supported. Counter-based (HOTP) codes are not supported. Keep the service’s own recovery codes in a safe place, separately from JM Authenticator.</p>
+          <p class="back-link"><a href="#chapter-01-overview">↑ Back to chapter overview</a></p>
         </section>
         <section id="codes" aria-labelledby="codes-title">
           <h2 id="codes-title">02. Use verification codes</h2>
@@ -275,6 +366,7 @@
                   <li><strong>Both</strong> — creates an internal copy and an external copy.</li>
                 </ul>
               </li>
+              <li>Keep the suggested <em>Backup filename</em> or enter your own. The <code>.jmbackup</code> extension is added automatically.</li>
               <li>Enter a <em>Backup password</em> of 12 to 1024 characters and enter it again in <em>Confirm backup password</em>.</li>
               <li>Tap <em>Create encrypted backup</em>.</li>
             </ol>
@@ -306,7 +398,7 @@
           <div class="step-block">
             <ol class="steps">
               <li>Open <em>Settings → Encrypted backups</em>.</li>
-              <li>Select a backup in the backup history and tap <em>Restore selected backup</em>, or tap <em>Select backup file</em> to choose a backup file.</li>
+              <li>Select a backup in the backup history and tap <em>Restore selected backup</em>. To use a backup file instead, tap <em>Restore from backup file</em>, then <em>Select backup file</em>.</li>
               <li>Enter the backup password and tap <em>Continue</em>.</li>
             </ol>
             <figure class="shot">
@@ -348,8 +440,8 @@
               <li>Review the accounts and import them.</li>
             </ol>
             <figure class="shot">
-              <div class="shot-placeholder" data-screenshot="10-import-google.png" role="img" aria-label="Screenshot placeholder: Import from Google Authenticator">
-                <span>Screenshot placeholder</span><strong>Import from Google Authenticator</strong><code>10-import-google.png</code>
+              <div class="shot-placeholder" data-screenshot="10-import-google.png" role="img" aria-label="Screenshot placeholder: Google Authenticator import screen">
+                <span>Screenshot placeholder</span><strong>Google Authenticator</strong><code>10-import-google.png</code>
               </div>
               <figcaption>Scan or choose every part of the export.</figcaption>
             </figure>
@@ -359,11 +451,12 @@
             <ol class="steps">
               <li>Choose <em>2FAS Authenticator</em>, then <em>Choose .2fas file</em>.</li>
               <li>If the backup is protected, enter the <em>2FAS backup password</em> and tap <em>Unlock backup</em>.</li>
-              <li>Under <em>Select accounts to import</em>, choose the accounts, then tap <em>Import selected accounts</em>.</li>
+              <li>Under <em>Choose accounts to import</em>, select the accounts and tap the import button, for example <em>Import 2 accounts</em>.</li>
+              <li>In <em>Import these accounts?</em>, tap <em>Import selected accounts</em>.</li>
             </ol>
             <figure class="shot">
-              <div class="shot-placeholder" data-screenshot="11-import-2fas.png" role="img" aria-label="Screenshot placeholder: Select accounts to import from 2FAS">
-                <span>Screenshot placeholder</span><strong>Select accounts to import</strong><code>11-import-2fas.png</code>
+              <div class="shot-placeholder" data-screenshot="11-import-2fas.png" role="img" aria-label="Screenshot placeholder: Choose accounts to import from 2FAS">
+                <span>Screenshot placeholder</span><strong>Choose accounts to import</strong><code>11-import-2fas.png</code>
               </div>
               <figcaption>Select only the accounts you want to add.</figcaption>
             </figure>
@@ -372,7 +465,7 @@
           <div class="step-block">
             <ol class="steps">
               <li>Export your accounts from Ente Auth in the <strong>Encrypted</strong> (recommended) or <strong>Plain text</strong> format. Plain HTML exports are not supported.</li>
-              <li>Choose <em>Ente Auth</em>, then <em>Choose Ente export</em>. For an encrypted export, enter the <em>Ente export password</em>.</li>
+              <li>Choose <em>Ente Auth</em>. Expand <em>Formats and privacy</em> to see the supported formats, then tap <em>Choose Ente export</em>. For an encrypted export, enter the <em>Ente export password</em>.</li>
               <li>Under <em>Choose accounts to import</em>, select the accounts and import them.</li>
             </ol>
             <figure class="shot">
