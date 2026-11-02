@@ -100,6 +100,7 @@
     .shot-wide { max-width: 15rem; margin-block: 1.2rem 1.6rem; }
     .shot img, .shot-placeholder { display: block; width: 100%; height: auto; aspect-ratio: 1290 / 2796; border: 1px solid var(--line); border-radius: 1.6rem; background: var(--surface); }
     .shot img.shot-tall { aspect-ratio: auto; }
+    .shot-zoom { display: block; border-radius: 1.6rem; }
     .shot img.shot-crop { aspect-ratio: auto; border-radius: .9rem; }
     /* Chapter contents sit directly on the page background, without a card. */
     .chapter-nav { margin: 1.5rem 0 2rem; }
@@ -117,6 +118,16 @@
     @media (max-width: 760px) {
       .step-block { grid-template-columns: 1fr; gap: 1.2rem; }
       .shot, .shot-wide { width: min(15rem, 100%); margin-inline: auto; }
+    }
+    /* Consecutive steps in pairs; each instruction sits directly above its screenshot. Two columns only when the article is wide enough. */
+    .step-sequence { container-type: inline-size; margin-block: 1.2rem 1.6rem; }
+    .step-pair { display: grid; gap: 1.6rem; margin-bottom: 2rem; }
+    .step-pair:last-child { margin-bottom: 0; }
+    .step-cell { display: grid; gap: 1rem; align-content: start; }
+    .step-cell .shot { width: min(15rem, 100%); margin-inline: auto; }
+    @container (min-width: 34rem) {
+      .step-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto auto; gap: 1rem 2rem; }
+      .step-cell { grid-row: span 2; grid-template-rows: subgrid; }
     }
     /* Shared website navigation, identical to the Privacy Policy page. */
     .jm-policy-navigation { width: min(1184px, calc(100% - 48px)); margin-inline: auto; display: flex; flex-direction: column; align-items: stretch; padding-block: 20px 6px; color: #172f50; line-height: 1.6; }
@@ -520,60 +531,132 @@
         <section id="backup" aria-labelledby="backup-title">
           <h2 id="backup-title">04. Create an encrypted backup</h2>
           <p>JM Authenticator does not provide a cloud backup. Create encrypted backups so that you can recover your accounts if your device is lost or replaced.</p>
-          <div class="step-block">
-            <ol class="steps">
-              <li>Open <em>Settings → Encrypted backups</em> and tap <em>Back Up All Accounts</em>.</li>
-              <li>Under <em>Choose your backup type</em>, select:
-                <ul>
-                  <li><strong>External backup (Recommended)</strong> — saves an encrypted file to a location you choose, such as Files or iCloud Drive.</li>
-                  <li><strong>Internal backup</strong> — saves the backup privately inside the app on this iPhone or iPad. It does not protect against loss of the device and is removed when the app is deleted.</li>
-                  <li><strong>Both</strong> — creates an internal copy and an external copy.</li>
-                </ul>
-              </li>
-              <li>Keep the suggested <em>Backup filename</em> or enter your own. The <code>.jmbackup</code> extension is added automatically.</li>
-              <li>Enter a <em>Backup password</em> of 12 to 1024 characters and enter it again in <em>Confirm backup password</em>.</li>
-              <li>Tap <em>Create encrypted backup</em>.</li>
-            </ol>
-            <figure class="shot">
-              <div class="shot-placeholder" data-screenshot="05-backup-type.png" role="img" aria-label="Screenshot placeholder: Choose your backup type">
-                <span>Screenshot placeholder</span><strong>Choose your backup type</strong><code>05-backup-type.png</code>
+          <div class="step-sequence">
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps">
+                  <li>Open <em>Settings</em> and, under <em>Backup &amp; Restore</em>, tap <em>Encrypted backups</em>.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/backup-settings.png" aria-label="Open the Settings screenshot in full size"><img src="images/backup-settings.png" width="720" height="1560" alt="Settings screen with Language, Appearance, Security &amp; app lock, the Backup &amp; Restore section with Encrypted backups and Import &amp; Export Accounts, and Animated Welcome." loading="lazy"></a>
+                  <figcaption><em>Encrypted backups</em> under <em>Backup &amp; Restore</em> in <em>Settings</em>.</figcaption>
+                </figure>
               </div>
-              <figcaption>Choose where your encrypted backup is saved.</figcaption>
-            </figure>
-          </div>
-          <h3>Saving an external backup</h3>
-          <div class="step-block">
-            <ol class="steps">
-              <li>Read the <em>Save your external backup</em> guidance and continue.</li>
-              <li>In the window that opens, select a safe folder, then tap <em>Save</em>.</li>
-            </ol>
-            <figure class="shot">
-              <div class="shot-placeholder" data-screenshot="06-save-external-backup.png" role="img" aria-label="Screenshot placeholder: Save your external backup guidance">
-                <span>Screenshot placeholder</span><strong>Save your external backup</strong><code>06-save-external-backup.png</code>
+              <div class="step-cell">
+                <ol class="steps" start="2">
+                  <li>On <em>Encrypted backups</em>, tap <em>Back Up All Accounts</em>. This creates a password-protected backup of all your accounts and records it in your backup history.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/encrypted-backups.png" aria-label="Open the Encrypted backups screenshot in full size"><img class="shot-tall" src="images/encrypted-backups.png" width="720" height="1805" alt="Encrypted backups screen with the cards Back Up All Accounts and Restore from backup file, the collapsed Backup history (3 entries) with its storage-type legend Internal, External and Both, the Restore selected backup button and the complete Backup safety notice." loading="lazy"></a>
+                  <figcaption>The <em>Encrypted backups</em> screen. Tap to open full size.</figcaption>
+                </figure>
               </div>
-              <figcaption>Choose a safe location for the backup file.</figcaption>
-            </figure>
+            </div>
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps" start="3">
+                  <li>Under <em>Choose your backup type</em>, open the <em>Backup storage</em> drop-down and select where the backup is saved:
+                    <ul>
+                      <li><strong>External backup (Recommended)</strong> — saves an encrypted file to a location you choose, such as Files or iCloud Drive.</li>
+                      <li><strong>Internal backup</strong> — saves the backup privately inside the app on this iPhone or iPad. It does not protect against loss of the device and is removed when the app is deleted.</li>
+                      <li><strong>Both</strong> — creates an internal copy and an external copy.</li>
+                    </ul>
+                    This guide shows <strong>External backup (Recommended)</strong>.
+                  </li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/backup-storage.png" aria-label="Open the Backup storage screenshot in full size"><img src="images/backup-storage.png" width="720" height="1561" alt="Encrypted backup screen with the Backup storage drop-down open, showing External backup (Recommended), Internal backup and Both, each with a short description." loading="lazy"></a>
+                  <figcaption>The <em>Backup storage</em> options.</figcaption>
+                </figure>
+              </div>
+              <div class="step-cell">
+                <ol class="steps" start="4">
+                  <li>Keep the suggested <em>Backup filename</em> or enter your own. The <code>.jmbackup</code> extension is added automatically. Under <em>Protect your backup with a password</em>, enter a <em>Backup password</em> of 12 to 1024 characters and enter it again in <em>Confirm backup password</em>. Use a long, unique password. A shorter password shows <em>Password must contain at least 12 characters.</em></li>
+                  <li>Tap <em>Create encrypted backup</em>.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/backup-create.png" aria-label="Open the Encrypted backup screenshot in full size"><img src="images/backup-create.png" width="720" height="1561" alt="Encrypted backup screen with Backup storage set to External backup (Recommended), the Backup filename JM-Auth-DemoTest with the .jmbackup extension, the filled Backup password and Confirm backup password fields under Protect your backup with a password, and the Create encrypted backup button." loading="lazy"></a>
+                  <figcaption>The completed form with <em>Create encrypted backup</em>.</figcaption>
+                </figure>
+              </div>
+            </div>
+            <h3>Saving an external backup</h3>
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps" start="6">
+                  <li>Read <em>Save your external backup</em>. The next window lets you choose where to save your encrypted backup. Tap <em>Continue</em>.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/backup-save-guidance.png" aria-label="Open the Save your external backup screenshot in full size"><img src="images/backup-save-guidance.png" width="720" height="1561" alt="Save your external backup dialog: The next window will let you choose where to save your encrypted backup. Select a safe folder, then tap Save. Keep your backup file and password safe. You will need both to restore your accounts. The buttons Cancel and Continue." loading="lazy"></a>
+                  <figcaption>The <em>Save your external backup</em> guidance.</figcaption>
+                </figure>
+              </div>
+              <div class="step-cell">
+                <ol class="steps" start="7">
+                  <li>In the iOS <em>Files</em> window, choose a safe location, such as a folder on your iPhone or in iCloud Drive, and tap <em>Save</em>. The backup filename is shown under <em>Save as</em>.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/backup-save-location.png" aria-label="Open the Files save window screenshot in full size"><img src="images/backup-save-location.png" width="720" height="1561" alt="Edited demonstration screenshot of the iOS Files save window: the On My iPhone location with the Save button, the Search field, the folders Documents, Downloads, JM Authenticator Backups and Projects, several unavailable text files, and the Save as field with the backup filename JM-Auth-De… and Tags." loading="lazy"></a>
+                  <figcaption>The iOS <em>Files</em> save window with <em>Save</em>. Edited demonstration screenshot: folder and file names are examples.</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps" start="8">
+                  <li>Check <em>Backup created successfully</em>. It shows the <em>Filename</em>, the <em>Storage</em> type and the number of <em>Accounts</em> in the backup. Tap <em>OK</em>.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/backup-created.png" aria-label="Open the Backup created successfully screenshot in full size"><img src="images/backup-created.png" width="720" height="1561" alt="Backup created successfully dialog: Your encrypted backup has been saved successfully. Filename JM-Auth-DemoTest.jmbackup, Storage External backup, Accounts 14, and the OK button." loading="lazy"></a>
+                  <figcaption>Confirmation of the new backup.</figcaption>
+                </figure>
+              </div>
+              <div class="step-cell">
+                <ol class="steps" start="9">
+                  <li>Back on <em>Encrypted backups</em>, tap <em>Backup history</em> to expand it. The new backup is listed at the top with its filename, date and time, storage type and the number of accounts included.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/backup-history.png" aria-label="Open the Backup history screenshot in full size"><img src="images/backup-history.png" width="720" height="1561" alt="Encrypted backups screen with the expanded Backup history (4 entries) and the legend Internal, External and Both. The new backup JM-Auth-DemoTest.jmbackup, Monday, November 2, 2026, 20:36 (local time), External, Accounts included: 14, is selected at the top, followed by the earlier external backups JM-Third.jmbackup and JM-All-double.jmbackup, and the Restore selected backup button." loading="lazy"></a>
+                  <figcaption>The new backup in <em>Backup history</em>.</figcaption>
+                </figure>
+              </div>
+            </div>
           </div>
-          <p class="note"><strong>Keep your backup file and its password safe. Backup passwords are not saved by the app, and a forgotten backup password cannot be recovered.</strong></p>
+          <p class="note"><strong>Keep your backup file and its password safe. You need both to restore your accounts. Backup passwords are not saved by the app, and a forgotten backup password cannot be recovered.</strong></p>
         </section>
         <section id="restore" aria-labelledby="restore-title">
           <h2 id="restore-title">05. Restore a backup</h2>
           <p>Restoring adds accounts from a JM Authenticator encrypted backup. Existing accounts are kept, and exact duplicates are skipped.</p>
           <div class="step-block">
-            <ol class="steps">
-              <li>Open <em>Settings → Encrypted backups</em>.</li>
-              <li>Select a backup in the backup history and tap <em>Restore selected backup</em>. To use a backup file instead, tap <em>Restore from backup file</em>, then <em>Select backup file</em>.</li>
-              <li>Enter the backup password and tap <em>Continue</em>.</li>
-            </ol>
+            <div>
+              <ol class="steps">
+                <li>Open <em>Settings → Encrypted backups</em>.</li>
+                <li>Choose how to restore:
+                  <ul>
+                    <li><strong>From your backup history</strong> — select a backup under <em>Backup history</em> and tap <em>Restore selected backup</em>.</li>
+                    <li><strong>From a backup file</strong> — tap <em>Restore from backup file</em>.</li>
+                  </ul>
+                </li>
+              </ol>
+              <p>As the <em>Backup safety</em> notice explains, a history entry does not guarantee that its file still exists. Keep your backup files and passwords safe.</p>
+            </div>
             <figure class="shot">
-              <div class="shot-placeholder" data-screenshot="07-encrypted-backups.png" role="img" aria-label="Screenshot placeholder: Encrypted backups screen with backup history">
-                <span>Screenshot placeholder</span><strong>Encrypted backups</strong><code>07-encrypted-backups.png</code>
-              </div>
-              <figcaption>Backup history and restore options.</figcaption>
+              <a class="shot-zoom" href="images/encrypted-backups.png" aria-label="Open the Encrypted backups screenshot in full size"><img class="shot-tall" src="images/encrypted-backups.png" width="720" height="1805" alt="Encrypted backups screen with the cards Back Up All Accounts and Restore from backup file, the collapsed Backup history (3 entries) with its storage-type legend Internal, External and Both, the Restore selected backup button and the complete Backup safety notice." loading="lazy"></a>
+              <figcaption>Backup history and restore options. Tap to open full size.</figcaption>
             </figure>
           </div>
           <div class="step-block">
-            <ol class="steps" start="4">
+            <ol class="steps" start="3">
+              <li>If you tapped <em>Restore from backup file</em>, the Files window opens. Go to the location where you saved the backup and select your <code>.jmbackup</code> file.</li>
+              <li>Enter the backup password and tap <em>Continue</em>.</li>
+            </ol>
+            <figure class="shot">
+              <img src="images/restore-files.png" width="720" height="1560" alt="Edited demonstration screenshot of the iOS Files window opened by Restore from backup file: the On My iPhone location with the folders Documents, Downloads, JM Authenticator Backups and Projects and the file JM-Backup-Demo.jmbackup. No file is selected." loading="lazy">
+              <figcaption>The Files window opened by <em>Restore from backup file</em>. Edited demonstration screenshot: folder and file names are examples.</figcaption>
+            </figure>
+          </div>
+          <div class="step-block">
+            <ol class="steps" start="5">
               <li>In <em>Restore encrypted backup?</em>, check <em>Accounts in backup</em>, <em>Already enrolled</em> and <em>New accounts to add</em>, then tap <em>Restore</em>.</li>
               <li><em>Restoration completed</em> shows how many accounts were added and how many duplicates were skipped. Tap <em>Done</em>.</li>
             </ol>
