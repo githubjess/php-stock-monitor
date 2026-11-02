@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JM Authenticator User Guide: add accounts, use verification codes, create and restore encrypted backups, and import accounts from Google Authenticator, 2FAS and Ente Auth.">
+  <!-- DRAFT: remove this tag only after real screenshots are inserted and approved. -->
+  <meta name="robots" content="noindex">
+  <meta name="referrer" content="no-referrer">
+  <title>User Guide | JM Authenticator</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f7f6;
+      --surface: #fff;
+      --ink: #172d38;
+      --muted: #4c616b;
+      --accent: #245e67;
+      --line: #d7e2df;
+      --wash: #eaf2ef;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 1.5rem; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: 1.75;
+      overflow-wrap: anywhere;
+    }
+    a { color: var(--accent); text-underline-offset: .2em; }
+    a:hover { text-decoration-thickness: .15em; }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; border-radius: 2px; }
+    .skip-link { position: absolute; top: -8rem; left: 1rem; padding: .7rem 1rem; background: white; z-index: 2; }
+    .skip-link:focus { top: 1rem; }
+    .wrap { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+    .hero { padding-block: clamp(2.5rem, 7vw, 5rem) 2rem; }
+    .eyebrow { margin: 0 0 .7rem; color: var(--accent); text-transform: uppercase; font-size: .75rem; font-weight: 750; letter-spacing: .16em; }
+    h1 { margin: 0; font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.1; letter-spacing: -.055em; }
+    .intro { max-width: 44rem; margin: 1.4rem 0; font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--muted); }
+    .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-block: 1.8rem 3.5rem; }
+    .fact { padding: 1.3rem; background: var(--surface); border: 1px solid var(--line); border-radius: .7rem; }
+    .fact strong { display: block; font-size: 1rem; margin-bottom: .3rem; }
+    .fact p { color: var(--muted); margin: 0; font-size: .92rem; }
+    .layout { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; padding-bottom: 4rem; }
+    .toc { position: sticky; top: 1.5rem; padding-block: .4rem; }
+    .toc h2 { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; margin: 0 0 1rem; }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc a { display: block; padding: .4rem 0; font-size: .9rem; text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    article { min-width: 0; }
+    article section { padding-block: 1.8rem; border-top: 1px solid var(--line); }
+    article section:first-child { padding-top: 0; border-top: 0; }
+    h2 { font-size: 1.45rem; line-height: 1.35; letter-spacing: -.025em; margin: 0 0 1rem; }
+    h3 { font-size: 1.05rem; margin: 1.5rem 0 .5rem; }
+    p { margin: 0 0 1rem; }
+    p:last-child { margin-bottom: 0; }
+    ul { padding-left: 1.3rem; }
+    li + li { margin-top: .45rem; }
+    dl { margin: 1.2rem 0; }
+    dt { font-weight: 650; margin-top: 1rem; }
+    dd { margin: .25rem 0 0; color: var(--muted); }
+    .note { background: var(--wash); padding: 1.2rem; border-radius: .5rem; }
+    footer { border-top: 1px solid var(--line); padding-block: 1.6rem; color: var(--muted); font-size: .85rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    @media (max-width: 760px) {
+      .wrap { width: calc(100% - 2rem); }
+      .facts { grid-template-columns: 1fr; gap: .65rem; margin-bottom: 2rem; }
+      .fact { padding: 1rem; }
+      .layout { grid-template-columns: 1fr; gap: 2rem; }
+      .toc { position: static; border-block: 1px solid var(--line); padding-block: 1.2rem; }
+      .toc ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem 1rem; }
+    }
+    @media (max-width: 380px) { .toc ol { grid-template-columns: 1fr; } }
+    @media print {
+      body { background: white; color: black; font-size: 11pt; }
+      .wrap { width: 100%; }
+      .toc, .skip-link, .back-top { display: none; }
+      .layout { display: block; }
+      .hero { padding-top: 1.5rem; }
+      .facts { margin-bottom: 2rem; }
+      h2, h3 { break-after: avoid; }
+      a { color: inherit; }
+    }
+
+    .status { margin: 0 0 1rem; padding: .8rem 1rem; border-left: 3px solid var(--accent); background: var(--wash); font-size: .9rem; }
+    .step-block { display: grid; grid-template-columns: minmax(0, 1fr) 15rem; gap: 2rem; align-items: start; margin-block: 1.2rem 1.6rem; }
+    .steps { margin: 0; padding-left: 1.4rem; }
+    .steps > li + li { margin-top: .7rem; }
+    .steps ul { margin-top: .5rem; }
+    .shot { margin: 0; }
+    .shot-wide { max-width: 15rem; margin-block: 1.2rem 1.6rem; }
+    .shot img, .shot-placeholder { display: block; width: 100%; aspect-ratio: 1290 / 2796; border: 1px solid var(--line); border-radius: 1.6rem; background: var(--surface); }
+    .shot-placeholder { box-sizing: border-box; display: grid; place-content: center; gap: .35rem; padding: 1rem; text-align: center; border: 2px dashed var(--accent); background: var(--wash); color: var(--muted); font-size: .85rem; line-height: 1.4; }
+    .shot-placeholder span { text-transform: uppercase; letter-spacing: .12em; font-size: .7rem; font-weight: 750; color: var(--accent); }
+    .shot-placeholder strong { color: var(--ink); }
+    .shot-placeholder code { font-size: .75rem; }
+    .shot figcaption { margin-top: .6rem; color: var(--muted); font-size: .85rem; line-height: 1.5; text-align: center; }
+    @media (max-width: 760px) {
+      .step-block { grid-template-columns: 1fr; gap: 1.2rem; }
+      .shot, .shot-wide { width: min(15rem, 100%); margin-inline: auto; }
+    }
+    /* Shared website navigation, identical to the Privacy Policy page. */
+    .jm-policy-navigation { width: min(1184px, calc(100% - 48px)); margin-inline: auto; display: flex; flex-direction: column; align-items: stretch; padding-block: 20px 6px; color: #172f50; line-height: 1.6; }
+    .jm-policy-navigation a { color: inherit; text-decoration: none; }
+    .jm-policy-navigation a:hover { color: #7053c6; }
+    .jm-policy-navigation :focus-visible { outline: 3px solid #7053c6; outline-offset: 5px; }
+    .jm-policy-navigation .jm-brand { align-self: flex-start; padding-bottom: 14px; display: inline-flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 650; letter-spacing: -.6px; }
+    .jm-policy-navigation img { display: block; object-fit: contain; }
+    .jm-policy-navigation .jm-nav-icon { flex: none; width: 16px; height: 16px; margin-right: 1px; color: #3474d4; }
+    /* The link keeps its 44px hit area; the visible highlight is a centred 32px layer behind it. */
+    .jm-policy-navigation .jm-nav a[aria-current] { position: relative; isolation: isolate; padding-inline: 10px; color: #2059ad; }
+    .jm-policy-navigation .jm-nav a[aria-current]::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 50%; height: 32px; transform: translateY(-50%); box-sizing: border-box; border: 1px solid #d5dae2; border-radius: 7px; background: #f0f5fc; }
+    .jm-policy-navigation .jm-nav a[aria-current] .jm-nav-icon { color: #2059ad; }
+    .jm-policy-navigation .jm-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 4px clamp(16px, 1.4vw, 28px); padding-top: 6px; border-top: 1px solid #e3e7ef; font-size: 14px; font-weight: 550; min-width: 0; }
+    .jm-policy-navigation .jm-nav a { display: inline-flex; align-items: center; min-height: 44px; gap: 5px; }
+    .jm-policy-navigation .jm-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .jm-policy-navigation .jm-language { position: relative; z-index: 30; margin-left: auto; }
+    .jm-policy-navigation .jm-language::after { content: ""; position: absolute; right: 14px; top: calc(50% - 4px); width: 7px; height: 7px; border-right: 1.5px solid #7053c6; border-bottom: 1.5px solid #7053c6; transform: rotate(45deg); pointer-events: none; }
+    /* Language picker (i18n/language-menu.js): borderless when closed, soft card when open. */
+    .jm-lang-button { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; max-width: 100%; padding: 8px 34px 8px 10px; border: 0; border-radius: 10px; background: transparent; color: #172f50; font: inherit; cursor: pointer; }
+    .jm-lang-button:focus-visible { outline: 2px solid #3474d4; outline-offset: 2px; }
+    .jm-lang-flag { flex: none; display: block; width: 21px; height: 14px; border-radius: 2px; overflow: hidden; box-shadow: 0 0 0 1px rgba(23, 47, 80, .12); }
+    .jm-lang-flag svg { display: block; width: 100%; height: 100%; }
+    .jm-lang-list { position: absolute; top: calc(100% + 6px); right: 0; box-sizing: border-box; min-width: 210px; max-width: calc(100vw - 32px); margin: 0; padding: 6px; list-style: none; border: 1px solid #d5dae2; border-radius: 12px; background: #f8fafd; box-shadow: 0 16px 36px -12px rgba(23, 47, 80, .22), 0 3px 8px rgba(23, 47, 80, .06); font-size: 14px; font-weight: 550; line-height: 1.4; }
+    .jm-lang-list[hidden] { display: none; }
+    .jm-lang-option { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #172f50; cursor: pointer; white-space: nowrap; }
+    .jm-lang-option + .jm-lang-option { margin-top: 0; } /* overrides the article li + li spacing */
+    .jm-lang-option:hover, .jm-lang-option.is-active { background: #eef2f8; }
+    .jm-lang-option[aria-selected="true"] { background: #e4ebf5; }
+    .jm-lang-option[aria-selected="true"]:hover, .jm-lang-option[aria-selected="true"].is-active { background: #dce5f2; }
+    .jm-lang-check { flex: none; width: 16px; height: 16px; margin-left: auto; color: #2059ad; visibility: hidden; }
+    .jm-lang-option[aria-selected="true"] .jm-lang-check { visibility: visible; }
+    .jm-language:has(.jm-lang-button[aria-expanded="true"])::after { top: calc(50% - 1px); transform: rotate(-135deg); }
+    @media (max-width: 760px) { .jm-policy-navigation .jm-nav { gap: 4px 18px; font-size: 13px; } .jm-policy-navigation .jm-brand { font-size: 19px; } }
+    @media print { .jm-policy-navigation .jm-nav { display: none; } }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#guide">Skip to user guide</a>
+  <header class="jm-header jm-container jm-policy-navigation">
+      <a data-i18n-aria-label="a11y.home" class="jm-brand" href="/" aria-label="JM Authenticator home">
+        <img src="/jm-authenticator/branding/jm-shield.png" alt="" width="52" height="52" />
+        <span data-i18n="common.product">JM Authenticator</span>
+      </a>
+      <nav class="jm-nav" data-i18n-aria-label="a11y.mainNav" aria-label="Main navigation">
+        <a href="/" data-i18n-text="nav.home"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/></svg>Home</a>
+        <a href="/#features" data-i18n-text="nav.features"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11 4.5Q11.8 11.2 18.5 12Q11.8 12.8 11 19.5Q10.2 12.8 3.5 12Q10.2 11.2 11 4.5z"/><circle cx="18.5" cy="5.5" r="1.5"/></svg>Features</a>
+        <a href="/jm-authenticator/privacy/" data-legal-page="privacy" data-i18n-text="nav.privacy"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.2c2.2 1.5 4.6 2.3 7 2.5v5.6c0 4.6-2.9 8-7 9.5-4.1-1.5-7-4.9-7-9.5V5.7c2.4-.2 4.8-1 7-2.5z"/><path d="m9 12 2 2 4-4"/></svg>Privacy</a>
+        <a href="/jm-authenticator/support/" data-i18n-text="nav.support"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 14v-2a7.5 7.5 0 0 1 15 0v2"/><rect x="3.5" y="13" width="4" height="6.5" rx="1.5"/><rect x="16.5" y="13" width="4" height="6.5" rx="1.5"/><path d="M18.5 19.5c0 1.3-1.5 2-3.5 2h-2"/></svg>Support</a>
+        <a href="/jm-authenticator/guide/" aria-current="page" data-i18n-text="nav.guide"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 7.5v12"/><path d="M3.5 5.5c3-.8 5.8-.3 8.5 2 2.7-2.3 5.5-2.8 8.5-2v13c-3-.8-5.8-.3-8.5 2-2.7-2.3-5.5-2.8-8.5-2z"/></svg>User Guide</a>
+        <a href="/impressum/" data-legal-page="impressum" data-i18n-text="nav.impressum"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg>Impressum</a>
+        <a href="/share-monitor/" data-i18n-text="nav.shareMonitor"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-6"/></svg>Share Monitor <span aria-hidden="true">↗</span></a>
+        <div class="jm-language" hidden>
+          <label class="jm-sr-only" for="jm-language" data-i18n="a11y.language">Website language</label>
+          <select id="jm-language" data-i18n-aria-label="a11y.language" aria-label="Website language">
+            <option value="en" lang="en">🇬🇧 English</option>
+            <option value="de" lang="de">🇩🇪 Deutsch</option>
+            <option value="es" lang="es">🇪🇸 Español</option>
+            <option value="fr" lang="fr">🇫🇷 Français</option>
+            <option value="vi" lang="vi">🇻🇳 Tiếng Việt</option>
+            <option value="zh-Hans" lang="zh-Hans">🇨🇳 简体中文</option>
+            <option value="zh-Hant" lang="zh-Hant">🇹🇼 繁體中文</option>
+          </select>
+        </div>
+      </nav>
+    </header>
+  <main class="wrap">
+    <div class="hero">
+      <p class="eyebrow">Step-by-step</p>
+      <h1>JM Authenticator User Guide</h1>
+      <p class="intro">Step-by-step instructions for adding accounts, using verification codes, backing up and restoring your accounts, and importing accounts from other authenticator apps.</p>
+      <!-- DRAFT: remove this notice and the robots noindex tag only after the real screenshots have been inserted and approved. -->
+      <p class="status"><strong>Draft — not yet published.</strong> Screenshots are placeholders and will be replaced with genuine app screenshots before publication.</p>
+    </div>
+    <div class="facts" aria-label="User Guide at a glance">
+      <div class="fact"><strong>Add accounts</strong><p>Scan a QR code, choose an image or enter a setup key.</p></div>
+      <div class="fact"><strong>Back up &amp; restore</strong><p>Protect your accounts with password-encrypted backups.</p></div>
+      <div class="fact"><strong>Import from other apps</strong><p>Move accounts from Google Authenticator, 2FAS and Ente Auth.</p></div>
+    </div>
+    <div class="layout">
+      <nav class="toc" aria-label="User Guide contents">
+        <h2>On this page</h2>
+        <ol>
+          <li><a href="#add-account">01 · Add an account</a></li>
+          <li><a href="#codes">02 · Use verification codes</a></li>
+          <li><a href="#backup">03 · Create a backup</a></li>
+          <li><a href="#restore">04 · Restore a backup</a></li>
+          <li><a href="#import">05 · Import accounts</a></li>
+          <li><a href="#help">06 · Need more help?</a></li>
+        </ol>
+      </nav>
+      <article id="guide" aria-label="JM Authenticator user guide" tabindex="-1">
+        <section id="add-account" aria-labelledby="add-account-title">
+          <h2 id="add-account-title">01. Add an account</h2>
+          <p>When you turn on two-factor authentication for a service, it shows a setup QR code or a text setup key. Use it to add the account to JM Authenticator.</p>
+          <div class="step-block">
+            <ol class="steps">
+              <li>On the accounts screen, tap <em>Add account</em>. If you have no accounts yet, tap <em>Add your first account</em>.</li>
+              <li>In <em>Add an account</em>, choose how to add it:
+                <ul>
+                  <li><strong>Scan QR code</strong> — point your camera at the setup QR code shown by the service. Scanning stays on your device.</li>
+                  <li><strong>Choose from Photos</strong> — select a screenshot or photo of the setup QR code.</li>
+                  <li><strong>Choose from Files</strong> — select a saved QR code image (PNG, JPEG or HEIC, up to 8 MB).</li>
+                  <li><strong>Enter setup key</strong> — enter the account details manually.</li>
+                </ul>
+              </li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="01-add-account-sheet.png" role="img" aria-label="Screenshot placeholder: Add an account sheet">
+                <span>Screenshot placeholder</span><strong>Add an account sheet</strong><code>01-add-account-sheet.png</code>
+              </div>
+              <figcaption>The four ways to add an account.</figcaption>
+            </figure>
+          </div>
+          <h3>Entering a setup key</h3>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Enter the <em>Service / issuer</em> and <em>Account name</em>. A <em>Descriptive label</em> is optional.</li>
+              <li>Enter the setup key from the service in <em>Base32 secret key</em>. Spaces are allowed.</li>
+              <li>Open <em>Advanced TOTP settings</em> only if the service asks for a different algorithm, code length or validity period.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="02-manual-enrollment.png" role="img" aria-label="Screenshot placeholder: Manual enrollment form with demo details">
+                <span>Screenshot placeholder</span><strong>Manual enrollment</strong><code>02-manual-enrollment.png</code>
+              </div>
+              <figcaption>Manual enrollment with demo account details.</figcaption>
+            </figure>
+          </div>
+          <h3>Confirming the account</h3>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Check the details, then tap <em>Review and add</em>.</li>
+              <li>In <em>Confirm enrollment</em>, review the service, account and code settings, then tap <em>Add account</em>.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="03-confirm-enrollment.png" role="img" aria-label="Screenshot placeholder: Confirm enrollment dialog">
+                <span>Screenshot placeholder</span><strong>Confirm enrollment</strong><code>03-confirm-enrollment.png</code>
+              </div>
+              <figcaption>Review the account before it is added.</figcaption>
+            </figure>
+          </div>
+          <p>Standard <code>otpauth</code> TOTP setup codes are supported. Counter-based (HOTP) codes are not supported. Keep the service’s own recovery codes in a safe place, separately from JM Authenticator.</p>
+        </section>
+        <section id="codes" aria-labelledby="codes-title">
+          <h2 id="codes-title">02. Use verification codes</h2>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Find the account in your list. Its current code and a countdown are shown.</li>
+              <li>If codes are hidden, tap the code to reveal it.</li>
+              <li>Tap the copy button next to the code. <em>Code copied successfully!</em> confirms the copy.</li>
+              <li>Paste the code into the service that asks for it before the countdown ends.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="04-code-copied.png" role="img" aria-label="Screenshot placeholder: Account list with a copied code">
+                <span>Screenshot placeholder</span><strong>Copying a code</strong><code>04-code-copied.png</code>
+              </div>
+              <figcaption>A code with its countdown and the copy confirmation.</figcaption>
+            </figure>
+          </div>
+          <p>A copied code is cleared from the clipboard within 30 seconds or when the code expires. If a service rejects valid-looking codes, check that your device’s date, time and time zone are set automatically.</p>
+        </section>
+        <section id="backup" aria-labelledby="backup-title">
+          <h2 id="backup-title">03. Create an encrypted backup</h2>
+          <p>JM Authenticator does not provide a cloud backup. Create encrypted backups so that you can recover your accounts if your device is lost or replaced.</p>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Open <em>Settings → Encrypted backups</em> and tap <em>Back Up All Accounts</em>.</li>
+              <li>Under <em>Choose your backup type</em>, select:
+                <ul>
+                  <li><strong>External backup (Recommended)</strong> — saves an encrypted file to a location you choose, such as Files or iCloud Drive.</li>
+                  <li><strong>Internal backup</strong> — saves the backup privately inside the app on this iPhone. It does not protect against loss of the device and is removed when the app is deleted.</li>
+                  <li><strong>Both</strong> — creates an internal copy and an external copy.</li>
+                </ul>
+              </li>
+              <li>Enter a <em>Backup password</em> of 12 to 1024 characters and enter it again in <em>Confirm backup password</em>.</li>
+              <li>Tap <em>Create encrypted backup</em>.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="05-backup-type.png" role="img" aria-label="Screenshot placeholder: Choose your backup type">
+                <span>Screenshot placeholder</span><strong>Choose your backup type</strong><code>05-backup-type.png</code>
+              </div>
+              <figcaption>Choose where your encrypted backup is saved.</figcaption>
+            </figure>
+          </div>
+          <h3>Saving an external backup</h3>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Read the <em>Save your external backup</em> guidance and continue.</li>
+              <li>In the window that opens, select a safe folder, then tap <em>Save</em>.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="06-save-external-backup.png" role="img" aria-label="Screenshot placeholder: Save your external backup guidance">
+                <span>Screenshot placeholder</span><strong>Save your external backup</strong><code>06-save-external-backup.png</code>
+              </div>
+              <figcaption>Choose a safe location for the backup file.</figcaption>
+            </figure>
+          </div>
+          <p class="note"><strong>Keep your backup file and its password safe. Backup passwords are not saved by the app, and a forgotten backup password cannot be recovered.</strong></p>
+        </section>
+        <section id="restore" aria-labelledby="restore-title">
+          <h2 id="restore-title">04. Restore a backup</h2>
+          <p>Restoring adds accounts from a JM Authenticator encrypted backup. Existing accounts are kept, and exact duplicates are skipped.</p>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Open <em>Settings → Encrypted backups</em>.</li>
+              <li>Select a backup in the backup history and tap <em>Restore selected backup</em>, or tap <em>Select backup file</em> to choose a backup file.</li>
+              <li>Enter the backup password and tap <em>Continue</em>.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="07-encrypted-backups.png" role="img" aria-label="Screenshot placeholder: Encrypted backups screen with backup history">
+                <span>Screenshot placeholder</span><strong>Encrypted backups</strong><code>07-encrypted-backups.png</code>
+              </div>
+              <figcaption>Backup history and restore options.</figcaption>
+            </figure>
+          </div>
+          <div class="step-block">
+            <ol class="steps" start="4">
+              <li>In <em>Restore encrypted backup?</em>, check <em>Accounts in backup</em>, <em>Already enrolled</em> and <em>New accounts to add</em>, then tap <em>Restore</em>.</li>
+              <li><em>Restoration completed</em> shows how many accounts were added and how many duplicates were skipped. Tap <em>Done</em>.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="08-restore-confirm.png" role="img" aria-label="Screenshot placeholder: Restore encrypted backup confirmation">
+                <span>Screenshot placeholder</span><strong>Restore encrypted backup?</strong><code>08-restore-confirm.png</code>
+              </div>
+              <figcaption>Nothing is imported until you confirm.</figcaption>
+            </figure>
+          </div>
+          <p>If the password is incorrect or the file is damaged, no accounts are imported.</p>
+        </section>
+        <section id="import" aria-labelledby="import-title">
+          <h2 id="import-title">05. Import accounts</h2>
+          <p>Open <em>Settings → Import &amp; Export Accounts</em> and choose a source under <em>Import into JM</em>. Imports are processed on your device. Only the accounts you select are added; existing accounts and backups remain unchanged, and duplicates are skipped.</p>
+          <figure class="shot shot-wide">
+            <div class="shot-placeholder" data-screenshot="09-import-export.png" role="img" aria-label="Screenshot placeholder: Import and Export Accounts screen">
+              <span>Screenshot placeholder</span><strong>Import &amp; Export Accounts</strong><code>09-import-export.png</code>
+            </div>
+            <figcaption>Choose the app you are importing from.</figcaption>
+          </figure>
+          <h3 id="import-google">Google Authenticator</h3>
+          <div class="step-block">
+            <ol class="steps">
+              <li>In Google Authenticator, use <em>Transfer accounts → Export accounts</em> to display the export QR codes.</li>
+              <li>In JM Authenticator, choose <em>Google Authenticator</em>, then <em>Scan a QR code</em> or <em>Choose images</em> of the QR codes.</li>
+              <li>If the export has several QR codes, add every part. The progress shows how many parts have been collected.</li>
+              <li>Review the accounts and import them.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="10-import-google.png" role="img" aria-label="Screenshot placeholder: Import from Google Authenticator">
+                <span>Screenshot placeholder</span><strong>Import from Google Authenticator</strong><code>10-import-google.png</code>
+              </div>
+              <figcaption>Scan or choose every part of the export.</figcaption>
+            </figure>
+          </div>
+          <h3 id="import-2fas">2FAS Authenticator</h3>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Choose <em>2FAS Authenticator</em>, then <em>Choose .2fas file</em>.</li>
+              <li>If the backup is protected, enter the <em>2FAS backup password</em> and tap <em>Unlock backup</em>.</li>
+              <li>Under <em>Select accounts to import</em>, choose the accounts, then tap <em>Import selected accounts</em>.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="11-import-2fas.png" role="img" aria-label="Screenshot placeholder: Select accounts to import from 2FAS">
+                <span>Screenshot placeholder</span><strong>Select accounts to import</strong><code>11-import-2fas.png</code>
+              </div>
+              <figcaption>Select only the accounts you want to add.</figcaption>
+            </figure>
+          </div>
+          <h3 id="import-ente">Ente Auth</h3>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Export your accounts from Ente Auth in the <strong>Encrypted</strong> (recommended) or <strong>Plain text</strong> format. Plain HTML exports are not supported.</li>
+              <li>Choose <em>Ente Auth</em>, then <em>Choose Ente export</em>. For an encrypted export, enter the <em>Ente export password</em>.</li>
+              <li>Under <em>Choose accounts to import</em>, select the accounts and import them.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="12-import-ente.png" role="img" aria-label="Screenshot placeholder: Import from Ente Auth">
+                <span>Screenshot placeholder</span><strong>Import from Ente Auth</strong><code>12-import-ente.png</code>
+              </div>
+              <figcaption>Supported Ente Auth export formats.</figcaption>
+            </figure>
+          </div>
+          <p>Only standard TOTP accounts can be imported; HOTP, Steam and other unsupported types are skipped. Because other apps can change their export formats, not every version of their exports may be supported.</p>
+          <p class="note"><strong>QR screenshots and export files contain your authentication secrets.</strong> After you have checked the import, delete them, including from <em>Recently Deleted</em> in Photos.</p>
+        </section>
+        <section id="help" aria-labelledby="help-title">
+          <h2 id="help-title">06. Need more help?</h2>
+          <p>Visit <a href="/jm-authenticator/support/">JM Authenticator Support</a> or email <a href="mailto:support@jegprofil.info">support@jegprofil.info</a>. Never send secret keys, codes, backup files, backup passwords or QR codes.</p>
+          <p>To learn how your data is handled, read the <a href="/jm-authenticator/privacy/">JM Authenticator Privacy Policy</a>.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+  <footer><div class="wrap footer-inner"><span>JM Authenticator · User Guide</span><a href="/jm-authenticator/support/">Support</a><a href="/jm-authenticator/privacy/">Privacy Policy</a><a href="/impressum/">Impressum</a><a class="back-top" href="#top">Back to top ↑</a></div></footer>
+  <script type="module" src="/jm-authenticator/navigation.js"></script>
+</body>
+</html>

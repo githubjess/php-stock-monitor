@@ -1,8 +1,10 @@
+import { enhanceLanguageMenu } from "./language-menu.js";
 import { resolveLegalPage } from "./legal-pages.js";
 
 export function initTranslations(catalogs, { titleKey = "page.title", queryLanguage = false, root = document, updateDocument = true } = {}) {
   const preferenceKey = "jm-authenticator:website-language";
   const selector = root.querySelector("#jm-language");
+  const languageMenu = enhanceLanguageMenu(selector);
 
   function supported(language) {
     return Object.hasOwn(catalogs, language) ? language : "en";
@@ -38,6 +40,7 @@ export function initTranslations(catalogs, { titleKey = "page.title", queryLangu
       }
     });
     selector.value = language;
+    languageMenu.sync();
   }
 
   let initialLanguage = "en";

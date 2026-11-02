@@ -62,6 +62,7 @@
     dd { margin: .25rem 0 0; color: var(--muted); }
     .note { background: var(--wash); padding: 1.2rem; border-radius: .5rem; }
     .contact-email { font-size: 1.15rem; font-weight: 650; }
+    .guide-callout { margin: 0; padding: .9rem 1.1rem; border-left: 3px solid var(--accent); background: var(--wash); }
     footer { border-top: 1px solid var(--line); padding-block: 1.6rem; color: var(--muted); font-size: .85rem; }
     .footer-inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
     @media (max-width: 760px) {
@@ -85,21 +86,37 @@
     }
 
     /* Shared website navigation, identical to the Privacy Policy page. */
-    .jm-policy-navigation { width: min(1184px, calc(100% - 48px)); margin-inline: auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; padding-block: 25px; color: #172f50; line-height: 1.6; }
+    .jm-policy-navigation { width: min(1184px, calc(100% - 48px)); margin-inline: auto; display: flex; flex-direction: column; align-items: stretch; padding-block: 20px 6px; color: #172f50; line-height: 1.6; }
     .jm-policy-navigation a { color: inherit; text-decoration: none; }
     .jm-policy-navigation a:hover { color: #7053c6; }
     .jm-policy-navigation :focus-visible { outline: 3px solid #7053c6; outline-offset: 5px; }
-    .jm-policy-navigation .jm-brand { display: inline-flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 650; letter-spacing: -.6px; }
+    .jm-policy-navigation .jm-brand { align-self: flex-start; padding-bottom: 14px; display: inline-flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 650; letter-spacing: -.6px; }
     .jm-policy-navigation img { display: block; object-fit: contain; }
     .jm-policy-navigation .jm-nav-icon { flex: none; width: 16px; height: 16px; margin-right: 1px; color: #3474d4; }
-    .jm-policy-navigation .jm-nav a[aria-current] { padding-inline: 10px; border: 1px solid #c3d8fa; border-radius: 10px; background: #e8f1ff; color: #2059ad; }
+    /* The link keeps its 44px hit area; the visible highlight is a centred 32px layer behind it. */
+    .jm-policy-navigation .jm-nav a[aria-current] { position: relative; isolation: isolate; padding-inline: 10px; color: #2059ad; }
+    .jm-policy-navigation .jm-nav a[aria-current]::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 50%; height: 32px; transform: translateY(-50%); box-sizing: border-box; border: 1px solid #d5dae2; border-radius: 7px; background: #f0f5fc; }
     .jm-policy-navigation .jm-nav a[aria-current] .jm-nav-icon { color: #2059ad; }
-    .jm-policy-navigation .jm-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 28px; font-size: 14px; font-weight: 550; min-width: 0; }
+    .jm-policy-navigation .jm-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 4px clamp(16px, 1.4vw, 28px); padding-top: 6px; border-top: 1px solid #e3e7ef; font-size: 14px; font-weight: 550; min-width: 0; }
     .jm-policy-navigation .jm-nav a { display: inline-flex; align-items: center; min-height: 44px; gap: 5px; }
     .jm-policy-navigation .jm-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-    .jm-policy-navigation .jm-language { position: relative; }
-    .jm-policy-navigation select { appearance: none; -webkit-appearance: none; min-height: 44px; max-width: 100%; padding: 8px 34px 8px 10px; border: 1px solid #dedbef; border-radius: 10px; background: white; color: #172f50; font: inherit; cursor: pointer; }
+    .jm-policy-navigation .jm-language { position: relative; z-index: 30; margin-left: auto; }
     .jm-policy-navigation .jm-language::after { content: ""; position: absolute; right: 14px; top: calc(50% - 4px); width: 7px; height: 7px; border-right: 1.5px solid #7053c6; border-bottom: 1.5px solid #7053c6; transform: rotate(45deg); pointer-events: none; }
+    /* Language picker (i18n/language-menu.js): borderless when closed, soft card when open. */
+    .jm-lang-button { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; max-width: 100%; padding: 8px 34px 8px 10px; border: 0; border-radius: 10px; background: transparent; color: #172f50; font: inherit; cursor: pointer; }
+    .jm-lang-button:focus-visible { outline: 2px solid #3474d4; outline-offset: 2px; }
+    .jm-lang-flag { flex: none; display: block; width: 21px; height: 14px; border-radius: 2px; overflow: hidden; box-shadow: 0 0 0 1px rgba(23, 47, 80, .12); }
+    .jm-lang-flag svg { display: block; width: 100%; height: 100%; }
+    .jm-lang-list { position: absolute; top: calc(100% + 6px); right: 0; box-sizing: border-box; min-width: 210px; max-width: calc(100vw - 32px); margin: 0; padding: 6px; list-style: none; border: 1px solid #d5dae2; border-radius: 12px; background: #f8fafd; box-shadow: 0 16px 36px -12px rgba(23, 47, 80, .22), 0 3px 8px rgba(23, 47, 80, .06); font-size: 14px; font-weight: 550; line-height: 1.4; }
+    .jm-lang-list[hidden] { display: none; }
+    .jm-lang-option { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #172f50; cursor: pointer; white-space: nowrap; }
+    .jm-lang-option + .jm-lang-option { margin-top: 0; } /* overrides the article li + li spacing */
+    .jm-lang-option:hover, .jm-lang-option.is-active { background: #eef2f8; }
+    .jm-lang-option[aria-selected="true"] { background: #e4ebf5; }
+    .jm-lang-option[aria-selected="true"]:hover, .jm-lang-option[aria-selected="true"].is-active { background: #dce5f2; }
+    .jm-lang-check { flex: none; width: 16px; height: 16px; margin-left: auto; color: #2059ad; visibility: hidden; }
+    .jm-lang-option[aria-selected="true"] .jm-lang-check { visibility: visible; }
+    .jm-language:has(.jm-lang-button[aria-expanded="true"])::after { top: calc(50% - 1px); transform: rotate(-135deg); }
     @media (max-width: 760px) { .jm-policy-navigation .jm-nav { gap: 4px 18px; font-size: 13px; } .jm-policy-navigation .jm-brand { font-size: 19px; } }
     @media print { .jm-policy-navigation .jm-nav { display: none; } }
   </style>
@@ -113,9 +130,10 @@
       </a>
       <nav class="jm-nav" data-i18n-aria-label="a11y.mainNav" aria-label="Main navigation">
         <a href="/" data-i18n-text="nav.home"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/></svg>Home</a>
-        <a href="/#features" data-i18n-text="nav.features"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>Features</a>
+        <a href="/#features" data-i18n-text="nav.features"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11 4.5Q11.8 11.2 18.5 12Q11.8 12.8 11 19.5Q10.2 12.8 3.5 12Q10.2 11.2 11 4.5z"/><circle cx="18.5" cy="5.5" r="1.5"/></svg>Features</a>
         <a href="/jm-authenticator/privacy/" data-legal-page="privacy" data-i18n-text="nav.privacy"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.2c2.2 1.5 4.6 2.3 7 2.5v5.6c0 4.6-2.9 8-7 9.5-4.1-1.5-7-4.9-7-9.5V5.7c2.4-.2 4.8-1 7-2.5z"/><path d="m9 12 2 2 4-4"/></svg>Privacy</a>
         <a href="/jm-authenticator/support/" aria-current="page" data-i18n-text="nav.support"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 14v-2a7.5 7.5 0 0 1 15 0v2"/><rect x="3.5" y="13" width="4" height="6.5" rx="1.5"/><rect x="16.5" y="13" width="4" height="6.5" rx="1.5"/><path d="M18.5 19.5c0 1.3-1.5 2-3.5 2h-2"/></svg>Support</a>
+        <a href="/jm-authenticator/guide/" data-i18n-text="nav.guide"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 7.5v12"/><path d="M3.5 5.5c3-.8 5.8-.3 8.5 2 2.7-2.3 5.5-2.8 8.5-2v13c-3-.8-5.8-.3-8.5 2-2.7-2.3-5.5-2.8-8.5-2z"/></svg>User Guide</a>
         <a href="/impressum/" data-legal-page="impressum" data-i18n-text="nav.impressum"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg>Impressum</a>
         <a href="/share-monitor/" data-i18n-text="nav.shareMonitor"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-6"/></svg>Share Monitor <span aria-hidden="true">↗</span></a>
         <div class="jm-language" hidden>
@@ -137,6 +155,7 @@
       <p class="eyebrow">Help &amp; contact</p>
       <h1>JM Authenticator Support</h1>
       <p class="intro">Welcome. This page helps you get started with JM Authenticator, keep your accounts safely backed up, move accounts between apps and personalize your account icons. If you need further help, our support team is happy to assist.</p>
+      <p class="guide-callout"><strong>Step-by-step help:</strong> the <a href="/jm-authenticator/guide/">JM Authenticator User Guide</a> shows how to add accounts, use codes, back up and restore, and import accounts.</p>
     </div>
     <div class="facts" aria-label="Support at a glance">
       <div class="fact"><strong>Email support</strong><p>Write to <a href="mailto:support@jegprofil.info">support@jegprofil.info</a> with questions about using JM Authenticator.</p></div>
@@ -170,11 +189,13 @@
         </section>
         <section id="getting-started" aria-labelledby="getting-started-title">
           <h2 id="getting-started-title">02. Getting started</h2>
+          <p>Step-by-step instructions: <a href="/jm-authenticator/guide/#add-account">User Guide — Add an account</a>.</p>
           <p>JM Authenticator generates time-based one-time passwords (TOTP), the six- or eight-digit verification codes that many websites and apps use for two-factor authentication.</p>
           <h3>Adding an account</h3>
           <ul>
             <li><strong>Scan a QR code</strong> — when a service shows a two-factor setup QR code, choose <em>Scan QR code</em> and point your camera at it. Scanning stays on your device.</li>
             <li><strong>Choose from Photos</strong> — select a screenshot or photo of a setup QR code.</li>
+            <li><strong>Choose from Files</strong> — select a saved QR code image (PNG, JPEG or HEIC, up to 8 MB).</li>
             <li><strong>Enter a setup key</strong> — if the service offers a text key instead, enter the service name, account name and key manually.</li>
           </ul>
           <p>Standard <code>otpauth</code> TOTP setup codes are supported. Counter-based (HOTP) codes are not supported.</p>
@@ -186,6 +207,7 @@
         </section>
         <section id="backups" aria-labelledby="backups-title">
           <h2 id="backups-title">03. Backup &amp; restore</h2>
+          <p>Step-by-step instructions: <a href="/jm-authenticator/guide/#backup">User Guide — Create a backup</a> and <a href="/jm-authenticator/guide/#restore">Restore a backup</a>.</p>
           <p>JM Authenticator does not provide a cloud backup. To protect your accounts against loss of your device, create encrypted backups in <em>Settings → Encrypted backups</em>.</p>
           <h3>Backup types</h3>
           <dl>
@@ -202,6 +224,7 @@
         </section>
         <section id="transfers" aria-labelledby="transfers-title">
           <h2 id="transfers-title">04. Import &amp; export</h2>
+          <p>Step-by-step instructions: <a href="/jm-authenticator/guide/#import">User Guide — Import accounts</a>.</p>
           <p>You can move accounts into and out of JM Authenticator in <em>Settings → Import &amp; Export Accounts</em>. All processing happens locally on your device. Importing only adds accounts you select; existing accounts and backups remain unchanged, and duplicates are skipped.</p>
           <h3>Importing</h3>
           <dl>
@@ -247,7 +270,7 @@
       </article>
     </div>
   </main>
-  <footer><div class="wrap footer-inner"><span>JM Authenticator · Support</span><a href="/jm-authenticator/privacy/">Privacy Policy</a><a href="/impressum/">Impressum</a><a class="back-top" href="#top">Back to top ↑</a></div></footer>
+  <footer><div class="wrap footer-inner"><span>JM Authenticator · Support</span><a href="/jm-authenticator/guide/">User Guide</a><a href="/jm-authenticator/privacy/">Privacy Policy</a><a href="/impressum/">Impressum</a><a class="back-top" href="#top">Back to top ↑</a></div></footer>
   <script type="module" src="/jm-authenticator/navigation.js"></script>
 </body>
 </html>

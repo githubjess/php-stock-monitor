@@ -20,12 +20,19 @@
 .jm-container { width: min(1184px, calc(100% - 96px)); margin-inline: auto; }
 .jm-skip { position: fixed; top: 10px; left: 16px; z-index: 5; padding: 10px 18px; background: white; border: 2px solid var(--jm-violet); transform: translateY(-160%); }
 .jm-skip:focus { transform: translateY(0); }
-.jm-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 25px; }
+/* Two-row header: branding on row 1, then a divider and the navigation on row 2 at every width. */
+.jm-header { display: flex; flex-direction: column; align-items: stretch; padding-block: 20px 6px; }
+.jm-header .jm-brand { align-self: flex-start; padding-bottom: 14px; }
 .jm-brand { display: inline-flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 650; letter-spacing: -.6px; flex-shrink: 0; }
 .jm-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 28px; font-size: 14px; font-weight: 550; }
 .jm-nav a { display: inline-flex; align-items: center; gap: 5px; min-height: 44px; }
+/* Header links tighten responsively so the logo and menu share one row on desktop. */
+.jm-header .jm-nav { justify-content: flex-start; gap: 4px clamp(16px, 1.4vw, 28px); padding-top: 6px; border-top: 1px solid #e3e7ef; }
+.jm-header .jm-language { margin-left: auto; }
 .jm-nav-icon { flex: none; width: 16px; height: 16px; margin-right: 1px; color: #3474d4; }
-.jm-header .jm-nav a[aria-current] { padding-inline: 10px; border: 1px solid #c3d8fa; border-radius: 10px; background: #e8f1ff; color: #2059ad; }
+/* The link keeps its 44px hit area; the visible highlight is a centred 32px layer behind it. */
+.jm-header .jm-nav a[aria-current] { position: relative; isolation: isolate; padding-inline: 10px; color: #2059ad; }
+.jm-header .jm-nav a[aria-current]::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 50%; height: 32px; transform: translateY(-50%); box-sizing: border-box; border: 1px solid #d5dae2; border-radius: 7px; background: #f0f5fc; }
 .jm-header .jm-nav a[aria-current] .jm-nav-icon { color: #2059ad; }
 .jm-hero { position: relative; isolation: isolate; }
 .jm-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 88% 35%, #f0edfc 0, transparent 48%), radial-gradient(ellipse at 8% 90%, #f0f7fe 0, transparent 46%); }
@@ -68,15 +75,14 @@
 .jm-footer .jm-nav-icon { width: 15px; height: 15px; }
 @media (max-width: 1050px) {
   .jm-container { width: calc(100% - 64px); }
-  .jm-header { flex-wrap: wrap; gap: 8px 24px; }
-  .jm-header .jm-nav { gap: 10px 22px; }
+  .jm-header .jm-nav { gap: 4px 22px; }
   .jm-hero-inner { gap: 32px; padding-block: 46px 58px; }
   .jm-feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .jm-footer-inner { flex-wrap: wrap; }
 }
 @media (max-width: 760px) {
   .jm-container { width: calc(100% - 40px); }
-  .jm-header { padding-block: 18px 14px; }
+  .jm-header { padding-block: 18px 6px; }
   .jm-brand { font-size: 19px; }
   .jm-header .jm-nav { gap: 4px 18px; font-size: 13px; }
   .jm-hero-inner { grid-template-columns: minmax(0, 1fr); gap: 52px; padding-block: 40px 45px; }
@@ -109,10 +115,22 @@
   .jm-feature:nth-child(7) { grid-column: 6 / span 2; }
 }
 .jm-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
-.jm-language { position: relative; }
-.jm-language select { appearance: none; -webkit-appearance: none; min-height: 44px; max-width: 100%; padding: 8px 34px 8px 10px; border: 1px solid #dedbef; border-radius: 10px; background: white; color: var(--jm-navy); font: inherit; cursor: pointer; }
+.jm-language { position: relative; z-index: 30; }
 .jm-language::after { content: ""; position: absolute; right: 14px; top: calc(50% - 4px); width: 7px; height: 7px; border-right: 1.5px solid var(--jm-violet); border-bottom: 1.5px solid var(--jm-violet); transform: rotate(45deg); pointer-events: none; }
-.jm-language select:focus-visible { border-color: var(--jm-violet); }
+/* Language picker (i18n/language-menu.js): borderless when closed, soft card when open. */
+.jm-lang-button { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; max-width: 100%; padding: 8px 34px 8px 10px; border: 0; border-radius: 10px; background: transparent; color: var(--jm-navy); font: inherit; cursor: pointer; }
+.jm-lang-button:focus-visible { outline: 2px solid #3474d4; outline-offset: 2px; }
+.jm-lang-flag { flex: none; display: block; width: 21px; height: 14px; border-radius: 2px; overflow: hidden; box-shadow: 0 0 0 1px rgba(23, 47, 80, .12); }
+.jm-lang-flag svg { display: block; width: 100%; height: 100%; }
+.jm-lang-list { position: absolute; top: calc(100% + 6px); right: 0; box-sizing: border-box; min-width: 210px; max-width: calc(100vw - 32px); margin: 0; padding: 6px; list-style: none; border: 1px solid #d5dae2; border-radius: 12px; background: #f8fafd; box-shadow: 0 16px 36px -12px rgba(23, 47, 80, .22), 0 3px 8px rgba(23, 47, 80, .06); font-size: 14px; font-weight: 550; line-height: 1.4; }
+.jm-lang-list[hidden] { display: none; }
+.jm-lang-option { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: var(--jm-navy); cursor: pointer; white-space: nowrap; }
+.jm-lang-option:hover, .jm-lang-option.is-active { background: #eef2f8; }
+.jm-lang-option[aria-selected="true"] { background: #e4ebf5; }
+.jm-lang-option[aria-selected="true"]:hover, .jm-lang-option[aria-selected="true"].is-active { background: #dce5f2; }
+.jm-lang-check { flex: none; width: 16px; height: 16px; margin-left: auto; color: #2059ad; visibility: hidden; }
+.jm-lang-option[aria-selected="true"] .jm-lang-check { visibility: visible; }
+.jm-language:has(.jm-lang-button[aria-expanded="true"])::after { top: calc(50% - 1px); transform: rotate(-135deg); }
 /* Longer translations wrap within the approved layout instead of widening it. */
 .jm-hero-copy, .jm-nav, .jm-feature { min-width: 0; }
 .jm-feature h3, .jm-feature p, .jm-tagline, .jm-preview figcaption { overflow-wrap: anywhere; }
