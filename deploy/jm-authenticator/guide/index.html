@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="JM Authenticator User Guide: add accounts, protect the app with App Lock and Face ID, and use verification codes.">
+  <meta name="description" content="JM Authenticator User Guide: add accounts, use verification codes, create and restore encrypted backups, and import accounts from Google Authenticator, 2FAS and Ente Auth.">
   <meta name="referrer" content="no-referrer">
   <title>User Guide | JM Authenticator</title>
   <style>
@@ -187,12 +187,12 @@
     <div class="hero">
       <p class="eyebrow">Step-by-step</p>
       <h1>JM Authenticator User Guide</h1>
-      <p class="intro">Step-by-step instructions for adding accounts, protecting JM Authenticator with App Lock and Face ID, and using verification codes.</p>
+      <p class="intro">Step-by-step instructions for adding accounts, using verification codes, backing up and restoring your accounts, and importing accounts from other authenticator apps.</p>
     </div>
     <div class="facts" aria-label="User Guide at a glance">
       <div class="fact"><strong>Add accounts</strong><p>Scan a QR code, choose an image or enter a setup key.</p></div>
-      <div class="fact"><strong>Security &amp; app lock</strong><p>Protect your codes with Face ID or your device passcode.</p></div>
-      <div class="fact"><strong>Use verification codes</strong><p>Reveal, copy and search your codes.</p></div>
+      <div class="fact"><strong>Back up &amp; restore</strong><p>Protect your accounts with password-encrypted backups.</p></div>
+      <div class="fact"><strong>Import from other apps</strong><p>Move accounts from Google Authenticator, 2FAS and Ente Auth.</p></div>
     </div>
     <div class="layout">
       <nav class="toc" aria-label="User Guide contents">
@@ -201,6 +201,10 @@
           <li><a href="#add-account"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/></svg>01 · Home screen &amp; adding accounts</a></li>
           <li><a href="#security"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.2c2.2 1.5 4.6 2.3 7 2.5v5.6c0 4.6-2.9 8-7 9.5-4.1-1.5-7-4.9-7-9.5V5.7c2.4-.2 4.8-1 7-2.5z"/><path d="m9 12 2 2 4-4"/></svg>02 · Security &amp; app lock</a></li>
           <li><a href="#codes"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 8.7-8.7"/><path d="m16 7 2.5 2.5"/><path d="m13.5 9.5 2 2"/></svg>03 · Use verification codes</a></li>
+          <li><a href="#backup"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 19H6.5a4 4 0 0 1-.4-7.98 6 6 0 0 1 11.6-1.5A4.5 4.5 0 0 1 17.5 19H16"/><path d="M12 12v8"/><path d="m9 15 3-3 3 3"/></svg>04 · Create a backup</a></li>
+          <li><a href="#restore"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 19H6.5a4 4 0 0 1-.4-7.98 6 6 0 0 1 11.6-1.5A4.5 4.5 0 0 1 17.5 19H16"/><path d="M12 12v8"/><path d="m9 17 3 3 3-3"/></svg>05 · Restore a backup</a></li>
+          <li><a href="#import"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M12 10v7"/><path d="m9 14 3 3 3-3"/></svg>06 · Import accounts</a></li>
+          <li><a href="#help"><svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .8-1 1.5v.6"/><path d="M12 17.2h.01"/></svg>07 · Need more help?</a></li>
         </ol>
       </nav>
       <article id="guide" aria-label="JM Authenticator user guide" tabindex="-1">
@@ -509,6 +513,136 @@
           </div>
           <p>If a service rejects valid-looking codes, check that your device’s date, time and time zone are set automatically.</p>
           <p class="back-link"><a href="#chapter-03-overview">↑ Back to chapter overview</a></p>
+        </section>
+        <section id="backup" aria-labelledby="backup-title">
+          <h2 id="backup-title">04. Create an encrypted backup</h2>
+          <p>JM Authenticator does not provide a cloud backup. Create encrypted backups so that you can recover your accounts if your device is lost or replaced.</p>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Open <em>Settings → Encrypted backups</em> and tap <em>Back Up All Accounts</em>.</li>
+              <li>Under <em>Choose your backup type</em>, select:
+                <ul>
+                  <li><strong>External backup (Recommended)</strong> — saves an encrypted file to a location you choose, such as Files or iCloud Drive.</li>
+                  <li><strong>Internal backup</strong> — saves the backup privately inside the app on this iPhone. It does not protect against loss of the device and is removed when the app is deleted.</li>
+                  <li><strong>Both</strong> — creates an internal copy and an external copy.</li>
+                </ul>
+              </li>
+              <li>Keep the suggested <em>Backup filename</em> or enter your own. The <code>.jmbackup</code> extension is added automatically.</li>
+              <li>Enter a <em>Backup password</em> of 12 to 1024 characters and enter it again in <em>Confirm backup password</em>.</li>
+              <li>Tap <em>Create encrypted backup</em>.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="05-backup-type.png" role="img" aria-label="Screenshot placeholder: Choose your backup type">
+                <span>Screenshot placeholder</span><strong>Choose your backup type</strong><code>05-backup-type.png</code>
+              </div>
+              <figcaption>Choose where your encrypted backup is saved.</figcaption>
+            </figure>
+          </div>
+          <h3>Saving an external backup</h3>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Read the <em>Save your external backup</em> guidance and continue.</li>
+              <li>In the window that opens, select a safe folder, then tap <em>Save</em>.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="06-save-external-backup.png" role="img" aria-label="Screenshot placeholder: Save your external backup guidance">
+                <span>Screenshot placeholder</span><strong>Save your external backup</strong><code>06-save-external-backup.png</code>
+              </div>
+              <figcaption>Choose a safe location for the backup file.</figcaption>
+            </figure>
+          </div>
+          <p class="note"><strong>Keep your backup file and its password safe. Backup passwords are not saved by the app, and a forgotten backup password cannot be recovered.</strong></p>
+        </section>
+        <section id="restore" aria-labelledby="restore-title">
+          <h2 id="restore-title">05. Restore a backup</h2>
+          <p>Restoring adds accounts from a JM Authenticator encrypted backup. Existing accounts are kept, and exact duplicates are skipped.</p>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Open <em>Settings → Encrypted backups</em>.</li>
+              <li>Select a backup in the backup history and tap <em>Restore selected backup</em>. To use a backup file instead, tap <em>Restore from backup file</em>, then <em>Select backup file</em>.</li>
+              <li>Enter the backup password and tap <em>Continue</em>.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="07-encrypted-backups.png" role="img" aria-label="Screenshot placeholder: Encrypted backups screen with backup history">
+                <span>Screenshot placeholder</span><strong>Encrypted backups</strong><code>07-encrypted-backups.png</code>
+              </div>
+              <figcaption>Backup history and restore options.</figcaption>
+            </figure>
+          </div>
+          <div class="step-block">
+            <ol class="steps" start="4">
+              <li>In <em>Restore encrypted backup?</em>, check <em>Accounts in backup</em>, <em>Already enrolled</em> and <em>New accounts to add</em>, then tap <em>Restore</em>.</li>
+              <li><em>Restoration completed</em> shows how many accounts were added and how many duplicates were skipped. Tap <em>Done</em>.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="08-restore-confirm.png" role="img" aria-label="Screenshot placeholder: Restore encrypted backup confirmation">
+                <span>Screenshot placeholder</span><strong>Restore encrypted backup?</strong><code>08-restore-confirm.png</code>
+              </div>
+              <figcaption>Nothing is imported until you confirm.</figcaption>
+            </figure>
+          </div>
+          <p>If the password is incorrect or the file is damaged, no accounts are imported.</p>
+        </section>
+        <section id="import" aria-labelledby="import-title">
+          <h2 id="import-title">06. Import accounts</h2>
+          <p>Open <em>Settings → Import &amp; Export Accounts</em> and choose a source under <em>Import into JM</em>. Imports are processed on your device. Only the accounts you select are added; existing accounts and backups remain unchanged, and duplicates are skipped.</p>
+          <figure class="shot shot-wide">
+            <div class="shot-placeholder" data-screenshot="09-import-export.png" role="img" aria-label="Screenshot placeholder: Import and Export Accounts screen">
+              <span>Screenshot placeholder</span><strong>Import &amp; Export Accounts</strong><code>09-import-export.png</code>
+            </div>
+            <figcaption>Choose the app you are importing from.</figcaption>
+          </figure>
+          <h3 id="import-google">Google Authenticator</h3>
+          <div class="step-block">
+            <ol class="steps">
+              <li>In Google Authenticator, use <em>Transfer accounts → Export accounts</em> to display the export QR codes.</li>
+              <li>In JM Authenticator, choose <em>Google Authenticator</em>, then <em>Scan a QR code</em> or <em>Choose images</em> of the QR codes.</li>
+              <li>If the export has several QR codes, add every part. The progress shows how many parts have been collected.</li>
+              <li>Review the accounts and import them.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="10-import-google.png" role="img" aria-label="Screenshot placeholder: Google Authenticator import screen">
+                <span>Screenshot placeholder</span><strong>Google Authenticator</strong><code>10-import-google.png</code>
+              </div>
+              <figcaption>Scan or choose every part of the export.</figcaption>
+            </figure>
+          </div>
+          <h3 id="import-2fas">2FAS Authenticator</h3>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Choose <em>2FAS Authenticator</em>, then <em>Choose .2fas file</em>.</li>
+              <li>If the backup is protected, enter the <em>2FAS backup password</em> and tap <em>Unlock backup</em>.</li>
+              <li>Under <em>Choose accounts to import</em>, select the accounts and tap the import button, for example <em>Import 2 accounts</em>.</li>
+              <li>In <em>Import these accounts?</em>, tap <em>Import selected accounts</em>.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="11-import-2fas.png" role="img" aria-label="Screenshot placeholder: Choose accounts to import from 2FAS">
+                <span>Screenshot placeholder</span><strong>Choose accounts to import</strong><code>11-import-2fas.png</code>
+              </div>
+              <figcaption>Select only the accounts you want to add.</figcaption>
+            </figure>
+          </div>
+          <h3 id="import-ente">Ente Auth</h3>
+          <div class="step-block">
+            <ol class="steps">
+              <li>Export your accounts from Ente Auth in the <strong>Encrypted</strong> (recommended) or <strong>Plain text</strong> format. Plain HTML exports are not supported.</li>
+              <li>Choose <em>Ente Auth</em>. Expand <em>Formats and privacy</em> to see the supported formats, then tap <em>Choose Ente export</em>. For an encrypted export, enter the <em>Ente export password</em>.</li>
+              <li>Under <em>Choose accounts to import</em>, select the accounts and import them.</li>
+            </ol>
+            <figure class="shot">
+              <div class="shot-placeholder" data-screenshot="12-import-ente.png" role="img" aria-label="Screenshot placeholder: Import from Ente Auth">
+                <span>Screenshot placeholder</span><strong>Import from Ente Auth</strong><code>12-import-ente.png</code>
+              </div>
+              <figcaption>Supported Ente Auth export formats.</figcaption>
+            </figure>
+          </div>
+          <p>Only standard TOTP accounts can be imported; HOTP, Steam and other unsupported types are skipped. Because other apps can change their export formats, not every version of their exports may be supported.</p>
+          <p class="note"><strong>QR screenshots and export files contain your authentication secrets.</strong> After you have checked the import, delete them, including from <em>Recently Deleted</em> in Photos.</p>
+        </section>
+        <section id="help" aria-labelledby="help-title">
+          <h2 id="help-title">07. Need more help?</h2>
+          <p>Visit <a href="/jm-authenticator/support/">JM Authenticator Support</a> or email <a href="mailto:support@jegprofil.info">support@jegprofil.info</a>. Never send secret keys, codes, backup files, backup passwords or QR codes.</p>
+          <p>To learn how your data is handled, read the <a href="/jm-authenticator/privacy/">JM Authenticator Privacy Policy</a>.</p>
         </section>
       </article>
     </div>

@@ -71,7 +71,7 @@ No PHP or hosting-configuration change is required. The page has no placeholders
 
 Intended address: `https://jegprofil.info/jm-authenticator/guide/`.
 
-**Status: published (Chapters 01–03).** The draft notice and `noindex` were removed on 2 November 2026. Unfinished Chapters 04–07 (with their screenshot placeholders) are kept outside the published page in `web/guide-drafts/chapters-04-07.html`, which is not built or uploaded; move a chapter back into the page only when it is complete.
+**Status: published with all seven chapters (2 November 2026).** Chapters 01–03 are complete. Chapters 04–07 were restored from `web/guide-drafts/chapters-04-07.html` and still contain draft text and dashed screenshot placeholders; that holding file is now a duplicate of their published source. The draft notice and `noindex` remain removed.
 
 The guide follows the same workflow and conventions as the Support page:
 
