@@ -344,6 +344,13 @@
         <section id="security" aria-labelledby="security-title">
           <h2 id="security-title">02. Security &amp; app lock</h2>
           <p>JM Authenticator can require Face ID or your device passcode before it shows your accounts. All security options are on one screen: <em>Home → Settings (gear icon) → Security &amp; app lock</em>.</p>
+          <p>Four settings work together:</p>
+          <ul>
+            <li><strong>App Lock</strong> turns protection on: JM Authenticator requires authentication before it shows your accounts.</li>
+            <li><strong>Face ID</strong> (biometric authentication) is how you authenticate. You can also use your device passcode.</li>
+            <li><strong>Lock when returning to the app</strong> asks for authentication again after you leave JM Authenticator.</li>
+            <li><strong>Auto-lock after inactivity</strong> asks for authentication again after a period of inactivity, even when the app remains open.</li>
+          </ul>
           <nav class="chapter-nav" id="chapter-02-overview" aria-label="Chapter 02 sections">
             <h3>Content</h3>
             <ol>
@@ -388,13 +395,8 @@
               <p>The authentication itself is performed by iOS. You can also unlock with your device passcode — for example, if Face ID does not recognise you or becomes unavailable. There is no bypass or remote reset, so keep your device passcode available.</p>
               <p class="back-link"><a href="#chapter-02-overview">↑ Back to chapter overview</a></p>
               <h3 id="auto-lock">Auto-lock after inactivity</h3>
-              <p><em>Require authentication after a period of inactivity, even when the app remains open.</em> Choose when JM Authenticator locks itself:</p>
-              <ul>
-                <li><strong>Immediately</strong> — locks as soon as you leave the app.</li>
-                <li><strong>After 30 seconds</strong>, <strong>After 1 minute (recommended)</strong>, <strong>After 5 minutes</strong> or <strong>After 10 minutes</strong> — lock after that time without interaction, also while the app stays open.</li>
-                <li><strong>Never</strong> — no automatic lock after inactivity.</li>
-              </ul>
-              <p>Auto-lock applies only while App Lock is on. If JM Authenticator was installed before this setting existed, it may show <em>Use existing lock behavior</em>, as in the screenshot, until you choose one of the options.</p>
+              <p><em>Require authentication after a period of inactivity, even when the app remains open.</em> Below this description is a drop-down where you choose how JM Authenticator handles inactivity. In the screenshot it is set to <em>Use existing lock behavior</em>.</p>
+              <p>Unlike <em>Lock when returning to the app</em>, which applies when you leave JM Authenticator and come back, auto-lock also applies while the app stays open. Both only ask for authentication while App Lock is on.</p>
               <p class="back-link"><a href="#chapter-02-overview">↑ Back to chapter overview</a></p>
               <h3 id="lock-on-return">Lock when returning to the app</h3>
               <p><em>Require authentication after leaving JM Authenticator.</em> When this and App Lock are on, the app asks for Face ID or your device passcode each time you come back to it from another app or the Home Screen.</p>
