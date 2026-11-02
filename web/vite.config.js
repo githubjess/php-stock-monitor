@@ -64,6 +64,12 @@ export default defineConfig({
               "/jm-authenticator/privacy/index.html",
             );
           }
+          if (req.url?.split("?")[0] === "/jm-authenticator/support/") {
+            req.url = req.url.replace(
+              "/jm-authenticator/support/",
+              "/jm-authenticator/support/index.html",
+            );
+          }
           next();
         });
       },

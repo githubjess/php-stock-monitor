@@ -1098,3 +1098,90 @@ td {
     grid-template-columns: 1fr;
   }
 }
+
+/* Website navigation around the Share Monitor app (share-monitor/index.html). */
+.siteNav {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 16px 16px 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 8px;
+  color: #172f50;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.siteNav + #root > .container {
+  margin-top: 16px;
+}
+
+.siteNavIcon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: #3474d4;
+}
+
+.siteNavHome {
+  display: inline-flex;
+  white-space: nowrap;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 12px;
+  margin-left: -12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.siteNavHome:hover {
+  border-color: #c3d8fa;
+  background: #e8f1ff;
+  color: #2059ad;
+}
+
+.siteNavHome:hover .siteNavIcon {
+  color: #2059ad;
+}
+
+.siteNavTitle {
+  display: inline-flex;
+  white-space: nowrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.siteFooter {
+  max-width: 980px;
+  margin: -16px auto 0;
+  padding: 0 16px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  font-size: 13px;
+}
+
+.siteFooter a {
+  color: #536178;
+  text-decoration: none;
+}
+
+.siteFooter a:hover {
+  color: #2059ad;
+  text-decoration: underline;
+}
+
+.siteNavHome:focus-visible,
+.siteFooter a:focus-visible {
+  outline: 3px solid #7053c6;
+  outline-offset: 3px;
+}
+
+.siteFooter a:focus-visible {
+  border-radius: 4px;
+}

@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JM Authenticator Support: contact support, add accounts, scan QR codes, encrypted backups and restore, import and export, Icon Studio, app lock and privacy.">
+  <meta name="referrer" content="no-referrer">
+  <title>Support | JM Authenticator</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f7f6;
+      --surface: #fff;
+      --ink: #172d38;
+      --muted: #4c616b;
+      --accent: #245e67;
+      --line: #d7e2df;
+      --wash: #eaf2ef;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 1.5rem; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: 1.75;
+      overflow-wrap: anywhere;
+    }
+    a { color: var(--accent); text-underline-offset: .2em; }
+    a:hover { text-decoration-thickness: .15em; }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; border-radius: 2px; }
+    .skip-link { position: absolute; top: -8rem; left: 1rem; padding: .7rem 1rem; background: white; z-index: 2; }
+    .skip-link:focus { top: 1rem; }
+    .wrap { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+    .hero { padding-block: clamp(2.5rem, 7vw, 5rem) 2rem; }
+    .eyebrow { margin: 0 0 .7rem; color: var(--accent); text-transform: uppercase; font-size: .75rem; font-weight: 750; letter-spacing: .16em; }
+    h1 { margin: 0; font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.1; letter-spacing: -.055em; }
+    .intro { max-width: 44rem; margin: 1.4rem 0; font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--muted); }
+    .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-block: 1.8rem 3.5rem; }
+    .fact { padding: 1.3rem; background: var(--surface); border: 1px solid var(--line); border-radius: .7rem; }
+    .fact strong { display: block; font-size: 1rem; margin-bottom: .3rem; }
+    .fact p { color: var(--muted); margin: 0; font-size: .92rem; }
+    .layout { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; padding-bottom: 4rem; }
+    .toc { position: sticky; top: 1.5rem; padding-block: .4rem; }
+    .toc h2 { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; margin: 0 0 1rem; }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc a { display: block; padding: .4rem 0; font-size: .9rem; text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    article { min-width: 0; }
+    article section { padding-block: 1.8rem; border-top: 1px solid var(--line); }
+    article section:first-child { padding-top: 0; border-top: 0; }
+    h2 { font-size: 1.45rem; line-height: 1.35; letter-spacing: -.025em; margin: 0 0 1rem; }
+    h3 { font-size: 1.05rem; margin: 1.5rem 0 .5rem; }
+    p { margin: 0 0 1rem; }
+    p:last-child { margin-bottom: 0; }
+    ul { padding-left: 1.3rem; }
+    li + li { margin-top: .45rem; }
+    dl { margin: 1.2rem 0; }
+    dt { font-weight: 650; margin-top: 1rem; }
+    dd { margin: .25rem 0 0; color: var(--muted); }
+    .note { background: var(--wash); padding: 1.2rem; border-radius: .5rem; }
+    .contact-email { font-size: 1.15rem; font-weight: 650; }
+    footer { border-top: 1px solid var(--line); padding-block: 1.6rem; color: var(--muted); font-size: .85rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    @media (max-width: 760px) {
+      .wrap { width: calc(100% - 2rem); }
+      .facts { grid-template-columns: 1fr; gap: .65rem; margin-bottom: 2rem; }
+      .fact { padding: 1rem; }
+      .layout { grid-template-columns: 1fr; gap: 2rem; }
+      .toc { position: static; border-block: 1px solid var(--line); padding-block: 1.2rem; }
+      .toc ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem 1rem; }
+    }
+    @media (max-width: 380px) { .toc ol { grid-template-columns: 1fr; } }
+    @media print {
+      body { background: white; color: black; font-size: 11pt; }
+      .wrap { width: 100%; }
+      .toc, .skip-link, .back-top { display: none; }
+      .layout { display: block; }
+      .hero { padding-top: 1.5rem; }
+      .facts { margin-bottom: 2rem; }
+      h2, h3 { break-after: avoid; }
+      a { color: inherit; }
+    }
+
+    /* Shared website navigation, identical to the Privacy Policy page. */
+    .jm-policy-navigation { width: min(1184px, calc(100% - 48px)); margin-inline: auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; padding-block: 25px; color: #172f50; line-height: 1.6; }
+    .jm-policy-navigation a { color: inherit; text-decoration: none; }
+    .jm-policy-navigation a:hover { color: #7053c6; }
+    .jm-policy-navigation :focus-visible { outline: 3px solid #7053c6; outline-offset: 5px; }
+    .jm-policy-navigation .jm-brand { display: inline-flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 650; letter-spacing: -.6px; }
+    .jm-policy-navigation img { display: block; object-fit: contain; }
+    .jm-policy-navigation .jm-nav-icon { flex: none; width: 16px; height: 16px; margin-right: 1px; color: #3474d4; }
+    .jm-policy-navigation .jm-nav a[aria-current] { padding-inline: 10px; border: 1px solid #c3d8fa; border-radius: 10px; background: #e8f1ff; color: #2059ad; }
+    .jm-policy-navigation .jm-nav a[aria-current] .jm-nav-icon { color: #2059ad; }
+    .jm-policy-navigation .jm-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 28px; font-size: 14px; font-weight: 550; min-width: 0; }
+    .jm-policy-navigation .jm-nav a { display: inline-flex; align-items: center; min-height: 44px; gap: 5px; }
+    .jm-policy-navigation .jm-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .jm-policy-navigation .jm-language { position: relative; }
+    .jm-policy-navigation select { appearance: none; -webkit-appearance: none; min-height: 44px; max-width: 100%; padding: 8px 34px 8px 10px; border: 1px solid #dedbef; border-radius: 10px; background: white; color: #172f50; font: inherit; cursor: pointer; }
+    .jm-policy-navigation .jm-language::after { content: ""; position: absolute; right: 14px; top: calc(50% - 4px); width: 7px; height: 7px; border-right: 1.5px solid #7053c6; border-bottom: 1.5px solid #7053c6; transform: rotate(45deg); pointer-events: none; }
+    @media (max-width: 760px) { .jm-policy-navigation .jm-nav { gap: 4px 18px; font-size: 13px; } .jm-policy-navigation .jm-brand { font-size: 19px; } }
+    @media print { .jm-policy-navigation .jm-nav { display: none; } }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#support">Skip to support content</a>
+  <header class="jm-header jm-container jm-policy-navigation">
+      <a data-i18n-aria-label="a11y.home" class="jm-brand" href="/" aria-label="JM Authenticator home">
+        <img src="/jm-authenticator/branding/jm-shield.png" alt="" width="52" height="52" />
+        <span data-i18n="common.product">JM Authenticator</span>
+      </a>
+      <nav class="jm-nav" data-i18n-aria-label="a11y.mainNav" aria-label="Main navigation">
+        <a href="/" data-i18n-text="nav.home"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/></svg>Home</a>
+        <a href="/#features" data-i18n-text="nav.features"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>Features</a>
+        <a href="/jm-authenticator/privacy/" data-legal-page="privacy" data-i18n-text="nav.privacy"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.2c2.2 1.5 4.6 2.3 7 2.5v5.6c0 4.6-2.9 8-7 9.5-4.1-1.5-7-4.9-7-9.5V5.7c2.4-.2 4.8-1 7-2.5z"/><path d="m9 12 2 2 4-4"/></svg>Privacy</a>
+        <a href="/jm-authenticator/support/" aria-current="page" data-i18n-text="nav.support"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 14v-2a7.5 7.5 0 0 1 15 0v2"/><rect x="3.5" y="13" width="4" height="6.5" rx="1.5"/><rect x="16.5" y="13" width="4" height="6.5" rx="1.5"/><path d="M18.5 19.5c0 1.3-1.5 2-3.5 2h-2"/></svg>Support</a>
+        <a href="/impressum/" data-legal-page="impressum" data-i18n-text="nav.impressum"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg>Impressum</a>
+        <a href="/share-monitor/" data-i18n-text="nav.shareMonitor"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-6"/></svg>Share Monitor <span aria-hidden="true">↗</span></a>
+        <div class="jm-language" hidden>
+          <label class="jm-sr-only" for="jm-language" data-i18n="a11y.language">Website language</label>
+          <select id="jm-language" data-i18n-aria-label="a11y.language" aria-label="Website language">
+            <option value="en" lang="en">🇬🇧 English</option>
+            <option value="de" lang="de">🇩🇪 Deutsch</option>
+            <option value="es" lang="es">🇪🇸 Español</option>
+            <option value="fr" lang="fr">🇫🇷 Français</option>
+            <option value="vi" lang="vi">🇻🇳 Tiếng Việt</option>
+            <option value="zh-Hans" lang="zh-Hans">🇨🇳 简体中文</option>
+            <option value="zh-Hant" lang="zh-Hant">🇹🇼 繁體中文</option>
+          </select>
+        </div>
+      </nav>
+    </header>
+  <main class="wrap">
+    <div class="hero">
+      <p class="eyebrow">Help &amp; contact</p>
+      <h1>JM Authenticator Support</h1>
+      <p class="intro">Welcome. This page helps you get started with JM Authenticator, keep your accounts safely backed up, move accounts between apps and personalize your account icons. If you need further help, our support team is happy to assist.</p>
+    </div>
+    <div class="facts" aria-label="Support at a glance">
+      <div class="fact"><strong>Email support</strong><p>Write to <a href="mailto:support@jegprofil.info">support@jegprofil.info</a> with questions about using JM Authenticator.</p></div>
+      <div class="fact"><strong>Works offline</strong><p>Authentication codes are generated on your device. No JM account, registration or network connection is required.</p></div>
+      <div class="fact"><strong>Never share secrets</strong><p>Support will never ask for your secret keys, codes, backup passwords or account QR codes.</p></div>
+    </div>
+    <div class="layout">
+      <nav class="toc" aria-label="Support contents">
+        <h2>On this page</h2>
+        <ol>
+          <li><a href="#contact">01 · Contact support</a></li>
+          <li><a href="#getting-started">02 · Getting started</a></li>
+          <li><a href="#backups">03 · Backup &amp; restore</a></li>
+          <li><a href="#transfers">04 · Import &amp; export</a></li>
+          <li><a href="#icon-studio">05 · Icon Studio</a></li>
+          <li><a href="#security">06 · Security &amp; privacy</a></li>
+        </ol>
+      </nav>
+      <article id="support" aria-label="JM Authenticator support" tabindex="-1">
+        <section id="contact" aria-labelledby="contact-title">
+          <h2 id="contact-title">01. Contact support</h2>
+          <p>For questions, problems or feedback about JM Authenticator, email us at:</p>
+          <p class="contact-email"><a href="mailto:support@jegprofil.info">support@jegprofil.info</a></p>
+          <p>To help us assist you, please include:</p>
+          <ul>
+            <li>your device model, such as iPhone or iPad, and its iOS or iPadOS version;</li>
+            <li>the JM Authenticator version, shown in Settings;</li>
+            <li>a short description of the problem and the steps that lead to it.</li>
+          </ul>
+          <p class="note"><strong>Never send authentication secrets, setup keys, verification codes, backup files, backup passwords, recovery codes or QR codes that contain account credentials.</strong> We do not need them to help you, and JM Authenticator cannot recover a forgotten backup password.</p>
+        </section>
+        <section id="getting-started" aria-labelledby="getting-started-title">
+          <h2 id="getting-started-title">02. Getting started</h2>
+          <p>JM Authenticator generates time-based one-time passwords (TOTP), the six- or eight-digit verification codes that many websites and apps use for two-factor authentication.</p>
+          <h3>Adding an account</h3>
+          <ul>
+            <li><strong>Scan a QR code</strong> — when a service shows a two-factor setup QR code, choose <em>Scan QR code</em> and point your camera at it. Scanning stays on your device.</li>
+            <li><strong>Choose from Photos</strong> — select a screenshot or photo of a setup QR code.</li>
+            <li><strong>Enter a setup key</strong> — if the service offers a text key instead, enter the service name, account name and key manually.</li>
+          </ul>
+          <p>Standard <code>otpauth</code> TOTP setup codes are supported. Counter-based (HOTP) codes are not supported.</p>
+          <h3>Using verification codes</h3>
+          <p>Each code is valid for a short period, usually 30 seconds, and a countdown shows when the next code appears. Copy the code, then paste it into the service that asks for it. A copied code is cleared from the clipboard within 30 seconds or when the code expires.</p>
+          <h3>If a code is rejected</h3>
+          <p>Codes are calculated from your device clock. If a service rejects valid-looking codes, check that your device’s date, time and time zone are set automatically and are correct.</p>
+          <p>Keep each service’s own recovery codes in a safe place, separately from JM Authenticator.</p>
+        </section>
+        <section id="backups" aria-labelledby="backups-title">
+          <h2 id="backups-title">03. Backup &amp; restore</h2>
+          <p>JM Authenticator does not provide a cloud backup. To protect your accounts against loss of your device, create encrypted backups in <em>Settings → Encrypted backups</em>.</p>
+          <h3>Backup types</h3>
+          <dl>
+            <dt>External backup (recommended)</dt><dd>Saves an encrypted <code>.jmbackup</code> file to a location you choose, such as a folder in Files or iCloud Drive. External backups are easy to transfer and restore on another device.</dd>
+            <dt>Internal backup</dt><dd>Saves the encrypted backup privately inside JM Authenticator on this device. It is intended for local recovery, cannot protect you against loss of the device, and is removed when the app is deleted.</dd>
+            <dt>Both</dt><dd>Creates an internal copy and lets you save an external copy at the same time.</dd>
+          </dl>
+          <h3>Backup passwords</h3>
+          <p>Every backup is protected by a password of at least 12 characters that you choose. Use a long, unique password. You need the same password to restore your accounts later.</p>
+          <p class="note"><strong>Keep your backup file and its password safe. Backup passwords are not saved by the app, and a forgotten backup password cannot be recovered</strong> — not by JM Authenticator and not by support.</p>
+          <h3>Restoring a backup</h3>
+          <p>Select a backup from the backup history or choose a backup file, then enter its password. Before anything is imported, the app shows how many accounts are in the backup and how many are new. Restoring adds accounts that are not yet in the app; existing accounts are kept, and exact duplicates are skipped.</p>
+          <p>Before deleting the app or changing devices, save an external backup and confirm that you still know its password.</p>
+        </section>
+        <section id="transfers" aria-labelledby="transfers-title">
+          <h2 id="transfers-title">04. Import &amp; export</h2>
+          <p>You can move accounts into and out of JM Authenticator in <em>Settings → Import &amp; Export Accounts</em>. All processing happens locally on your device. Importing only adds accounts you select; existing accounts and backups remain unchanged, and duplicates are skipped.</p>
+          <h3>Importing</h3>
+          <dl>
+            <dt>Google Authenticator</dt><dd>In Google Authenticator, use <em>Transfer accounts → Export accounts</em>, then scan every QR code shown, or select screenshots of them. Google Authenticator migration formats version 1 and 2 are supported.</dd>
+            <dt>2FAS Authenticator</dt><dd>Choose a <code>.2fas</code> backup file and enter its password if it is protected. 2FAS backup schema versions 3 and 4 are supported.</dd>
+            <dt>Ente Auth</dt><dd>Choose an Ente Auth export in encrypted (recommended) or plain-text format. Plain HTML exports are not supported.</dd>
+          </dl>
+          <p>Only standard TOTP accounts can be imported. HOTP, Steam and other unsupported account types are skipped, and the app explains which entries cannot be imported. Because other apps can change their export formats, not every version of their exports may be supported.</p>
+          <p>QR screenshots contain your authentication secrets. After you have verified the import, delete such screenshots from Photos, including <em>Recently Deleted</em>.</p>
+          <h3>Exporting</h3>
+          <ul>
+            <li><strong>Export as QR codes</strong> — shows Google Authenticator–compatible transfer QR codes after you confirm with Face ID, Touch ID or your device passcode. Only 30-second TOTP accounts with 6 or 8 digits can be exported this way, and JM labels and icons are not transferred. Whether another app accepts these codes depends on that app.</li>
+            <li><strong>Export to encrypted file</strong> — saves the selected accounts to a password-protected file that you can later restore in JM Authenticator.</li>
+          </ul>
+          <p>Anyone who scans exported QR codes may gain access to those accounts. Treat them as sensitive credentials.</p>
+        </section>
+        <section id="icon-studio" aria-labelledby="icon-studio-title">
+          <h2 id="icon-studio-title">05. Icon Studio</h2>
+          <p>Icon Studio lets you give each account a recognizable icon. Open an account’s edit screen and choose <em>Change Icon</em>. A live preview shows how the icon will appear.</p>
+          <h3>Built-in icons</h3>
+          <p>Choose from a library of symbols and service logos, and select a background colour from the preset colours or a custom colour adjusted by hue, saturation and brightness. You can restore the default icon at any time.</p>
+          <h3>Personal images</h3>
+          <p>You can also use your own picture from the Photo Library, the camera or Files. Images up to 8 MB and 24 megapixels are supported.</p>
+          <ul>
+            <li><strong>Crop</strong> — pinch to zoom, drag to position and rotate the image.</li>
+            <li><strong>Customize</strong> — adjust size and alignment, select the image background with an adjustable tolerance, and change its colour or make it transparent. You can undo changes or restore the original image.</li>
+          </ul>
+          <p>Processed icons are stored securely with your accounts and included in encrypted JM backups. Your original photos are not changed or deleted.</p>
+        </section>
+        <section id="security" aria-labelledby="security-title">
+          <h2 id="security-title">06. Security &amp; privacy</h2>
+          <p>Security options are in <em>Settings → Security &amp; app lock</em>.</p>
+          <dl>
+            <dt>App Lock</dt><dd>Requires Face ID, Touch ID or your device passcode before your accounts are shown. Authentication is performed by iOS; JM Authenticator does not access or store biometric data.</dd>
+            <dt>Lock when returning to the app</dt><dd>Requires authentication again after you leave JM Authenticator.</dd>
+            <dt>Auto-lock after inactivity</dt><dd>Locks the app after a period of inactivity that you choose, even while it remains open.</dd>
+            <dt>Hide authentication codes by default</dt><dd>Keeps codes hidden until you tap to reveal them. Countdown timers remain visible.</dd>
+          </dl>
+          <p>When the app moves to the background, its content is covered so that your accounts and codes are not visible in the app switcher.</p>
+          <p>If Face ID or Touch ID changes or becomes unavailable, use your device passcode. There is no bypass or remote reset, so keep your device passcode and an external backup available.</p>
+          <p>JM Authenticator contains no analytics, advertising or tracking, and it does not send your accounts or codes to the developer. For full details, read the <a href="/jm-authenticator/privacy/">JM Authenticator Privacy Policy</a>.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+  <footer><div class="wrap footer-inner"><span>JM Authenticator · Support</span><a href="/jm-authenticator/privacy/">Privacy Policy</a><a href="/impressum/">Impressum</a><a class="back-top" href="#top">Back to top ↑</a></div></footer>
+  <script type="module" src="/jm-authenticator/navigation.js"></script>
+</body>
+</html>
