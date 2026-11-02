@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Website privacy notice for jegprofil.info: hosting, server logs, contact form, Share Monitor, browser storage and your GDPR rights.">
+  <meta name="referrer" content="no-referrer">
+  <title>Website Privacy Notice | jegprofil.info</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f7f6;
+      --surface: #fff;
+      --ink: #172d38;
+      --muted: #4c616b;
+      --accent: #245e67;
+      --line: #d7e2df;
+      --wash: #eaf2ef;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 1.5rem; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: 1.75;
+      overflow-wrap: anywhere;
+    }
+    a { color: var(--accent); text-underline-offset: .2em; }
+    a:hover { text-decoration-thickness: .15em; }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; border-radius: 2px; }
+    .skip-link { position: absolute; top: -8rem; left: 1rem; padding: .7rem 1rem; background: white; z-index: 2; }
+    .skip-link:focus { top: 1rem; }
+    .wrap { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+    .hero { padding-block: clamp(2.5rem, 7vw, 5rem) 2rem; }
+    .eyebrow { margin: 0 0 .7rem; color: var(--accent); text-transform: uppercase; font-size: .75rem; font-weight: 750; letter-spacing: .16em; }
+    h1 { margin: 0; font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.1; letter-spacing: -.055em; }
+    .intro { max-width: 44rem; margin: 1.4rem 0; font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--muted); }
+    .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-block: 1.8rem 3.5rem; }
+    .fact { padding: 1.3rem; background: var(--surface); border: 1px solid var(--line); border-radius: .7rem; }
+    .fact strong { display: block; font-size: 1rem; margin-bottom: .3rem; }
+    .fact p { color: var(--muted); margin: 0; font-size: .92rem; }
+    .layout { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; padding-bottom: 4rem; }
+    .toc { position: sticky; top: 1.5rem; padding-block: .4rem; }
+    .toc h2 { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; margin: 0 0 1rem; }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc a { display: block; padding: .4rem 0; font-size: .9rem; text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    article { min-width: 0; }
+    article section { padding-block: 1.8rem; border-top: 1px solid var(--line); }
+    article section:first-child { padding-top: 0; border-top: 0; }
+    h2 { font-size: 1.45rem; line-height: 1.35; letter-spacing: -.025em; margin: 0 0 1rem; }
+    h3 { font-size: 1.05rem; margin: 1.5rem 0 .5rem; }
+    p { margin: 0 0 1rem; }
+    p:last-child { margin-bottom: 0; }
+    ul { padding-left: 1.3rem; }
+    li + li { margin-top: .45rem; }
+    dl { margin: 1.2rem 0; }
+    dt { font-weight: 650; margin-top: 1rem; }
+    dd { margin: .25rem 0 0; color: var(--muted); }
+    .note { background: var(--wash); padding: 1.2rem; border-radius: .5rem; }
+    footer { border-top: 1px solid var(--line); padding-block: 1.6rem; color: var(--muted); font-size: .85rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    @media (max-width: 760px) {
+      .wrap { width: calc(100% - 2rem); }
+      .facts { grid-template-columns: 1fr; gap: .65rem; margin-bottom: 2rem; }
+      .fact { padding: 1rem; }
+      .layout { grid-template-columns: 1fr; gap: 2rem; }
+      .toc { position: static; border-block: 1px solid var(--line); padding-block: 1.2rem; }
+      .toc ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem 1rem; }
+    }
+    @media (max-width: 380px) { .toc ol { grid-template-columns: 1fr; } }
+    @media print {
+      body { background: white; color: black; font-size: 11pt; }
+      .wrap { width: 100%; }
+      .toc, .skip-link, .back-top { display: none; }
+      .layout { display: block; }
+      .hero { padding-top: 1.5rem; }
+      .facts { margin-bottom: 2rem; }
+      h2, h3 { break-after: avoid; }
+      a { color: inherit; }
+    }
+
+    /* Shared website navigation, identical to the Privacy Policy page. */
+    .jm-policy-navigation { width: min(1184px, calc(100% - 48px)); margin-inline: auto; display: flex; flex-direction: column; align-items: stretch; padding-block: 20px 6px; color: #172f50; line-height: 1.6; }
+    .jm-policy-navigation a { color: inherit; text-decoration: none; }
+    .jm-policy-navigation a:hover { color: #7053c6; }
+    .jm-policy-navigation :focus-visible { outline: 3px solid #7053c6; outline-offset: 5px; }
+    .jm-policy-navigation .jm-brand { align-self: flex-start; padding-bottom: 14px; display: inline-flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 650; letter-spacing: -.6px; }
+    .jm-policy-navigation img { display: block; object-fit: contain; }
+    .jm-policy-navigation .jm-nav-icon { flex: none; width: 16px; height: 16px; margin-right: 1px; color: #3474d4; }
+    /* The link keeps its 44px hit area; the visible highlight is a centred 32px layer behind it. */
+    .jm-policy-navigation .jm-nav a[aria-current] { position: relative; isolation: isolate; padding-inline: 10px; color: #2059ad; }
+    .jm-policy-navigation .jm-nav a[aria-current]::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 50%; height: 32px; transform: translateY(-50%); box-sizing: border-box; border: 1px solid #d5dae2; border-radius: 7px; background: #f0f5fc; }
+    .jm-policy-navigation .jm-nav a[aria-current] .jm-nav-icon { color: #2059ad; }
+    .jm-policy-navigation .jm-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 4px clamp(16px, 1.4vw, 28px); padding-top: 6px; border-top: 1px solid #e3e7ef; font-size: 14px; font-weight: 550; min-width: 0; }
+    .jm-policy-navigation .jm-nav a { display: inline-flex; align-items: center; min-height: 44px; gap: 5px; }
+    .jm-policy-navigation .jm-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .jm-policy-navigation .jm-language { position: relative; z-index: 30; margin-left: auto; }
+    .jm-policy-navigation .jm-language::after { content: ""; position: absolute; right: 14px; top: calc(50% - 4px); width: 7px; height: 7px; border-right: 1.5px solid #7053c6; border-bottom: 1.5px solid #7053c6; transform: rotate(45deg); pointer-events: none; }
+    /* Language picker (i18n/language-menu.js): borderless when closed, soft card when open. */
+    .jm-lang-button { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; max-width: 100%; padding: 8px 34px 8px 10px; border: 0; border-radius: 10px; background: transparent; color: #172f50; font: inherit; cursor: pointer; }
+    .jm-lang-button:focus-visible { outline: 2px solid #3474d4; outline-offset: 2px; }
+    .jm-lang-flag { flex: none; display: block; width: 21px; height: 14px; border-radius: 2px; overflow: hidden; box-shadow: 0 0 0 1px rgba(23, 47, 80, .12); }
+    .jm-lang-flag svg { display: block; width: 100%; height: 100%; }
+    .jm-lang-list { position: absolute; top: calc(100% + 6px); right: 0; box-sizing: border-box; min-width: 210px; max-width: calc(100vw - 32px); margin: 0; padding: 6px; list-style: none; border: 1px solid #d5dae2; border-radius: 12px; background: #f8fafd; box-shadow: 0 16px 36px -12px rgba(23, 47, 80, .22), 0 3px 8px rgba(23, 47, 80, .06); font-size: 14px; font-weight: 550; line-height: 1.4; }
+    .jm-lang-list[hidden] { display: none; }
+    .jm-lang-option { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 8px; color: #172f50; cursor: pointer; white-space: nowrap; }
+    .jm-lang-option + .jm-lang-option { margin-top: 0; } /* overrides the article li + li spacing */
+    .jm-lang-option:hover, .jm-lang-option.is-active { background: #eef2f8; }
+    .jm-lang-option[aria-selected="true"] { background: #e4ebf5; }
+    .jm-lang-option[aria-selected="true"]:hover, .jm-lang-option[aria-selected="true"].is-active { background: #dce5f2; }
+    .jm-lang-check { flex: none; width: 16px; height: 16px; margin-left: auto; color: #2059ad; visibility: hidden; }
+    .jm-lang-option[aria-selected="true"] .jm-lang-check { visibility: visible; }
+    .jm-language:has(.jm-lang-button[aria-expanded="true"])::after { top: calc(50% - 1px); transform: rotate(-135deg); }
+    @media (max-width: 760px) { .jm-policy-navigation .jm-nav { gap: 4px 18px; font-size: 13px; } .jm-policy-navigation .jm-brand { font-size: 19px; } }
+    @media print { .jm-policy-navigation .jm-nav { display: none; } }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#policy">Skip to privacy notice</a>
+  <header class="jm-header jm-container jm-policy-navigation">
+      <a data-i18n-aria-label="a11y.home" class="jm-brand" href="/" aria-label="JM Authenticator home">
+        <img src="/jm-authenticator/branding/jm-shield.png" alt="" width="52" height="52" />
+        <span data-i18n="common.product">JM Authenticator</span>
+      </a>
+      <nav class="jm-nav" data-i18n-aria-label="a11y.mainNav" aria-label="Main navigation">
+        <a href="/" data-i18n-text="nav.home"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/></svg>Home</a>
+        <a href="/#features" data-i18n-text="nav.features"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11 4.5Q11.8 11.2 18.5 12Q11.8 12.8 11 19.5Q10.2 12.8 3.5 12Q10.2 11.2 11 4.5z"/><circle cx="18.5" cy="5.5" r="1.5"/></svg>Features</a>
+        <a href="/jm-authenticator/privacy/" data-legal-page="privacy" data-i18n-text="nav.privacy"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.2c2.2 1.5 4.6 2.3 7 2.5v5.6c0 4.6-2.9 8-7 9.5-4.1-1.5-7-4.9-7-9.5V5.7c2.4-.2 4.8-1 7-2.5z"/><path d="m9 12 2 2 4-4"/></svg>App Privacy</a>
+        <a href="/privacy/" aria-current="page" data-i18n-text="nav.websitePrivacy"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.4 2.6 3.6 5.6 3.6 9s-1.2 6.4-3.6 9c-2.4-2.6-3.6-5.6-3.6-9s1.2-6.4 3.6-9z"/></svg>Website Privacy</a>
+        <a href="/jm-authenticator/support/" data-i18n-text="nav.support"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 14v-2a7.5 7.5 0 0 1 15 0v2"/><rect x="3.5" y="13" width="4" height="6.5" rx="1.5"/><rect x="16.5" y="13" width="4" height="6.5" rx="1.5"/><path d="M18.5 19.5c0 1.3-1.5 2-3.5 2h-2"/></svg>Support</a>
+        <a href="/jm-authenticator/guide/" data-i18n-text="nav.guide"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 7.5v12"/><path d="M3.5 5.5c3-.8 5.8-.3 8.5 2 2.7-2.3 5.5-2.8 8.5-2v13c-3-.8-5.8-.3-8.5 2-2.7-2.3-5.5-2.8-8.5-2z"/></svg>User Guide</a>
+        <a href="/impressum/" data-legal-page="impressum" data-i18n-text="nav.impressum"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg>Impressum</a>
+        <a href="/share-monitor/" data-i18n-text="nav.shareMonitor"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-6"/></svg>Share Monitor <span aria-hidden="true">↗</span></a>
+        <div class="jm-language" hidden>
+          <label class="jm-sr-only" for="jm-language" data-i18n="a11y.language">Website language</label>
+          <select id="jm-language" data-i18n-aria-label="a11y.language" aria-label="Website language">
+            <option value="en" lang="en">🇬🇧 English</option>
+            <option value="de" lang="de">🇩🇪 Deutsch</option>
+            <option value="es" lang="es">🇪🇸 Español</option>
+            <option value="fr" lang="fr">🇫🇷 Français</option>
+            <option value="vi" lang="vi">🇻🇳 Tiếng Việt</option>
+            <option value="zh-Hans" lang="zh-Hans">🇨🇳 简体中文</option>
+            <option value="zh-Hant" lang="zh-Hant">🇹🇼 繁體中文</option>
+          </select>
+        </div>
+      </nav>
+    </header>
+  <main class="wrap">
+    <div class="hero">
+      <p class="eyebrow">Website privacy</p>
+      <h1>Website Privacy Notice</h1>
+      <p class="intro">This notice explains how personal data is processed when you visit jegprofil.info, use the contact form or use Share Monitor. The JM Authenticator app has its own <a href="/jm-authenticator/privacy/">App Privacy Policy</a>.</p>
+    </div>
+    <div class="facts" aria-label="Website privacy at a glance">
+      <div class="fact"><strong>No cookies or tracking</strong><p>This website uses no cookies, analytics, advertising, external fonts or third-party scripts.</p></div>
+      <div class="fact"><strong>Contact form</strong><p>Your enquiry is sent by email so that it can be answered.</p></div>
+      <div class="fact"><strong>Stored in your browser</strong><p>Your language choice and Share Monitor settings stay in your browser.</p></div>
+    </div>
+    <div class="layout">
+      <nav class="toc" aria-label="Website privacy contents">
+        <h2>On this page</h2>
+        <ol>
+          <li><a href="#controller">01 · Controller &amp; scope</a></li>
+          <li><a href="#hosting">02 · Hosting &amp; server logs</a></li>
+          <li><a href="#contact-form">03 · Contact form</a></li>
+          <li><a href="#share-monitor">04 · Share Monitor</a></li>
+          <li><a href="#browser-storage">05 · Browser storage</a></li>
+          <li><a href="#recipients">06 · Recipients</a></li>
+          <li><a href="#rights">07 · Your rights</a></li>
+          <li><a href="#changes">08 · Changes</a></li>
+        </ol>
+      </nav>
+      <article id="policy" aria-label="Website privacy notice" tabindex="-1">
+        <section id="controller" aria-labelledby="controller-title">
+          <h2 id="controller-title">01. Controller &amp; scope</h2>
+          <p>The controller responsible for this website is:</p>
+          <dl>
+            <dt>Name</dt><dd>Jesus Gerardo Macias De La Rosa</dd>
+            <dt>Address</dt><dd>Hildeboldstrasse 5, 80797 München, Germany</dd>
+            <dt>Privacy contact</dt><dd><a href="mailto:privacy@jegprofil.info">privacy@jegprofil.info</a></dd>
+            <dt>Effective date</dt><dd>2 November 2026</dd>
+          </dl>
+          <p>This notice covers the website jegprofil.info, including its contact form and Share Monitor. It does not cover the JM Authenticator app; for the app, read the <a href="/jm-authenticator/privacy/">App Privacy Policy</a>. Further provider details are in the <a href="/impressum/">Impressum</a>.</p>
+        </section>
+        <section id="hosting" aria-labelledby="hosting-title">
+          <h2 id="hosting-title">02. Hosting &amp; server logs</h2>
+          <p>This website is hosted by one.com. When you open a page, your browser sends technical request data to the web server, including your IP address and the page or file requested. The hosting provider processes this data to deliver the website and to keep it secure and stable, and may record it in server logs.</p>
+          <p>The legal basis is our legitimate interest in providing a secure and working website (Art. 6(1)(f) GDPR). We do not use this data to identify visitors or to create usage profiles. How long server logs are kept is determined by the hosting provider.</p>
+        </section>
+        <section id="contact-form" aria-labelledby="contact-form-title">
+          <h2 id="contact-form-title">03. Contact form</h2>
+          <p>When you use the <a href="/contact/">contact form</a>, we process the name, email address, subject and message you enter. They are sent by email to business@jegprofil.info, with your email address set as the reply address, so that we can answer your enquiry. You can also write to that address directly.</p>
+          <p>The legal basis is the handling of your enquiry: Art. 6(1)(b) GDPR where it relates to a contract or steps before one, and otherwise our legitimate interest in answering enquiries (Art. 6(1)(f) GDPR). We keep enquiry emails only as long as needed to handle your enquiry and any follow-up, unless statutory retention obligations require longer storage.</p>
+          <h3>Protection against misuse</h3>
+          <p>To prevent automated misuse, the server limits how many messages can be sent within 15 minutes. For this, it stores the time of each submission together with a keyed hash of your IP address, not the IP address itself. Entries older than 15 minutes are discarded the next time the limit is checked. The legal basis is our legitimate interest in protecting the form against abuse (Art. 6(1)(f) GDPR).</p>
+          <p>Please do not send passwords, authentication codes or account secrets through the form.</p>
+        </section>
+        <section id="share-monitor" aria-labelledby="share-monitor-title">
+          <h2 id="share-monitor-title">04. Share Monitor</h2>
+          <p><a href="/share-monitor/">Share Monitor</a> shows market information for the ticker symbols you choose. Your browser requests this information from our server. Our server then retrieves the market data from Yahoo Finance; these server requests contain the ticker symbols and currency pairs, not your IP address or other information about you.</p>
+          <p>Your tickers and Share Monitor settings are stored in your browser, as described under <a href="#browser-storage">Browser storage</a>. The legal basis for processing the requests is our legitimate interest in providing the function you use (Art. 6(1)(f) GDPR).</p>
+        </section>
+        <section id="browser-storage" aria-labelledby="browser-storage-title">
+          <h2 id="browser-storage-title">05. Browser storage</h2>
+          <p>This website uses no cookies. It stores the following information in your browser’s local storage:</p>
+          <ul>
+            <li><strong>Website language</strong> — only after you choose a language in the language menu (<code>jm-authenticator:website-language</code>).</li>
+            <li><strong>Share Monitor</strong> — your tickers, related listings, signal settings and display currency (<code>stock-monitor:tickers</code>, <code>stock-monitor:related-listings</code>, <code>stock-monitor:signal-settings</code>, <code>stock-monitor:panel-currency</code>).</li>
+          </ul>
+          <p>This information stays on your device and is not sent to us, except that Share Monitor sends your ticker symbols to our server to retrieve market data. It is stored because it is necessary to provide the functions you request, so no consent is asked for (§ 25(2) No. 2 TDDDG). You can delete it at any time by clearing this website’s data in your browser.</p>
+        </section>
+        <section id="recipients" aria-labelledby="recipients-title">
+          <h2 id="recipients-title">06. Recipients</h2>
+          <ul>
+            <li><strong>one.com</strong> — hosts this website and processes the request data described above.</li>
+            <li><strong>Email delivery</strong> — contact form messages are delivered by email to the mailbox business@jegprofil.info.</li>
+            <li><strong>Yahoo Finance</strong> — receives our server’s requests for market data, which contain no personal data about you.</li>
+          </ul>
+          <p>We do not sell personal data or share it for advertising. There is no automated decision-making within the meaning of Art. 22 GDPR.</p>
+        </section>
+        <section id="rights" aria-labelledby="rights-title">
+          <h2 id="rights-title">07. Your rights</h2>
+          <p>Under the GDPR, you have the right to access your personal data (Art. 15), to rectification (Art. 16), to erasure (Art. 17), to restriction of processing (Art. 18) and to data portability (Art. 20).</p>
+          <p class="note"><strong>Right to object (Art. 21 GDPR):</strong> where processing is based on our legitimate interests, you can object at any time on grounds relating to your particular situation.</p>
+          <p>To exercise your rights, contact <a href="mailto:privacy@jegprofil.info">privacy@jegprofil.info</a>. You also have the right to lodge a complaint with a data protection supervisory authority (Art. 77 GDPR), for example the authority in the EU member state where you live or work. For the controller of this website, the competent authority is the Bavarian State Office for Data Protection Supervision (Bayerisches Landesamt für Datenschutzaufsicht, BayLDA).</p>
+        </section>
+        <section id="changes" aria-labelledby="changes-title">
+          <h2 id="changes-title">08. Changes</h2>
+          <p>This notice is updated when the website’s data processing changes. The effective date above shows the current version.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+  <footer><div class="wrap footer-inner"><span>jegprofil.info · Website Privacy Notice</span><a href="/jm-authenticator/privacy/">App Privacy Policy</a><a href="/contact/">Contact</a><a href="/impressum/">Impressum</a><a class="back-top" href="#top">Back to top ↑</a></div></footer>
+  <script type="module" src="/jm-authenticator/navigation.js"></script>
+</body>
+</html>

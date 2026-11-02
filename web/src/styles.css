@@ -1166,6 +1166,12 @@ td {
   font-size: 13px;
 }
 
+.siteNotice {
+  flex-basis: 100%;
+  margin: 0 0 4px;
+  color: #536178;
+}
+
 .siteFooter a {
   color: #536178;
   text-decoration: none;

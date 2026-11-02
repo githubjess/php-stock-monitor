@@ -70,6 +70,9 @@ export default defineConfig({
               "/jm-authenticator/support/index.html",
             );
           }
+          if (req.url?.split("?")[0] === "/privacy/") {
+            req.url = req.url.replace("/privacy/", "/privacy/index.html");
+          }
           if (req.url?.split("?")[0] === "/jm-authenticator/guide/") {
             req.url = req.url.replace(
               "/jm-authenticator/guide/",
