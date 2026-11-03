@@ -130,8 +130,10 @@
       .step-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto auto; gap: 1rem 2rem; }
       .step-cell { grid-row: span 2; grid-template-rows: subgrid; }
     }
-    /* Chapter 04 only: emphasised step numbers 1–9; the nested bullet lists keep their default markers. */
-    #backup .steps > li::marker { color: #1b3a6b; font-size: 1.15em; font-weight: 700; }
+    /* Chapters 04 and 05: emphasised step numbers; the nested bullet lists keep their default markers. */
+    #backup .steps > li::marker, #restore .steps > li::marker { color: #1b3a6b; font-size: 1.15em; font-weight: 700; }
+    /* Continues the previous step's bullet list in the next cell, aligned with the nested list above. */
+    .steps-cont { margin: 0; padding-left: 2.7rem; list-style-type: circle; }
     /* Shared website navigation, identical to the Privacy Policy page. */
     .jm-policy-navigation { width: min(1184px, calc(100% - 48px)); margin-inline: auto; display: flex; flex-direction: column; align-items: stretch; padding-block: 20px 6px; color: #172f50; line-height: 1.6; }
     .jm-policy-navigation a { color: inherit; text-decoration: none; }
@@ -629,48 +631,106 @@
         </section>
         <section id="restore" aria-labelledby="restore-title">
           <h2 id="restore-title">05. Restore a backup</h2>
-          <p>Restoring adds accounts from a JM Authenticator encrypted backup. Existing accounts are kept, and exact duplicates are skipped.</p>
-          <div class="step-block">
-            <div>
-              <ol class="steps">
-                <li>Open <em>Settings → Encrypted backups</em>.</li>
-                <li>Choose how to restore:
-                  <ul>
-                    <li><strong>From your backup history</strong> — select a backup under <em>Backup history</em> and tap <em>Restore selected backup</em>.</li>
-                    <li><strong>From a backup file</strong> — tap <em>Restore from backup file</em>.</li>
-                  </ul>
-                </li>
-              </ol>
-              <p>As the <em>Backup safety</em> notice explains, a history entry does not guarantee that its file still exists. Keep your backup files and passwords safe.</p>
-            </div>
-            <figure class="shot">
-              <a class="shot-zoom" href="images/encrypted-backups.png" aria-label="Open the Encrypted backups screenshot in full size"><img class="shot-tall" src="images/encrypted-backups.png" width="720" height="1805" alt="Encrypted backups screen with the cards Back Up All Accounts and Restore from backup file, the collapsed Backup history (3 entries) with its storage-type legend Internal, External and Both, the Restore selected backup button and the complete Backup safety notice." loading="lazy"></a>
-              <figcaption>Backup history and restore options. Tap to open full size.</figcaption>
-            </figure>
-          </div>
-          <div class="step-block">
-            <ol class="steps" start="3">
-              <li>If you tapped <em>Restore from backup file</em>, the Files window opens. Go to the location where you saved the backup and select your <code>.jmbackup</code> file.</li>
-              <li>Enter the backup password and tap <em>Continue</em>.</li>
-            </ol>
-            <figure class="shot">
-              <img src="images/restore-files.png" width="720" height="1560" alt="Edited demonstration screenshot of the iOS Files window opened by Restore from backup file: the On My iPhone location with the folders Documents, Downloads, JM Authenticator Backups and Projects and the file JM-Backup-Demo.jmbackup. No file is selected." loading="lazy">
-              <figcaption>The Files window opened by <em>Restore from backup file</em>. Edited demonstration screenshot: folder and file names are examples.</figcaption>
-            </figure>
-          </div>
-          <div class="step-block">
-            <ol class="steps" start="5">
-              <li>In <em>Restore encrypted backup?</em>, check <em>Accounts in backup</em>, <em>Already enrolled</em> and <em>New accounts to add</em>, then tap <em>Restore</em>.</li>
-              <li><em>Restoration completed</em> shows how many accounts were added and how many duplicates were skipped. Tap <em>Done</em>.</li>
-            </ol>
-            <figure class="shot">
-              <div class="shot-placeholder" data-screenshot="08-restore-confirm.png" role="img" aria-label="Screenshot placeholder: Restore encrypted backup confirmation">
-                <span>Screenshot placeholder</span><strong>Restore encrypted backup?</strong><code>08-restore-confirm.png</code>
+          <p>Restoring adds accounts from a JM Authenticator encrypted backup. Existing accounts are kept, exact duplicates are skipped, and only the accounts you select are added. Nothing is imported until you verify the file with its password and confirm the restoration.</p>
+          <div class="step-sequence">
+            <h3>Choose the backup</h3>
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps">
+                  <li>Open <em>Settings</em> and, under <em>Backup &amp; Restore</em>, tap <em>Encrypted backups</em>. There are two ways to restore:
+                    <ul>
+                      <li><strong>A · Restore from backup file</strong> — select a <code>.jmbackup</code> file saved in Files or iCloud Drive.</li>
+                      <li><strong>B · Restore selected backup</strong> — choose a backup listed in <em>Backup history</em>.</li>
+                    </ul>
+                  </li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/encrypted-backups.png" aria-label="Open the Encrypted backups screenshot in full size"><img class="shot-tall" src="images/encrypted-backups.png" width="720" height="1805" alt="Encrypted backups screen with the cards Back Up All Accounts and Restore from backup file, the collapsed Backup history with its storage-type legend Internal, External and Both, the Restore selected backup button and the complete Backup safety notice." loading="lazy"></a>
+                  <figcaption>Both restore options on <em>Encrypted backups</em>.</figcaption>
+                </figure>
               </div>
-              <figcaption>Nothing is imported until you confirm.</figcaption>
-            </figure>
+              <div class="step-cell">
+                <ol class="steps" start="2">
+                  <li>Choose the backup in one of two ways:
+                    <ul>
+                      <li><strong>A</strong> — Tap <em>Restore from backup file</em>. In the Files window, go to the location where you saved the backup and select your <code>.jmbackup</code> file.</li>
+                    </ul>
+                  </li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/restore-files.png" aria-label="Open the Files window screenshot in full size"><img src="images/restore-files.png" width="720" height="1560" alt="Edited demonstration screenshot of the iOS Files window opened by Restore from backup file: the On My iPhone location with the folders Documents, Downloads, JM Authenticator Backups and Projects and the file JM-Backup-Demo.jmbackup. No file is selected." loading="lazy"></a>
+                  <figcaption>A · The Files window opened by <em>Restore from backup file</em>. Edited demonstration screenshot: folder and file names are examples.</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="step-pair">
+              <div class="step-cell">
+                <ul class="steps-cont">
+                  <li><strong>B</strong> — Or tap <em>Backup history</em> to expand it, tap a backup to select it (it is marked with a check mark), then tap <em>Restore selected backup</em>.</li>
+                </ul>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/backup-history.png" aria-label="Open the Backup history screenshot in full size"><img src="images/backup-history.png" width="720" height="1561" alt="Encrypted backups screen with the expanded Backup history (4 entries). The backup JM-Auth-DemoTest.jmbackup, Monday, November 2, 2026, 20:36 (local time), External, Accounts included: 14, is selected with a check mark, followed by JM-Third.jmbackup and JM-All-double.jmbackup, and the Restore selected backup button." loading="lazy"></a>
+                  <figcaption>B · A selected backup in <em>Backup history</em>, with <em>Restore selected backup</em>.</figcaption>
+                </figure>
+              </div>
+              <div class="step-cell">
+                <ol class="steps" start="3">
+                  <li><em>Restore encrypted backup</em> shows the name of the backup file. Enter its <em>Backup password</em> and tap <em>Continue</em>. To use a different backup, tap <em>Select another backup file</em>.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/restore-password.png" aria-label="Open the Restore encrypted backup screenshot in full size"><img src="images/restore-password.png" width="720" height="1561" alt="Restore encrypted backup screen: Existing accounts are kept. Accounts from the file are added, and exact duplicates are skipped. The file JM-Auth-DemoTest.jmbackup, the filled Backup password field, the Continue button, the note that nothing is imported until you verify the file and confirm restoration, and the Select another backup file button." loading="lazy"></a>
+                  <figcaption>Enter the backup password and tap <em>Continue</em>.</figcaption>
+                </figure>
+              </div>
+            </div>
+            <h3>Choose accounts to restore</h3>
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps" start="4">
+                  <li>After the password is verified, <em>Choose accounts to restore</em> opens. It shows the <em>Selected file</em> and, under <em>Backup content</em>:
+                    <ul>
+                      <li><strong>Accounts in backup</strong> — all accounts in the file.</li>
+                      <li><strong>Already in JM Authenticator</strong> — accounts you already have.</li>
+                      <li><strong>Available to restore</strong> — new accounts that can be added.</li>
+                    </ul>
+                  </li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/restore-summary.png" aria-label="Open the Choose accounts to restore screenshot in full size"><img src="images/restore-summary.png" width="720" height="1561" alt="Choose accounts to restore screen for the file JM-Auth-DemoTest.jmbackup. Backup content: Accounts in backup 14, Already in JM Authenticator 14, Available to restore 0. The notice Nothing new to restore, Existing accounts have been preserved, the start of the Already in JM Authenticator list, No accounts selected and the disabled Restore selected accounts (0) button." loading="lazy"></a>
+                  <figcaption>The <em>Backup content</em> summary. Account names are demo details.</figcaption>
+                </figure>
+              </div>
+              <div class="step-cell">
+                <ol class="steps" start="5">
+                  <li>Scroll through <em>Already in JM Authenticator</em>. Each account you already have is marked <em>Existing accounts have been preserved.</em> These accounts are not restored again and stay unchanged. At the end of the list, <em>Cancel</em> stops the restoration and <em>Select another backup file</em> lets you choose a different backup.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/restore-existing.png" aria-label="Open the Already in JM Authenticator screenshot in full size"><img src="images/restore-existing.png" width="720" height="1561" alt="End of the Already in JM Authenticator list with four existing accounts, each marked Existing accounts have been preserved, followed by Cancel and Select another backup file, No accounts selected, the disabled Restore selected accounts (0) button and Done." loading="lazy"></a>
+                  <figcaption>Existing accounts are preserved. Account names are demo details.</figcaption>
+                </figure>
+              </div>
+            </div>
+            <ol class="steps" start="6">
+              <li>If <em>Available to restore</em> is greater than 0, select the new accounts you want to add. The bar at the bottom shows how many accounts are selected.</li>
+              <li>Tap <em>Restore selected accounts</em>. The button shows the number of selected accounts.</li>
+              <li>Review the result shown by JM Authenticator, then tap <em>Done</em>. The restored accounts appear on the Home screen together with your existing accounts.</li>
+            </ol>
           </div>
-          <p>If the password is incorrect or the file is damaged, no accounts are imported.</p>
+          <h3>Duplicate protection</h3>
+          <ul>
+            <li><strong>Existing accounts are preserved.</strong> Restoring never removes or replaces an account you already have.</li>
+            <li><strong>Exact duplicates are skipped.</strong> Accounts that are already in JM Authenticator are listed under <em>Already in JM Authenticator</em> and cannot be restored a second time.</li>
+            <li><strong>Only selected accounts are added.</strong> Of the accounts available to restore, only those you select are added.</li>
+          </ul>
+          <h3>Example: nothing new to restore</h3>
+          <p>In the screenshots, the backup <em>JM-Auth-DemoTest.jmbackup</em> is restored while all of its accounts are already in JM Authenticator:</p>
+          <dl>
+            <dt>Accounts in backup: 14</dt><dd>The backup contains 14 accounts.</dd>
+            <dt>Already in JM Authenticator: 14</dt><dd>All 14 accounts are already enrolled.</dd>
+            <dt>Available to restore: 0</dt><dd>There are no new accounts to add.</dd>
+          </dl>
+          <p>JM Authenticator therefore shows <em>Nothing new to restore. Existing accounts have been preserved.</em> No accounts can be selected, <em>Restore selected accounts (0)</em> stays unavailable, and nothing is changed. Tap <em>Done</em> to leave the screen.</p>
+          <p class="note"><strong>You need both the backup file and its password to restore your accounts.</strong> As the <em>Backup safety</em> notice explains, a history entry does not guarantee that its file still exists, and a forgotten backup password cannot be recovered.</p>
         </section>
         <section id="import" aria-labelledby="import-title">
           <h2 id="import-title">06. Import accounts</h2>
