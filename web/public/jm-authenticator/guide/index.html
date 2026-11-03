@@ -130,8 +130,8 @@
       .step-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto auto; gap: 1rem 2rem; }
       .step-cell { grid-row: span 2; grid-template-rows: subgrid; }
     }
-    /* Chapters 04 and 05: emphasised step numbers; the nested bullet lists keep their default markers. */
-    #backup .steps > li::marker, #restore .steps > li::marker { color: #1b3a6b; font-size: 1.15em; font-weight: 700; }
+    /* Chapters 04, 05 and the Chapter 06 Google section: emphasised step numbers; the nested bullet lists keep their default markers. */
+    #backup .steps > li::marker, #restore .steps > li::marker, #import-google-steps .steps > li::marker { color: #1b3a6b; font-size: 1.15em; font-weight: 700; }
     /* Continues the previous step's bullet list in the next cell, aligned with the nested list above. */
     .steps-cont { margin: 0; padding-left: 2.7rem; list-style-type: circle; }
     /* Shared website navigation, identical to the Privacy Policy page. */
@@ -736,26 +736,84 @@
           <h2 id="import-title">06. Import accounts</h2>
           <p>Open <em>Settings → Import &amp; Export Accounts</em> and choose a source under <em>Import into JM</em>. Imports are processed on your device. Only the accounts you select are added; existing accounts and backups remain unchanged, and duplicates are skipped.</p>
           <figure class="shot shot-wide">
-            <div class="shot-placeholder" data-screenshot="09-import-export.png" role="img" aria-label="Screenshot placeholder: Import and Export Accounts screen">
-              <span>Screenshot placeholder</span><strong>Import &amp; Export Accounts</strong><code>09-import-export.png</code>
-            </div>
+            <a class="shot-zoom" href="images/import-export.png" aria-label="Open the Import &amp; Export Accounts screenshot in full size"><img src="images/import-export.png" width="720" height="1561" alt="Import &amp; Export Accounts screen with Google Authenticator, 2FAS Authenticator and Ente Auth under Import into JM, and Export Accounts under Export." loading="lazy"></a>
             <figcaption>Choose the app you are importing from.</figcaption>
           </figure>
           <h3 id="import-google">Google Authenticator</h3>
-          <div class="step-block">
-            <ol class="steps">
-              <li>In Google Authenticator, use <em>Transfer accounts → Export accounts</em> to display the export QR codes.</li>
-              <li>In JM Authenticator, choose <em>Google Authenticator</em>, then <em>Scan a QR code</em> or <em>Choose images</em> of the QR codes.</li>
-              <li>If the export has several QR codes, add every part. The progress shows how many parts have been collected.</li>
-              <li>Review the accounts and import them.</li>
-            </ol>
-            <figure class="shot">
-              <div class="shot-placeholder" data-screenshot="10-import-google.png" role="img" aria-label="Screenshot placeholder: Google Authenticator import screen">
-                <span>Screenshot placeholder</span><strong>Google Authenticator</strong><code>10-import-google.png</code>
+          <p>Move your accounts from Google Authenticator by scanning its export QR codes or by choosing screenshots of them. Existing accounts and backups remain unchanged.</p>
+          <div class="step-sequence" id="import-google-steps">
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps">
+                  <li>On the Home screen, tap the gear icon to open <em>Settings</em>.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-settings.png" aria-label="Open the Settings screenshot in full size"><img src="images/import-settings.png" width="720" height="1561" alt="Settings screen with Language, Appearance, Security &amp; app lock, the Backup &amp; Restore section with Encrypted backups and Import &amp; Export Accounts, and Animated Welcome." loading="lazy"></a>
+                  <figcaption><em>Import &amp; Export Accounts</em> under <em>Backup &amp; Restore</em> in <em>Settings</em>.</figcaption>
+                </figure>
               </div>
-              <figcaption>Scan or choose every part of the export.</figcaption>
-            </figure>
+              <div class="step-cell">
+                <ol class="steps" start="2">
+                  <li>Under <em>Backup &amp; Restore</em>, tap <em>Import &amp; Export Accounts</em>. The <em>Import &amp; Export Accounts</em> screen opens.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-export.png" aria-label="Open the Import &amp; Export Accounts screenshot in full size"><img src="images/import-export.png" width="720" height="1561" alt="Import &amp; Export Accounts screen with Google Authenticator, 2FAS Authenticator and Ente Auth under Import into JM, and Export Accounts under Export." loading="lazy"></a>
+                  <figcaption>The <em>Import &amp; Export Accounts</em> screen.</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps" start="3">
+                  <li>Under <em>Import into JM</em>, tap <em>Google Authenticator</em>. The screen <em>Import accounts from QR codes or screenshots</em> opens with the buttons <em>Scan a QR code</em> and <em>Choose images</em>. Until you add the first QR code, it shows <em>No QR parts collected.</em> To begin again, tap <em>Start over</em>.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-google.png" aria-label="Open the Google Authenticator import screenshot in full size"><img src="images/import-google.png" width="720" height="1561" alt="Google Authenticator import screen: Import accounts from QR codes or screenshots, the buttons Scan a QR code, Choose images and Start over, a warning that QR screenshots contain authentication secrets, the note that existing accounts and backups remain unchanged, No QR parts collected, and the collapsed Transfer and screenshot guidance." loading="lazy"></a>
+                  <figcaption>The <em>Google Authenticator</em> import screen.</figcaption>
+                </figure>
+              </div>
+              <div class="step-cell">
+                <ol class="steps" start="4">
+                  <li>Add the export QR codes in one of two ways:
+                    <ul>
+                      <li><strong>A · Scan a QR code</strong> — <em>Scan enrollment QR code</em> opens the camera. Scan one Google Authenticator export QR code, return to the import screen and scan the next part until the batch is complete. A larger export can consist of several QR codes; each scan adds one QR part.</li>
+                    </ul>
+                  </li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-google-scan.png" aria-label="Open the QR scanner screenshot in full size"><img src="images/import-google-scan.png" width="720" height="1561" alt="Scan enrollment QR code screen with the camera view, no QR code in view, the instruction Scan one Google Authenticator export QR code. Return here and scan the next part until the batch is complete, and Cancel." loading="lazy"></a>
+                  <figcaption>A · The QR scanner. No QR code is in view in this example.</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="step-pair">
+              <div class="step-cell">
+                <ul class="steps-cont">
+                  <li><strong>B · Choose images</strong> — Or tap <em>Choose images</em> to select screenshots of the export QR codes that you saved before opening JM Authenticator. The iOS photo picker opens: select up to 32 photos, then tap the check mark.</li>
+                </ul>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-google-photos.png" aria-label="Open the iOS photo picker screenshot in full size"><img src="images/import-google-photos.png" width="720" height="1561" alt="Edited demonstration screenshot of the iOS photo picker: Select up to 32 photos, the Photos and Collections tabs, the close and check mark buttons, a grid of neutral placeholder thumbnails, and the buttons More, Show Selected (4) with Location Included, and Search." loading="lazy"></a>
+                  <figcaption>B · The iOS photo picker. Edited demonstration screenshot: the photo thumbnails are neutral placeholders.</figcaption>
+                </figure>
+              </div>
+              <div class="step-cell">
+                <ol class="steps" start="5">
+                  <li>For help, tap <em>Transfer and screenshot guidance</em> to expand it. It explains that:
+                    <ul>
+                      <li>In Google Authenticator, you open <em>Transfer accounts → Export accounts</em>, unlock, select the accounts and continue.</li>
+                      <li>You scan every QR code, or select screenshots saved before opening JM Authenticator. Each scan adds one QR part.</li>
+                      <li>TOTP accounts use a 30-second period.</li>
+                    </ul>
+                  </li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-google-guidance.png" aria-label="Open the Transfer and screenshot guidance screenshot in full size"><img src="images/import-google-guidance.png" width="720" height="1561" alt="Google Authenticator import screen with the expanded Transfer and screenshot guidance: how to export accounts from Google Authenticator, that each scan adds one QR part, that TOTP accounts use a 30-second period, and how to handle QR screenshots safely." loading="lazy"></a>
+                  <figcaption>The expanded <em>Transfer and screenshot guidance</em>.</figcaption>
+                </figure>
+              </div>
+            </div>
           </div>
+          <p class="note"><strong>QR screenshots contain your authentication secrets.</strong> Keep them private, avoid cloud photo backups, and delete them from Photos and <em>Recently Deleted</em> after verifying the import. JM Authenticator does not save or delete your images.</p>
           <h3 id="import-2fas">2FAS Authenticator</h3>
           <div class="step-block">
             <ol class="steps">
