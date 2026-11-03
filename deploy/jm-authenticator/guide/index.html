@@ -130,8 +130,8 @@
       .step-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto auto; gap: 1rem 2rem; }
       .step-cell { grid-row: span 2; grid-template-rows: subgrid; }
     }
-    /* Chapters 04, 05 and the Chapter 06 Google section: emphasised step numbers; the nested bullet lists keep their default markers. */
-    #backup .steps > li::marker, #restore .steps > li::marker, #import-google-steps .steps > li::marker { color: #1b3a6b; font-size: 1.15em; font-weight: 700; }
+    /* Chapters 04, 05 and the Chapter 06 Google and 2FAS sections: emphasised step numbers; the nested bullet lists keep their default markers. */
+    #backup .steps > li::marker, #restore .steps > li::marker, #import-google-steps .steps > li::marker, #import-2fas-steps .steps > li::marker { color: #1b3a6b; font-size: 1.15em; font-weight: 700; }
     /* Continues the previous step's bullet list in the next cell, aligned with the nested list above. */
     .steps-cont { margin: 0; padding-left: 2.7rem; list-style-type: circle; }
     /* Shared website navigation, identical to the Privacy Policy page. */
@@ -815,20 +815,77 @@
           </div>
           <p class="note"><strong>QR screenshots contain your authentication secrets.</strong> Keep them private, avoid cloud photo backups, and delete them from Photos and <em>Recently Deleted</em> after verifying the import. JM Authenticator does not save or delete your images.</p>
           <h3 id="import-2fas">2FAS Authenticator</h3>
-          <div class="step-block">
-            <ol class="steps">
-              <li>Choose <em>2FAS Authenticator</em>, then <em>Choose .2fas file</em>.</li>
-              <li>If the backup is protected, enter the <em>2FAS backup password</em> and tap <em>Unlock backup</em>.</li>
-              <li>Under <em>Choose accounts to import</em>, select the accounts and tap the import button, for example <em>Import 2 accounts</em>.</li>
-              <li>In <em>Import these accounts?</em>, tap <em>Import selected accounts</em>.</li>
-            </ol>
-            <figure class="shot">
-              <div class="shot-placeholder" data-screenshot="11-import-2fas.png" role="img" aria-label="Screenshot placeholder: Choose accounts to import from 2FAS">
-                <span>Screenshot placeholder</span><strong>Choose accounts to import</strong><code>11-import-2fas.png</code>
+          <p>Import your accounts from a <code>.2fas</code> backup file created in 2FAS Authenticator, without scanning each QR code. Processing stays on your device.</p>
+          <div class="step-sequence" id="import-2fas-steps">
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps">
+                  <li>Open <em>Settings → Import &amp; Export Accounts</em> and, under <em>Import into JM</em>, tap <em>2FAS Authenticator</em>. <em>Import from 2FAS</em> explains that processing stays on this device and that existing JM Authenticator accounts and backups remain unchanged — only the new accounts you select are added. Tap <em>Choose .2fas file</em>.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-2fas-start.png" aria-label="Open the Import from 2FAS screenshot in full size"><img src="images/import-2fas-start.png" width="720" height="1561" alt="Import from 2FAS screen: Import accounts from a .2fas backup without scanning each QR code. Processing stays on this device. Existing JM Authenticator accounts and backups will remain unchanged. Only selected new accounts will be added. A warning, Import interrupted for privacy. Choose the file again after unlocking, and the Choose .2fas file button." loading="lazy"></a>
+                  <figcaption><em>Import from 2FAS</em>, here showing the privacy warning described below.</figcaption>
+                </figure>
               </div>
-              <figcaption>Select only the accounts you want to add.</figcaption>
-            </figure>
+              <div class="step-cell">
+                <ol class="steps" start="2">
+                  <li>In the Files window, go to the location of your 2FAS backup, for example iCloud Drive, and select the <code>.2fas</code> file. Choose a file that is available on your device; files stored only in the cloud may first have to be downloaded by your file provider.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-2fas-files.png" aria-label="Open the Files window screenshot in full size"><img src="images/import-2fas-files.png" width="720" height="1561" alt="Edited demonstration screenshot of the iOS Files window in iCloud Drive with the 2FAS backups Backup_2026-10-17.2fas and Backup_2026-11-03-1.2fas, followed by the folders Documents, Downloads and Images, the file Manual.pdf, the folder Preview and the file Unknown." loading="lazy"></a>
+                  <figcaption>Two <code>.2fas</code> backups in iCloud Drive. Anonymized demonstration screenshot: the other folder and file names and document previews are examples.</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps" start="3">
+                  <li>The <em>Selected file</em> is shown at the top. A password-protected <code>.2fas</code> backup needs the password you set in 2FAS: enter it in <em>2FAS backup password</em> and tap <em>Unlock backup</em>. To use a different backup, tap <em>Choose another file</em>.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-2fas-password.png" aria-label="Open the 2FAS backup password screenshot in full size"><img src="images/import-2fas-password.png" width="720" height="1561" alt="Import from 2FAS screen with Selected file: Backup_2026-10-17.2fas, the masked 2FAS backup password field, the Unlock backup button and Choose another file." loading="lazy"></a>
+                  <figcaption>Enter the 2FAS backup password and tap <em>Unlock backup</em>.</figcaption>
+                </figure>
+              </div>
+              <div class="step-cell">
+                <ol class="steps" start="4">
+                  <li><em>Choose accounts to import</em> opens. Under <em>Import content</em>, check what the backup contains. In this example:
+                    <ul>
+                      <li><strong>Entries: 10</strong> — all entries in the file, of which <strong>9</strong> are <em>Active</em>.</li>
+                      <li><strong>Already in JM Auth: 6</strong> — accounts you already have. There are no <em>Repeated accounts</em> and nothing <em>In trash</em>.</li>
+                      <li><strong>Invalid or unsupported: 1</strong> — an entry that cannot be imported.</li>
+                      <li><strong>Eligible for import: 3</strong> — new accounts that can be added.</li>
+                    </ul>
+                  </li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-2fas-summary.png" aria-label="Open the Import content screenshot in full size"><img src="images/import-2fas-summary.png" width="720" height="1561" alt="Choose accounts to import screen for Backup_2026-10-17.2fas. Import content: Entries 10, Active 9, Repeated accounts 0, Already in JM Auth 6, In trash 0, Invalid or unsupported 1, Eligible for import 3. Below, the start of the Already in JM Authenticator list, 3 accounts selected and the Import 3 accounts button." loading="lazy"></a>
+                  <figcaption>The <em>Import content</em> summary. Anonymized demonstration screenshot: account names are demo details.</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps" start="5">
+                  <li>Accounts you already have are listed separately under <em>Already in JM Authenticator</em>. They have no checkbox, are not imported again and stay unchanged. Below them, <em>Import accounts</em> offers <em>Select all</em> and <em>Deselect all</em>.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-2fas-existing.png" aria-label="Open the Already in JM Authenticator screenshot in full size"><img src="images/import-2fas-existing.png" width="720" height="1561" alt="Already in JM Authenticator list with existing demo accounts for login.muenchen.de, Java_bikems, Amazon, HResort and Booking.com, followed by the Import accounts heading with Select all and Deselect all, 3 accounts selected and the Import 3 accounts button." loading="lazy"></a>
+                  <figcaption>Existing accounts stay protected. Anonymized demonstration screenshot: account names are demo details.</figcaption>
+                </figure>
+              </div>
+              <div class="step-cell">
+                <ol class="steps" start="6">
+                  <li>Under <em>Import accounts</em>, each eligible account is marked <em>Ready</em> and has a checkbox. Tap a checkbox to select or deselect that account. An entry marked <em>Invalid details</em>, such as <em>Entry 1</em>, cannot be selected or imported. The bar at the bottom shows how many accounts are selected; tap <em>Import 3 accounts</em> to import the selected accounts. The number on the button follows your selection.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-2fas-select.png" aria-label="Open the Import accounts selection screenshot in full size"><img src="images/import-2fas-select.png" width="720" height="1561" alt="Import accounts list with Select all and Deselect all, three selected accounts marked Ready for Gitlab, Deutsche Bahn and Microsoft with demo account names, Entry 1 marked Invalid details without a checkbox, Choose another file, 3 accounts selected and the Import 3 accounts button." loading="lazy"></a>
+                  <figcaption>Three eligible accounts selected. Anonymized demonstration screenshot: account names are demo details.</figcaption>
+                </figure>
+              </div>
+            </div>
           </div>
+          <p><strong>Import interrupted for privacy.</strong> If JM Authenticator locks while a 2FAS import is in progress, the import is stopped and <em>Import from 2FAS</em> shows <em>Import interrupted for privacy. Choose the file again after unlocking.</em> This is not part of a normal import: unlock JM Authenticator, tap <em>Choose .2fas file</em> and start again.</p>
           <h3 id="import-ente">Ente Auth</h3>
           <div class="step-block">
             <ol class="steps">
