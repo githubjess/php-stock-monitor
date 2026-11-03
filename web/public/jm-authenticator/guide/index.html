@@ -130,8 +130,8 @@
       .step-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto auto; gap: 1rem 2rem; }
       .step-cell { grid-row: span 2; grid-template-rows: subgrid; }
     }
-    /* Chapters 04, 05 and the Chapter 06 Google and 2FAS sections: emphasised step numbers; the nested bullet lists keep their default markers. */
-    #backup .steps > li::marker, #restore .steps > li::marker, #import-google-steps .steps > li::marker, #import-2fas-steps .steps > li::marker { color: #1b3a6b; font-size: 1.15em; font-weight: 700; }
+    /* Chapters 04, 05 and the Chapter 06 Google, 2FAS and Ente sections: emphasised step numbers; the nested bullet lists keep their default markers. */
+    #backup .steps > li::marker, #restore .steps > li::marker, #import-google-steps .steps > li::marker, #import-2fas-steps .steps > li::marker, #import-ente-steps .steps > li::marker { color: #1b3a6b; font-size: 1.15em; font-weight: 700; }
     /* Continues the previous step's bullet list in the next cell, aligned with the nested list above. */
     .steps-cont { margin: 0; padding-left: 2.7rem; list-style-type: circle; }
     /* Shared website navigation, identical to the Privacy Policy page. */
@@ -887,18 +887,66 @@
           </div>
           <p><strong>Import interrupted for privacy.</strong> If JM Authenticator locks while a 2FAS import is in progress, the import is stopped and <em>Import from 2FAS</em> shows <em>Import interrupted for privacy. Choose the file again after unlocking.</em> This is not part of a normal import: unlock JM Authenticator, tap <em>Choose .2fas file</em> and start again.</p>
           <h3 id="import-ente">Ente Auth</h3>
-          <div class="step-block">
-            <ol class="steps">
-              <li>Export your accounts from Ente Auth in the <strong>Encrypted</strong> (recommended) or <strong>Plain text</strong> format. Plain HTML exports are not supported.</li>
-              <li>Choose <em>Ente Auth</em>. Expand <em>Formats and privacy</em> to see the supported formats, then tap <em>Choose Ente export</em>. For an encrypted export, enter the <em>Ente export password</em>.</li>
-              <li>Under <em>Choose accounts to import</em>, select the accounts and import them.</li>
-            </ol>
-            <figure class="shot">
-              <div class="shot-placeholder" data-screenshot="12-import-ente.png" role="img" aria-label="Screenshot placeholder: Import from Ente Auth">
-                <span>Screenshot placeholder</span><strong>Import from Ente Auth</strong><code>12-import-ente.png</code>
+          <p>Import your accounts from an export file created in Ente Auth. Nothing is added until you confirm.</p>
+          <div class="step-sequence" id="import-ente-steps">
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps">
+                  <li>Open <em>Settings → Import &amp; Export Accounts</em> and, under <em>Import into JM</em>, tap <em>Ente Auth</em>.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-ente-open.png" aria-label="Open the Import &amp; Export Accounts screenshot in full size"><img src="images/import-ente-open.png" width="720" height="1561" alt="Import &amp; Export Accounts screen with Google Authenticator, 2FAS Authenticator and Ente Auth under Import into JM, and Export Accounts under Export." loading="lazy"></a>
+                  <figcaption><em>Ente Auth</em> under <em>Import into JM</em>.</figcaption>
+                </figure>
               </div>
-              <figcaption>Supported Ente Auth export formats.</figcaption>
-            </figure>
+              <div class="step-cell">
+                <ol class="steps" start="2">
+                  <li><em>Import from Ente Auth</em> opens with the note <em>Import your Ente accounts. Nothing is added until you confirm.</em> Tap <em>Choose Ente export</em>. Below the button, <em>Formats and privacy</em> can be expanded for more information.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-ente-start.png" aria-label="Open the Import from Ente Auth screenshot in full size"><img src="images/import-ente-start.png" width="720" height="1561" alt="Import from Ente Auth screen: Import your Ente accounts. Nothing is added until you confirm. The Choose Ente export button and the collapsed Formats and privacy section." loading="lazy"></a>
+                  <figcaption>Tap <em>Choose Ente export</em>.</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps" start="3">
+                  <li>In the Files window, go to the location of your Ente export, for example iCloud Drive, and select the export file. Choose a file that is available on your device; files stored only in the cloud may first have to be downloaded by your file provider.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-ente-files.png" aria-label="Open the Files window screenshot in full size"><img src="images/import-ente-files.png" width="720" height="1561" alt="Edited demonstration screenshot of the iOS Files window in iCloud Drive, used as a generic illustration. It lists two 2FAS backups, Backup_2026-10-17.2fas and Backup_2026-11-03-1.2fas, the folders Documents, Downloads and Images, the file Manual.pdf, the folder Preview and the file Unknown. The Ente export used in this example is not shown." loading="lazy"></a>
+                  <figcaption>Generic illustration of the iOS Files window. This folder does not contain the Ente export used in this example; the <code>.2fas</code> files belong to the 2FAS section. Anonymized demonstration screenshot: the other folder and file names and document previews are examples.</figcaption>
+                </figure>
+              </div>
+              <div class="step-cell">
+                <ol class="steps" start="4">
+                  <li><em>Choose accounts to import</em> opens and shows the <em>Selected file</em> at the top — here <code>ente-android-plaintext.txt</code>. Under <em>Import content</em>, check what the export contains. In this example:
+                    <ul>
+                      <li><strong>Entries: 2</strong> — all entries in the file, and both are <em>Active</em> (<strong>2</strong>).</li>
+                      <li><strong>Repeated accounts: 0</strong> and <strong>Already in JM Auth: 2</strong> — both accounts already exist in JM Authenticator.</li>
+                      <li><strong>In trash: 0</strong> and <strong>Invalid or unsupported: 0</strong>.</li>
+                      <li><strong>Eligible for import: 0</strong> — there are no new accounts to add.</li>
+                    </ul>
+                  </li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-ente-summary.png" aria-label="Open the Import content screenshot in full size"><img src="images/import-ente-summary.png" width="720" height="1561" alt="Choose accounts to import screen for Selected file: ente-android-plaintext.txt. Import content: Entries 2, Active 2, Repeated accounts 0, Already in JM Auth 2, In trash 0, Invalid or unsupported 0, Eligible for import 0. Below, the start of the Already in JM Authenticator list, No accounts selected and the unavailable Import accounts button." loading="lazy"></a>
+                  <figcaption>The <em>Import content</em> summary for the selected Ente export.</figcaption>
+                </figure>
+              </div>
+            </div>
+            <div class="step-pair">
+              <div class="step-cell">
+                <ol class="steps" start="5">
+                  <li>Both accounts are listed under <em>Already in JM Authenticator</em>. They have no checkbox, are not imported again and stay unchanged. Because nothing is eligible, no accounts can be selected: the bar at the bottom shows <em>No accounts selected</em> and <em>Import accounts</em> stays unavailable. To use a different export, tap <em>Choose another file</em>.</li>
+                </ol>
+                <figure class="shot">
+                  <a class="shot-zoom" href="images/import-ente-existing.png" aria-label="Open the Already in JM Authenticator screenshot in full size"><img src="images/import-ente-existing.png" width="720" height="1561" alt="Already in JM Authenticator list with two test accounts, ente-test@example.com and JM-Galaxy-Transfer, each with its existing JM Authenticator details, followed by Choose another file, No accounts selected and the unavailable Import accounts button." loading="lazy"></a>
+                  <figcaption>Existing accounts stay protected; <em>Import accounts</em> is unavailable.</figcaption>
+                </figure>
+              </div>
+            </div>
           </div>
           <p>Only standard TOTP accounts can be imported; HOTP, Steam and other unsupported types are skipped. Because other apps can change their export formats, not every version of their exports may be supported.</p>
           <p class="note"><strong>QR screenshots and export files contain your authentication secrets.</strong> After you have checked the import, delete them, including from <em>Recently Deleted</em> in Photos.</p>
