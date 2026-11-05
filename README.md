@@ -123,6 +123,8 @@ Copy these files/folders:
 - `web/public/favicon.ico` -> `public_html/favicon.ico`
 - `php-api/public/index.php` -> `public_html/php-api/public/index.php`
 - `php-api/src/MarketData.php` -> `public_html/php-api/src/MarketData.php`
+- `php-api/src/ResponseCache.php` -> `public_html/php-api/src/ResponseCache.php`
+- `php-api/src/RateLimiter.php` -> `public_html/php-api/src/RateLimiter.php`
 - create `public_html/.htaccess` with the content below
 
 What each upload does:
@@ -131,6 +133,8 @@ What each upload does:
 - `favicon.ico` is the browser tab icon.
 - `php-api/public/index.php` is the PHP API entry point.
 - `php-api/src/MarketData.php` is the PHP backend logic.
+- `php-api/src/ResponseCache.php` caches Yahoo responses in private temporary storage (outside `public_html`), so visitor count does not multiply upstream requests.
+- `php-api/src/RateLimiter.php` limits API requests per visitor.
 - `.htaccess` connects `/api/...` and `/health` to the PHP backend and sends frontend routes to `index.html`.
 
 Tip after frontend changes:

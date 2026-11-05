@@ -20,7 +20,11 @@ export function hasSavedTickers() {
 }
 
 export function saveTickers(tickers) {
-  localStorage.setItem(KEY, JSON.stringify(tickers));
+  try {
+    localStorage.setItem(KEY, JSON.stringify(tickers));
+  } catch {
+    /* storage unavailable */
+  }
 }
 
 export function loadRelatedListingGroups() {
@@ -33,5 +37,28 @@ export function loadRelatedListingGroups() {
 }
 
 export function saveRelatedListingGroups(groups) {
-  localStorage.setItem(RELATED_LISTINGS_KEY, JSON.stringify(groups));
+  try {
+    localStorage.setItem(RELATED_LISTINGS_KEY, JSON.stringify(groups));
+  } catch {
+    /* storage unavailable */
+  }
+}
+
+const PREF_PREFIX = "stock-monitor:";
+
+export function loadPref(key, fallback) {
+  try {
+    const value = localStorage.getItem(PREF_PREFIX + key);
+    return value === null ? fallback : value;
+  } catch {
+    return fallback;
+  }
+}
+
+export function savePref(key, value) {
+  try {
+    localStorage.setItem(PREF_PREFIX + key, String(value));
+  } catch {
+    /* storage unavailable */
+  }
 }
