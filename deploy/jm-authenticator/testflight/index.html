@@ -250,7 +250,26 @@
       .tc-figs .shot { margin-inline: auto; }
       table.plain th { width: auto; }
     }
+    details.trouble { margin: 1rem 0; border: 1px solid var(--line); border-radius: .5rem; background: #f8faf9; }
+    details.trouble > summary { min-height: 44px; display: flex; align-items: center; padding: .5rem 1rem; font-weight: 650; color: var(--navy); cursor: pointer; }
+    details.trouble[open] > summary { border-bottom: 1px solid var(--line); }
+    details.trouble > ol, details.trouble > p { margin: .8rem 1rem; }
     @media print { details.tc { break-inside: avoid; } .summary-actions, .tc-result { display: none; } }
+    .fixture { margin: 1rem 0 1.4rem; padding: 1rem 1.1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: .7rem; }
+    .fixture h4 { margin: 0 0 .2rem; font-size: 1.05rem; color: var(--navy); }
+    .fixture .tbl-wrap { margin: .8rem 0; }
+    .fixture ol { margin: .3rem 0 .8rem; padding-left: 1.3rem; }
+    .fx-badge { display: inline-block; margin: .2rem 0 .4rem; padding: .1rem .55rem; border-radius: 999px; font-size: .74rem; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; border: 1px solid currentColor; }
+    .fx-plain { color: var(--blocked); background: #fdf3e3; }
+    .fx-enc { color: var(--pass); background: #e8f4ec; }
+    .fx-download { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1rem; border-radius: .5rem; background: var(--navy); color: #fff; font-weight: 650; text-decoration: none; }
+    .fx-download:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
+    .fx-qr { margin: 1rem 0; width: min(24rem, 100%); }
+    /* Shows the QR area of the original 1125 × 2436 PNG (QR at x 133–792, y 847–1507) with a white quiet zone; crop box x 92–832, y 807–1547. */
+    .fx-qr-frame { position: relative; aspect-ratio: 1; overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: .6rem; }
+    .fx-qr-frame img { position: absolute; max-width: none; width: 152.027%; height: auto; left: -12.432%; top: -109.054%; }
+    .fx-qr figcaption { margin-top: .5rem; color: var(--muted); font-size: .85rem; line-height: 1.5; }
+    .fx-record { margin: .8rem 0 0; padding: .7rem 1rem; border: 1px solid var(--line); border-radius: .5rem; background: #f8faf9; font-size: .93rem; }
   </style>
 </head>
 <body id="top">
@@ -1226,7 +1245,7 @@
 <h2 id="restore-title">06. Backup restoration</h2>
 <p>Restoring only adds accounts. Existing accounts are kept and exact duplicates are skipped. You need the backup file <em>and</em> its password.</p>
 
-<nav class="chapter-nav" aria-label="Chapter 06 test cases"><h3>Test cases</h3><ol><li><a href="#tc-06-01">TC-06-01 · Wrong password and nothing new to restore</a></li><li><a href="#tc-06-02">TC-06-02 · Restore a deleted demo account</a></li><li><a href="#tc-06-03">TC-06-03 · Restore selected backup from history</a></li></ol></nav>
+<nav class="chapter-nav" aria-label="Chapter 06 test cases"><h3>Test cases</h3><ol><li><a href="#tc-06-01">TC-06-01 · Wrong password and nothing new to restore</a></li><li><a href="#tc-06-02">TC-06-02 · Restore a missing account</a></li><li><a href="#tc-06-03">TC-06-03 · Restore selected backup from history</a></li></ol></nav>
 <details class="tc" id="tc-06-01" data-tc="TC-06-01" data-ref="P-09" data-title="Wrong password and nothing new to restore">
 <summary><span class="tc-id">TC-06-01</span><span class="tc-title">Wrong password and nothing new to restore</span><span class="tc-pill" data-status="NOT TESTED">NOT TESTED</span></summary>
 <div class="tc-body">
@@ -1252,24 +1271,31 @@
 <label class="fld">Comments and steps to reproduce (optional)<textarea name="comment-tc-06-01" rows="2"></textarea></label>
 </fieldset>
 </div>
-</details><details class="tc" id="tc-06-02" data-tc="TC-06-02" data-ref="P-09" data-title="Restore a deleted demo account">
-<summary><span class="tc-id">TC-06-02</span><span class="tc-title">Restore a deleted demo account</span><span class="tc-pill" data-status="NOT TESTED">NOT TESTED</span></summary>
+</details><details class="tc" id="tc-06-02" data-tc="TC-06-02" data-ref="P-09 (missing-account restoration)" data-title="Restore a missing account">
+<summary><span class="tc-id">TC-06-02</span><span class="tc-title">Restore a missing account</span><span class="tc-pill" data-status="NOT TESTED">NOT TESTED</span></summary>
 <div class="tc-body">
 <dl class="tc-meta">
-<div><dt>Objective</dt><dd>Confirm that a deleted account is restored from a backup and generates the same codes again.</dd></div>
-<div><dt>Preconditions</dt><dd>A backup containing <em>Demo Camera</em> exists (TC-05-03). Optional: <em>Demo Camera</em>’s key in another authenticator for comparison.</dd></div>
+<div><dt>Objective</dt><dd>Confirm that a deleted demonstration account is restored from an encrypted backup, that incorrect passwords are rejected, that existing accounts are preserved and that duplicates are not imported.</dd></div>
+<div><dt>Preconditions</dt><dd><strong>Important: Use demonstration accounts only. Never delete a real account to perform this test.</strong> Choose a throw-away test password of at least 12 characters.</dd></div>
 <div><dt>Starting screen</dt><dd>Home screen.</dd></div>
 <div><dt>Version and build</dt><dd>JM Authenticator 1.0.0 (Build 1)</dd></div>
-<div><dt>Traceability</dt><dd>P-09</dd></div>
+<div><dt>Traceability</dt><dd>P-09 (missing-account restoration)</dd></div>
 </dl>
 <div class="tbl-wrap"><table class="tc-steps"><caption>Actions and expected results for TC-06-02</caption><thead><tr><th scope="col">Step</th><th scope="col">Action</th><th scope="col">Expected result</th></tr></thead><tbody>
-<tr><td data-label="Step">1</td><td data-label="Action">Delete <em>Demo Camera</em> (TC-03-14 steps).</td><td data-label="Expected result"><em>Demo Camera</em> is no longer listed.</td></tr>
-<tr><td data-label="Step">2</td><td data-label="Action">Open <em>Settings → Encrypted backups → Restore from backup file</em>, select the backup and enter the password, then tap <em>Continue</em>.</td><td data-label="Expected result"><em>Choose accounts to restore</em> shows <em>Available to restore</em> 1; <em>Demo Camera</em> is listed under <em>Available to restore</em>.</td></tr>
-<tr><td data-label="Step">3</td><td data-label="Action">Select <em>Demo Camera</em>.</td><td data-label="Expected result">The bottom bar shows <em>1 account selected</em> and the button <em>Restore selected accounts (1)</em>.</td></tr>
-<tr><td data-label="Step">4</td><td data-label="Action">Tap <em>Restore selected accounts (1)</em>.</td><td data-label="Expected result"><em>Restoration completed</em> with <em>New accounts restored: 1</em>.</td></tr>
-<tr><td data-label="Step">5</td><td data-label="Action">Tap <em>Done</em>.</td><td data-label="Expected result"><em>Demo Camera</em> is back on the Home screen; all other accounts are unchanged. Optional: its code matches the other authenticator.</td></tr>
+<tr><td data-label="Step">1</td><td data-label="Action">Create a demonstration account in JM Authenticator (for example <em>Demo Mail</em> with the setup key from <a href="#demo-data">Demo data</a>, as in TC-03-02).</td><td data-label="Expected result">The demonstration account appears on the Home screen with a six-digit code.</td></tr>
+<tr><td data-label="Step">2</td><td data-label="Action">Create an encrypted backup containing that account: <em>Settings → Encrypted backups → Back Up All Accounts</em>, enter a filename and your test password twice, tap <em>Create encrypted backup</em> and save it (TC-05-03).</td><td data-label="Expected result"><em>Backup created successfully</em> shows the filename, <em>Storage</em> and <em>Accounts</em>.</td></tr>
+<tr><td data-label="Step">3</td><td data-label="Action">Confirm that the backup was created successfully and that you know its password, then tap <em>OK</em>.</td><td data-label="Expected result">The new backup is listed at the top of <em>Backup history</em>; its <em>Accounts included</em> count includes the demonstration account.</td></tr>
+<tr><td data-label="Step">4</td><td data-label="Action">Delete the demonstration account from JM Authenticator: open its <em>•••</em> menu, tap <em>Delete account</em>, then <em>Delete</em>.</td><td data-label="Expected result">The demonstration account is no longer listed; all other accounts are unchanged.</td></tr>
+<tr><td data-label="Step">5</td><td data-label="Action">Open <em>Settings → Encrypted backups</em>.</td><td data-label="Expected result"><em>Encrypted backups</em> shows <em>Restore from backup file</em> and <em>Backup history</em>.</td></tr>
+<tr><td data-label="Step">6</td><td data-label="Action">Select the backup containing the deleted account: expand <em>Backup history</em>, tap the backup and tap <em>Restore selected backup</em> (or use <em>Restore from backup file</em> and pick the file).</td><td data-label="Expected result"><em>Restore encrypted backup</em> shows the backup’s file name, <em>Backup password</em> and <em>Continue</em>.</td></tr>
+<tr><td data-label="Step">7</td><td data-label="Action">Enter an incorrect password first and tap <em>Continue</em>.</td><td data-label="Expected result">The app rejects it: <em>Incorrect password or damaged backup. No accounts were imported. Please try again.</em> Nothing is imported.</td></tr>
+<tr><td data-label="Step">8</td><td data-label="Action">Enter the correct password and tap <em>Continue</em>.</td><td data-label="Expected result">The backup is decrypted and <em>Choose accounts to restore</em> opens with the <em>Backup content</em> summary.</td></tr>
+<tr><td data-label="Step">9</td><td data-label="Action">Check that the missing demonstration account appears as available to restore.</td><td data-label="Expected result"><em>Available to restore</em> is at least 1 and the demonstration account is listed under it; accounts you still have are under <em>Already in JM Authenticator</em>.</td></tr>
+<tr><td data-label="Step">10</td><td data-label="Action">Select the account and complete the restoration: tap <em>Restore selected accounts (1)</em>, then <em>Done</em>.</td><td data-label="Expected result">The bottom bar shows <em>1 account selected</em>; after restoring, <em>Restoration completed</em> shows <em>New accounts restored: 1</em>.</td></tr>
+<tr><td data-label="Step">11</td><td data-label="Action">Return to the Home screen.</td><td data-label="Expected result">The restored demonstration account appears once and generates six-digit verification codes with a running countdown. All other accounts are unchanged.</td></tr>
+<tr><td data-label="Step">12</td><td data-label="Action">Repeat the restoration using the same backup (steps 5, 6 and 8).</td><td data-label="Expected result">The account is recognized as an existing duplicate: it is listed under <em>Already in JM Authenticator</em>, <em>Available to restore</em> is 0, <em>Nothing new to restore</em> is shown and <em>Restore selected accounts (0)</em> is unavailable. Tap <em>Cancel</em>; nothing is imported.</td></tr>
 </tbody></table></div>
-<p class="tc-evidence"><strong>Evidence:</strong> Screenshot of <em>Restoration completed</em>.</p>
+<p class="tc-criterion"><strong>Pass when:</strong> The missing demonstration account is restored successfully, incorrect passwords are rejected, existing accounts are preserved, and duplicate accounts are not imported.</p><p class="tc-note">Record your result as PASS, FAIL or BLOCKED and add comments if necessary.</p><p class="tc-evidence"><strong>Evidence:</strong> Screenshots of <em>Restoration completed</em> (step 10) and of <em>Nothing new to restore</em> (step 12) — demonstration data only.</p>
 
 <fieldset class="tc-result"><legend>Your result for TC-06-02</legend>
 <div class="st-row"><label class="st st-pass"><input type="radio" name="status-tc-06-02" value="PASS"><span>PASS</span></label><label class="st st-fail"><input type="radio" name="status-tc-06-02" value="FAIL"><span>FAIL</span></label><label class="st st-blocked"><input type="radio" name="status-tc-06-02" value="BLOCKED"><span>BLOCKED</span></label><label class="st st-not"><input type="radio" name="status-tc-06-02" value="NOT TESTED" checked><span>NOT TESTED</span></label></div>
@@ -1308,6 +1334,76 @@
 <section id="transfer" aria-labelledby="transfer-title">
 <h2 id="transfer-title">07. Import and export</h2>
 <p>Open <em>Settings → Import &amp; Export Accounts</em>. Imports are processed on your device; only accounts you select are added. Use <strong>demo accounts only</strong> in the other app as well — export QR codes and files contain secrets.</p>
+
+<h3 id="import-fixtures">Import testing — Google, Ente and 2FAS</h3>
+<p>You do not need Google Authenticator, Ente Auth or 2FAS to test the imports. Download the three prepared test files below. They contain <strong>demonstration accounts only</strong>, with public example keys that protect nothing. Never replace them with an export of your own real accounts, and never send real secrets, setup keys or verification codes in feedback.</p>
+<div class="callout warn"><p><strong>Unencrypted export or encrypted backup?</strong> An <em>unencrypted export</em> (the Google QR image and the Ente plain-text file) can be read by anyone who has the file. It needs no password. An <em>encrypted backup</em> (the 2FAS file) is protected by 2FAS encryption. Delete the downloaded Ente and 2FAS files from your iPhone when you have finished testing.</p></div>
+<p>The Google QR code is scanned directly from this page on a computer or second screen. Download the Ente and 2FAS files on the iPhone (they go to <em>Files → Downloads</em>). Record your result in the matching test case below (TC-07-02, TC-07-03 or TC-07-04).</p>
+
+<div class="fixture" id="fixture-google">
+<h4>Google Authenticator</h4>
+<span class="fx-badge fx-plain">Unencrypted export</span>
+<div class="tbl-wrap"><table class="plain"><caption>Google Authenticator test file</caption><tbody>
+<tr><th scope="row">Source application</th><td>Google Authenticator</td></tr>
+<tr><th scope="row">File name</th><td><code>Google-Accounts.png</code></td></tr>
+<tr><th scope="row">Format</th><td>Migration QR image (PNG screenshot of the <em>Transfer accounts → Export accounts</em> QR code)</td></tr>
+<tr><th scope="row">Contents</th><td>3 demo accounts: <em>Demo Camera</em>, <em>Demo Photos</em>, <em>Demo Files</em> (1 QR part)</td></tr>
+<tr><th scope="row">Password</th><td>None</td></tr>
+<tr><th scope="row">Purpose</th><td>Test the import with <em>Scan a QR code</em>.</td></tr>
+</tbody></table></div>
+<figure class="fx-qr"><div class="fx-qr-frame"><img src="fixtures/Google-Accounts.png" width="1125" height="2436" alt="Google Authenticator migration QR code for the three demo accounts Demo Camera, Demo Photos and Demo Files."></div><figcaption>Google Authenticator migration QR code (<code>Google-Accounts.png</code>, demo accounts only).</figcaption></figure>
+<p><strong>How to import</strong></p>
+<p>Display this QR code on a computer or second screen. On the iPhone running JM Authenticator, open <em>Settings → Import &amp; Export Accounts → Google Authenticator → Scan a QR code</em>.</p>
+<p>Point the iPhone camera at the QR code displayed on the other screen. Then select the accounts and confirm the import.</p>
+<p><strong>Expected result:</strong> JM shows <em>1 QR part collected out of 1.</em> The account list shows <em>Demo Camera</em>, <em>Demo Photos</em> and <em>Demo Files</em>. If you already added these demo accounts in chapter 03, JM must not add them a second time. Your existing accounts stay unchanged.</p>
+<p class="fx-record"><strong>Record PASS / FAIL / BLOCKED:</strong> <a href="#tc-07-02">TC-07-02 · Import from Google Authenticator</a>. Choose <em>BLOCKED</em> if you cannot scan the QR code (for example, no second screen).</p>
+</div>
+
+<div class="fixture" id="fixture-ente">
+<h4>Ente Auth</h4>
+<span class="fx-badge fx-plain">Unencrypted export</span>
+<div class="tbl-wrap"><table class="plain"><caption>Ente Auth test file</caption><tbody>
+<tr><th scope="row">Source application</th><td>Ente Auth</td></tr>
+<tr><th scope="row">File name</th><td><code>Ente-TestFlight.txt</code></td></tr>
+<tr><th scope="row">Format</th><td>Plain-text export (<em>Plain text — Unencrypted export</em>), one <code>otpauth://</code> link per line</td></tr>
+<tr><th scope="row">Contents</th><td>5 demo accounts: <em>Demo Camera</em>, <em>Demo Files</em>, <em>Demo Photos</em>, <em>Ente Transfer to JM Auth</em>, <em>JM transfer Lab</em></td></tr>
+<tr><th scope="row">Password</th><td>None</td></tr>
+<tr><th scope="row">Purpose</th><td>Test the Ente account import.</td></tr>
+</tbody></table></div>
+<p><a class="fx-download" href="fixtures/Ente-TestFlight.txt" download="Ente-TestFlight.txt">Download Ente-TestFlight.txt</a></p>
+<p><strong>How to import</strong></p>
+<ol>
+<li>Download the file on the iPhone.</li>
+<li>In JM Authenticator: <em>Settings → Import &amp; Export Accounts → Ente Auth</em>.</li>
+<li>Tap <em>Choose Ente export</em> and pick <em>Ente-TestFlight.txt</em> in <em>Files → Downloads</em>. No password is needed.</li>
+<li>Select the accounts and tap <em>Import N accounts</em>.</li>
+</ol>
+<p><strong>Expected result:</strong> The <em>Import content</em> summary lists the 5 demo accounts. <em>Ente Transfer to JM Auth</em> and <em>JM transfer Lab</em> are added. Demo accounts that are already in JM must not be added a second time. Your existing accounts stay unchanged.</p>
+<p class="fx-record"><strong>Record PASS / FAIL / BLOCKED:</strong> <a href="#tc-07-04">TC-07-04 · Import from Ente Auth</a>.</p>
+</div>
+
+<div class="fixture" id="fixture-2fas">
+<h4>2FAS Authenticator</h4>
+<span class="fx-badge fx-enc">Encrypted backup</span>
+<div class="tbl-wrap"><table class="plain"><caption>2FAS Authenticator test file</caption><tbody>
+<tr><th scope="row">Source application</th><td>2FAS Authenticator (backup created by the 2FAS app)</td></tr>
+<tr><th scope="row">File name</th><td><code>TestFkight-Backup.2fas</code></td></tr>
+<tr><th scope="row">Format</th><td>Encrypted 2FAS backup file (<code>.2fas</code>)</td></tr>
+<tr><th scope="row">Contents</th><td>Demo accounts only</td></tr>
+<tr><th scope="row">Purpose</th><td>Test the 2FAS backup import.</td></tr>
+</tbody></table></div>
+<p>This file is an <strong>encrypted 2FAS backup</strong>, created by the 2FAS Authenticator app and intended for JM Authenticator import testing.</p>
+<p><a class="fx-download" href="fixtures/TestFkight-Backup.2fas" download="TestFkight-Backup.2fas">Download 2FAS encrypted backup</a></p>
+<p><strong>How to import</strong></p>
+<ol>
+<li>Download the file on the iPhone.</li>
+<li>In JM Authenticator: <em>Settings → Import &amp; Export Accounts → 2FAS Authenticator</em>.</li>
+<li>Pick <em>TestFkight-Backup.2fas</em> in <em>Files → Downloads</em> and continue.</li>
+<li>Select the accounts and tap <em>Import N accounts</em>.</li>
+</ol>
+<p><strong>Expected result:</strong> JM recognises the file as an encrypted 2FAS backup. The <em>Import content</em> summary lists the demo accounts and the import completes. Your existing accounts stay unchanged.</p>
+<p class="fx-record"><strong>Record PASS / FAIL / BLOCKED:</strong> <a href="#tc-07-03">TC-07-03 · Import from 2FAS</a>.</p>
+</div>
 
 <nav class="chapter-nav" aria-label="Chapter 07 test cases"><h3>Test cases</h3><ol><li><a href="#tc-07-01">TC-07-01 · Import & Export Accounts screen</a></li><li><a href="#tc-07-02">TC-07-02 · Import from Google Authenticator</a></li><li><a href="#tc-07-03">TC-07-03 · Import from 2FAS</a></li><li><a href="#tc-07-04">TC-07-04 · Import from Ente Auth</a></li><li><a href="#tc-07-05">TC-07-05 · Export as QR Codes</a></li><li><a href="#tc-07-06">TC-07-06 · Export to Encrypted File</a></li></ol></nav>
 <details class="tc" id="tc-07-01" data-tc="TC-07-01" data-ref="P-10" data-title="Import &amp; Export Accounts screen">
@@ -1410,20 +1506,20 @@
 <summary><span class="tc-id">TC-07-05</span><span class="tc-title">Export as QR Codes</span><span class="tc-pill" data-status="NOT TESTED">NOT TESTED</span></summary>
 <div class="tc-body">
 <dl class="tc-meta">
-<div><dt>Objective</dt><dd>Confirm that selected accounts can be shown as QR codes after authentication and are hidden again for privacy.</dd></div>
-<div><dt>Preconditions</dt><dd>Only demo accounts in JM Authenticator. Do not photograph or share the QR codes.</dd></div>
-<div><dt>Starting screen</dt><dd><em>Import &amp; Export Accounts</em>.</dd></div>
+<div><dt>Objective</dt><dd>You show one demonstration account as a transfer QR code. This matters because the QR code is how accounts move to another authenticator; it must appear only after authentication and without errors.</dd></div>
+<div><dt>Preconditions</dt><dd>Only demonstration accounts in JM Authenticator. Do not photograph or share the QR code.</dd></div>
+<div><dt>Starting screen</dt><dd><em>Settings</em> → <em>Import &amp; Export Accounts</em>.</dd></div>
 <div><dt>Version and build</dt><dd>JM Authenticator 1.0.0 (Build 1)</dd></div>
 <div><dt>Traceability</dt><dd>P-10</dd></div>
 </dl>
 <div class="tbl-wrap"><table class="tc-steps"><caption>Actions and expected results for TC-07-05</caption><thead><tr><th scope="col">Step</th><th scope="col">Action</th><th scope="col">Expected result</th></tr></thead><tbody>
-<tr><td data-label="Step">1</td><td data-label="Action">Tap <em>Export Accounts</em>.</td><td data-label="Expected result"><em>Export Accounts</em> shows <em>Choose which accounts to export</em>, the account list with selection, <em>N of M selected</em>, <em>Select all</em> / <em>Clear All</em> and <em>Export method</em>.</td></tr>
-<tr><td data-label="Step">2</td><td data-label="Action">Select one demo account and tap <em>Export as QR Codes</em>.</td><td data-label="Expected result">Authentication is requested (<em>Authenticate to show QR codes</em>).</td></tr>
-<tr><td data-label="Step">3</td><td data-label="Action">Authenticate with Face ID.</td><td data-label="Expected result"><em>Export QR Codes</em> shows <em>QR code 1 of 1</em>, the warning <em>Anyone who scans these QR codes can access the exported accounts. Keep them private.</em> and the instructions.</td></tr>
-<tr><td data-label="Step">4</td><td data-label="Action">Go to the iOS Home Screen and return.</td><td data-label="Expected result">The QR code is no longer shown: <em>QR codes were cleared for your privacy. Authenticate again to continue.</em></td></tr>
-<tr><td data-label="Step">5</td><td data-label="Action">Close the screen.</td><td data-label="Expected result">Your accounts are unchanged.</td></tr>
+<tr><td data-label="Step">1</td><td data-label="Action">Tap <em>Export Accounts</em>.</td><td data-label="Expected result"><em>Export Accounts</em> shows <em>Choose which accounts to export</em>, your accounts, the selection count, <em>Select all</em> and the export buttons.</td></tr>
+<tr><td data-label="Step">2</td><td data-label="Action">Select one demonstration account.</td><td data-label="Expected result">The count reads <em>1 of N selected</em>.</td></tr>
+<tr><td data-label="Step">3</td><td data-label="Action">Tap <em>Export as QR Codes</em>.</td><td data-label="Expected result"><em>Export QR Codes</em> opens and asks you to authenticate (<em>Authenticate to show QR codes</em>).</td></tr>
+<tr><td data-label="Step">4</td><td data-label="Action">Authenticate with Face ID.</td><td data-label="Expected result"><em>Export QR Codes</em> shows one QR code with <em>QR code 1 of 1</em> and the warning <em>Anyone who scans these QR codes can access the exported accounts. Keep them private.</em> No error is shown.</td></tr>
+<tr><td data-label="Step">5</td><td data-label="Action">Tap <em>Done</em>.</td><td data-label="Expected result">The QR screen closes; your accounts are unchanged.</td></tr>
 </tbody></table></div>
-<p class="tc-evidence"><strong>Evidence:</strong> No screenshot of the QR code. A screenshot of the message in step 4 is welcome.</p>
+<p class="tc-criterion"><strong>Pass when:</strong> The QR code appears after authentication as <em>QR code 1 of 1</em>, with no error, and <em>Done</em> closes it without changing your accounts.</p><p class="tc-note">Optional privacy check: while the QR code is shown, go to the iOS Home Screen and return. The QR code should be hidden: <em>QR codes were cleared for your privacy. Authenticate again to continue.</em></p><p class="tc-evidence"><strong>Evidence:</strong> None required. Never capture the QR code itself.</p>
 
 <fieldset class="tc-result"><legend>Your result for TC-07-05</legend>
 <div class="st-row"><label class="st st-pass"><input type="radio" name="status-tc-07-05" value="PASS"><span>PASS</span></label><label class="st st-fail"><input type="radio" name="status-tc-07-05" value="FAIL"><span>FAIL</span></label><label class="st st-blocked"><input type="radio" name="status-tc-07-05" value="BLOCKED"><span>BLOCKED</span></label><label class="st st-not"><input type="radio" name="status-tc-07-05" value="NOT TESTED" checked><span>NOT TESTED</span></label></div>
@@ -1435,19 +1531,44 @@
 <summary><span class="tc-id">TC-07-06</span><span class="tc-title">Export to Encrypted File</span><span class="tc-pill" data-status="NOT TESTED">NOT TESTED</span></summary>
 <div class="tc-body">
 <dl class="tc-meta">
-<div><dt>Objective</dt><dd>Confirm that selected accounts can be exported to a password-protected file that can be restored.</dd></div>
-<div><dt>Preconditions</dt><dd>Only demo accounts. A throw-away test password.</dd></div>
-<div><dt>Starting screen</dt><dd><em>Export Accounts</em>.</dd></div>
+<div><dt>Objective</dt><dd>You save your demonstration accounts as a password-protected <code>.jmbackup</code> file in Files. This matters because the file lets you move or restore accounts later; success means the file is saved and the app confirms it.</dd></div>
+<div><dt>Preconditions</dt><dd>Only demonstration accounts. A throw-away test password of at least 12 characters. <strong>Keep the backup password safe:</strong> without it the file cannot be restored, and a forgotten password cannot be recovered.</dd></div>
+<div><dt>Starting screen</dt><dd><em>Settings</em> → <em>Import &amp; Export Accounts</em> → <em>Export Accounts</em>.</dd></div>
 <div><dt>Version and build</dt><dd>JM Authenticator 1.0.0 (Build 1)</dd></div>
 <div><dt>Traceability</dt><dd>P-10</dd></div>
 </dl>
 <div class="tbl-wrap"><table class="tc-steps"><caption>Actions and expected results for TC-07-06</caption><thead><tr><th scope="col">Step</th><th scope="col">Action</th><th scope="col">Expected result</th></tr></thead><tbody>
-<tr><td data-label="Step">1</td><td data-label="Action">Select two demo accounts and tap <em>Export to Encrypted File</em>.</td><td data-label="Expected result">A password-protected export form opens for the selected accounts. <span class="review">Wording not confirmed — report what you see.</span></td></tr>
-<tr><td data-label="Step">2</td><td data-label="Action">Enter a test password twice and save the file to <em>On My iPhone</em> in Files.</td><td data-label="Expected result">JM Authenticator confirms that the export was saved.</td></tr>
-<tr><td data-label="Step">3</td><td data-label="Action">Restore it via <em>Encrypted backups → Restore from backup file</em> (TC-06-01 steps 1–4).</td><td data-label="Expected result"><em>Choose accounts to restore</em> shows <em>Accounts in backup</em> 2.</td></tr>
+<tr><td data-label="Step">1</td><td data-label="Action">In <em>Export Accounts</em>, tap <em>Select all</em>.</td><td data-label="Expected result">All accounts are selected; the count reads <em>N of N selected</em>.</td></tr>
+<tr><td data-label="Step">2</td><td data-label="Action">Tap <em>Export to Encrypted File</em>.</td><td data-label="Expected result">The <em>Export to Encrypted File</em> screen opens with the number of selected accounts, <em>Backup filename</em>, <em>Backup password</em> and <em>Confirm backup password</em>.</td></tr>
+<tr><td data-label="Step">3</td><td data-label="Action">Enter a filename (for example <code>JM-TestFlight-Export</code>) and a backup password.</td><td data-label="Expected result">Both fields are filled; the password is hidden.</td></tr>
+<tr><td data-label="Step">4</td><td data-label="Action">Enter the same password in <em>Confirm backup password</em> and tap <em>Export to Encrypted File</em> at the bottom.</td><td data-label="Expected result"><em>Save your external backup</em> appears with <em>Continue</em>.</td></tr>
+<tr><td data-label="Step">5</td><td data-label="Action">Tap <em>Continue</em>.</td><td data-label="Expected result">The iOS <em>Files</em> save window opens.</td></tr>
+<tr><td data-label="Step">6</td><td data-label="Action">Choose <em>iCloud Drive</em> or <em>On My iPhone</em>.</td><td data-label="Expected result">The chosen location is shown.</td></tr>
+<tr><td data-label="Step">7</td><td data-label="Action">Optional: create a folder with <em>•••</em> → <em>New Folder</em> (for example <code>JM AUTH</code>).</td><td data-label="Expected result">The new folder appears in the location.</td></tr>
+<tr><td data-label="Step">8</td><td data-label="Action">Open the chosen folder.</td><td data-label="Expected result">The folder is shown as the save destination.</td></tr>
+<tr><td data-label="Step">9</td><td data-label="Action">Tap <em>Save</em>.</td><td data-label="Expected result">The Files window closes.</td></tr>
+<tr><td data-label="Step">10</td><td data-label="Action">Check the success confirmation and tap <em>OK</em>.</td><td data-label="Expected result">A confirmation titled <em>Export to Encrypted File</em> says the external encrypted backup was saved and shows the filename and <em>Accounts</em> with the number you selected.</td></tr>
 </tbody></table></div>
-<p class="tc-note">The app says: <em>Encrypted account exports can also be restored later using Restore from Backup File.</em> Describe each screen you see in your comments, as this flow has no screenshots yet.</p><p class="tc-evidence"><strong>Evidence:</strong> Screenshot of the confirmation.</p>
+<p class="tc-criterion"><strong>Pass when:</strong> The success confirmation appears with the filename and the correct number of accounts. You do not need to open Files afterwards.</p><p class="tc-note">The app reminds you: <em>Encrypted account exports can also be restored later using Restore from Backup File.</em></p><p class="tc-evidence"><strong>Evidence:</strong> Screenshot of the success confirmation.</p>
 
+<details class="trouble"><summary>Can't find iCloud Drive?</summary>
+<ol>
+<li>Open the iPhone Files app.</li>
+<li>Tap Browse at the bottom.</li>
+<li>If Locations is not displayed, tap Browse again or use the back arrow.</li>
+<li>Under Locations, find iCloud Drive.</li>
+<li>If iCloud Drive is missing:
+<ul>
+<li>Tap the three dots (•••).</li>
+<li>Select Edit.</li>
+<li>Enable iCloud Drive if available.</li>
+<li>Tap Done.</li>
+</ul></li>
+<li>Open iCloud Drive.</li>
+<li>Open the folder containing the backup.</li>
+</ol>
+<p>If iCloud Drive is not available on your iPhone, save the backup to <em>On My iPhone</em> instead when the save window offers it.</p>
+</details>
 <fieldset class="tc-result"><legend>Your result for TC-07-06</legend>
 <div class="st-row"><label class="st st-pass"><input type="radio" name="status-tc-07-06" value="PASS"><span>PASS</span></label><label class="st st-fail"><input type="radio" name="status-tc-07-06" value="FAIL"><span>FAIL</span></label><label class="st st-blocked"><input type="radio" name="status-tc-07-06" value="BLOCKED"><span>BLOCKED</span></label><label class="st st-not"><input type="radio" name="status-tc-07-06" value="NOT TESTED" checked><span>NOT TESTED</span></label></div>
 <label class="fld">Actual result, if different from expected (optional)<textarea name="actual-tc-07-06" rows="2"></textarea></label>
