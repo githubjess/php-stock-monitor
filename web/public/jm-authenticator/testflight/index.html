@@ -292,7 +292,7 @@
     <div class="facts" aria-label="Testing at a glance">
       <div class="fact"><strong>Build under test</strong><p>JM Authenticator 1.0.0 (Build 1), installed from TestFlight.</p></div>
       <div class="fact"><strong>Demo data only</strong><p>Never use real accounts, secrets, QR codes or backup passwords.</p></div>
-      <div class="fact"><strong>52 test cases</strong><p>Mark PASS, FAIL, BLOCKED or NOT TESTED, then generate and send your report.</p></div>
+      <div class="fact"><strong>52 test cases</strong><p>For each test select PASS, FAIL, or BLOCKED. Unfinished tests remain NOT TESTED. When you're done, generate and send your report.</p></div>
     </div>
     <div class="layout">
       <nav class="toc" aria-label="Testing guide contents">
@@ -1685,14 +1685,18 @@
 <li>Steps to reproduce</li>
 <li>A screenshot when useful — demo data only</li>
 </ul>
-<h3 id="testflight-feedback">Sending feedback through TestFlight</h3>
-<p>TestFlight sends your feedback, with device and build details, to the developer:</p>
-<ul>
-<li><strong>From a screenshot:</strong> while using JM Authenticator, take a screenshot, tap the preview and choose the option to share it as beta feedback. Add a comment that starts with the test ID.</li>
-<li><strong>From the TestFlight app:</strong> open <em>TestFlight</em>, select <em>JM Authenticator</em> and choose the option to send beta feedback.</li>
-<li><strong>After a crash:</strong> TestFlight may ask whether to share crash details. Please accept and describe what you were doing.</li>
-</ul>
-<p class="muted small">The exact names of these TestFlight options are set by Apple and can differ between iOS versions.</p>
+<h3 id="testflight-feedback">Send feedback directly through Apple TestFlight</h3>
+<div class="callout" role="note"><p><strong>Important: You can also report problems directly to Apple TestFlight.</strong></p></div>
+<ol>
+<li>Open the <strong>TestFlight</strong> app on your iPhone.</li>
+<li>Select <strong>JM Authenticator</strong>.</li>
+<li>Tap <strong>Send Beta Feedback</strong>.</li>
+<li>Describe the problem and optionally attach a screenshot.</li>
+<li>Tap <strong>Submit</strong>.</li>
+</ol>
+<p>Your feedback will be available to the JM Authenticator development team through Apple's App Store Connect.</p>
+<p><strong>Please use this method especially for bugs, crashes, unexpected behaviour or problems that are easier to explain with a screenshot.</strong></p>
+<div class="callout warn" role="note"><p><strong>Privacy reminder:</strong> Before submitting screenshots, make sure they contain only demonstration accounts and no sensitive information.</p></div>
 <p>You can also email <a href="mailto:support@jegprofil.info?subject=JM%20Authenticator%20TestFlight%201.0.0%20(1)%20report">support@jegprofil.info</a>. Never send secret keys, codes, backup files, backup passwords or QR codes.</p>
 <h3 id="summary">Your test report</h3>
 <div class="progress-box"><p class="progress-label" data-progress-label>0 of 52 tests completed</p><progress data-progress max="52" value="0" aria-label="Tests completed">0 of 52</progress></div>
