@@ -269,6 +269,9 @@
     .fx-qr-frame { position: relative; aspect-ratio: 1; overflow: hidden; background: #fff; border: 1px solid var(--line); border-radius: .6rem; }
     .fx-qr-frame img { position: absolute; max-width: none; width: 152.027%; height: auto; left: -12.432%; top: -109.054%; }
     .fx-qr figcaption { margin-top: .5rem; color: var(--muted); font-size: .85rem; line-height: 1.5; }
+    /* Header without site navigation: branding row, beta label directly below, left-aligned. */
+    .jm-policy-navigation .jm-brand { padding-bottom: 0; }
+    .tf-beta-label { margin: .45rem 0 0; padding-left: 0; color: var(--navy); text-transform: uppercase; font-size: .75rem; font-weight: 750; letter-spacing: .16em; line-height: 1.4; }
     .fx-record { margin: .8rem 0 0; padding: .7rem 1rem; border: 1px solid var(--line); border-radius: .5rem; background: #f8faf9; font-size: .93rem; }
   </style>
 </head>
@@ -279,32 +282,10 @@
         <img src="/jm-authenticator/branding/jm-shield.png" alt="" width="52" height="52" />
         <span data-i18n="common.product">JM Authenticator</span>
       </a>
-      <nav class="jm-nav" data-i18n-aria-label="a11y.mainNav" aria-label="Main navigation">
-        <a href="/" data-i18n-text="nav.home"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/></svg>Home</a>
-        <a href="/#features" data-i18n-text="nav.features"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11 4.5Q11.8 11.2 18.5 12Q11.8 12.8 11 19.5Q10.2 12.8 3.5 12Q10.2 11.2 11 4.5z"/><circle cx="18.5" cy="5.5" r="1.5"/></svg>Features</a>
-        <a href="/jm-authenticator/privacy/" data-legal-page="privacy" data-i18n-text="nav.privacy"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.2c2.2 1.5 4.6 2.3 7 2.5v5.6c0 4.6-2.9 8-7 9.5-4.1-1.5-7-4.9-7-9.5V5.7c2.4-.2 4.8-1 7-2.5z"/><path d="m9 12 2 2 4-4"/></svg>App Privacy</a>
-        <a href="/privacy/" data-i18n-text="nav.websitePrivacy"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.4 2.6 3.6 5.6 3.6 9s-1.2 6.4-3.6 9c-2.4-2.6-3.6-5.6-3.6-9s1.2-6.4 3.6-9z"/></svg>Website Privacy</a>
-        <a href="/jm-authenticator/support/" data-i18n-text="nav.support"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 14v-2a7.5 7.5 0 0 1 15 0v2"/><rect x="3.5" y="13" width="4" height="6.5" rx="1.5"/><rect x="16.5" y="13" width="4" height="6.5" rx="1.5"/><path d="M18.5 19.5c0 1.3-1.5 2-3.5 2h-2"/></svg>Support</a>
-        <a href="/jm-authenticator/guide/" data-i18n-text="nav.guide"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 7.5v12"/><path d="M3.5 5.5c3-.8 5.8-.3 8.5 2 2.7-2.3 5.5-2.8 8.5-2v13c-3-.8-5.8-.3-8.5 2-2.7-2.3-5.5-2.8-8.5-2z"/></svg>User Guide</a>
-        <a href="/impressum/" data-legal-page="impressum" data-i18n-text="nav.impressum"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h6"/></svg>Impressum</a>
-        <a href="/share-monitor/" data-i18n-text="nav.shareMonitor"><svg class="jm-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-6"/></svg>Share Monitor <span aria-hidden="true">↗</span></a>
-        <div class="jm-language" hidden>
-          <label class="jm-sr-only" for="jm-language" data-i18n="a11y.language">Website language</label>
-          <select id="jm-language" data-i18n-aria-label="a11y.language" aria-label="Website language">
-            <option value="en" lang="en">🇬🇧 English</option>
-            <option value="de" lang="de">🇩🇪 Deutsch</option>
-            <option value="es" lang="es">🇪🇸 Español</option>
-            <option value="fr" lang="fr">🇫🇷 Français</option>
-            <option value="vi" lang="vi">🇻🇳 Tiếng Việt</option>
-            <option value="zh-Hans" lang="zh-Hans">🇨🇳 简体中文</option>
-            <option value="zh-Hant" lang="zh-Hant">🇹🇼 繁體中文</option>
-          </select>
-        </div>
-      </nav>
+      <p class="tf-beta-label">TestFlight beta · 1.0.0 (Build 1)</p>
     </header>
   <main class="wrap">
     <div class="hero">
-      <p class="eyebrow">TestFlight beta · 1.0.0 (Build 1)</p>
       <h1>JM Authenticator TestFlight Testing Guide</h1>
       <p class="intro">Step-by-step test cases with the exact screens, actions and expected results for the JM Authenticator TestFlight beta, and how to report what you find.</p>
     </div>
@@ -1401,7 +1382,7 @@
 <li>Pick <em>TestFkight-Backup.2fas</em> in <em>Files → Downloads</em> and continue.</li>
 <li>Select the accounts and tap <em>Import N accounts</em>.</li>
 </ol>
-<p><strong>Expected result:</strong> JM recognises the file as an encrypted 2FAS backup. The <em>Import content</em> summary lists the demo accounts and the import completes. Your existing accounts stay unchanged.</p>
+<p><strong>Expected result:</strong> JM recognises the file as an encrypted 2FAS backup and shows the <em>Import content</em> summary with 3 entries and 0 invalid or unsupported. The backup contains the demo accounts <em>Demo Camera</em>, <em>Demo Photos</em> and <em>Demo Files</em>. If they are already in JM (from chapter 03 or the Google import), they are listed under <em>Already in JM Authenticator</em>, <em>Eligible for import</em> is 0 and <em>Import accounts</em> stays disabled — this duplicate protection is the correct result. Your existing accounts stay unchanged.</p>
 <p class="fx-record"><strong>Record PASS / FAIL / BLOCKED:</strong> <a href="#tc-07-03">TC-07-03 · Import from 2FAS</a>.</p>
 </div>
 
@@ -1445,7 +1426,7 @@
 <tr><td data-label="Step">5</td><td data-label="Action">Return to the Home screen.</td><td data-label="Expected result">The imported demo accounts are listed once each.</td></tr>
 </tbody></table></div>
 <p class="tc-evidence"><strong>Evidence:</strong> Screenshot of the import result. Never capture the export QR code.</p>
-
+<div class="tc-figs"><figure class="shot"><a class="shot-zoom" href="images/import-google-confirm.png" aria-label="Open the screenshot in full size"><img src="images/import-google-confirm.png" width="720" height="1558" alt="Import these accounts? dialog: Add 3 selected accounts? Existing JM Authenticator accounts and backups will remain unchanged. Buttons Cancel and Import selected accounts." loading="lazy"></a><figcaption><em>Import these accounts?</em> — 3 selected accounts.</figcaption></figure><figure class="shot"><a class="shot-zoom" href="images/import-google-complete.png" aria-label="Open the screenshot in full size"><img src="images/import-google-complete.png" width="720" height="1558" alt="Import complete: 3 accounts added. Your existing JM accounts are unchanged. Buttons Done and Start over." loading="lazy"></a><figcaption><em>Import complete</em> — 3 accounts added.</figcaption></figure><figure class="shot"><a class="shot-zoom" href="images/import-google-home.png" aria-label="Open the screenshot in full size"><img src="images/import-google-home.png" width="720" height="1558" alt="Home screen list with JM Test and the imported Demo Camera, Demo Photos and Demo Files accounts, codes hidden." loading="lazy"></a><figcaption>Home: the existing <em>JM Test</em> account and the 3 imported demo accounts.</figcaption></figure></div>
 <fieldset class="tc-result"><legend>Your result for TC-07-02</legend>
 <div class="st-row"><label class="st st-pass"><input type="radio" name="status-tc-07-02" value="PASS"><span>PASS</span></label><label class="st st-fail"><input type="radio" name="status-tc-07-02" value="FAIL"><span>FAIL</span></label><label class="st st-blocked"><input type="radio" name="status-tc-07-02" value="BLOCKED"><span>BLOCKED</span></label><label class="st st-not"><input type="radio" name="status-tc-07-02" value="NOT TESTED" checked><span>NOT TESTED</span></label></div>
 <label class="fld">Actual result, if different from expected (optional)<textarea name="actual-tc-07-02" rows="2"></textarea></label>
@@ -1470,7 +1451,7 @@
 <tr><td data-label="Step">5</td><td data-label="Action">Return to the Home screen.</td><td data-label="Expected result">The imported demo accounts are listed once each.</td></tr>
 </tbody></table></div>
 <p class="tc-evidence"><strong>Evidence:</strong> Screenshot of the <em>Import content</em> summary.</p>
-<div class="tc-figs"><figure class="shot"><a class="shot-zoom" href="/jm-authenticator/guide/images/import-2fas-summary.png" aria-label="Open the screenshot in full size"><img src="/jm-authenticator/guide/images/import-2fas-summary.png" width="720" height="1561" alt="Choose accounts to import with the Import content summary for a 2FAS backup." loading="lazy"></a><figcaption><em>Import content</em> summary (demo details).</figcaption></figure></div>
+<div class="tc-figs"><figure class="shot"><a class="shot-zoom" href="/jm-authenticator/guide/images/import-2fas-summary.png" aria-label="Open the screenshot in full size"><img src="/jm-authenticator/guide/images/import-2fas-summary.png" width="720" height="1561" alt="Choose accounts to import with the Import content summary for a 2FAS backup." loading="lazy"></a><figcaption><em>Import content</em> summary (demo details).</figcaption></figure><figure class="shot"><a class="shot-zoom" href="images/import-2fas-fixture-summary.png" aria-label="Open the screenshot in full size"><img src="images/import-2fas-fixture-summary.png" width="720" height="1558" alt="Choose accounts to import for the 2FAS test backup: Import content shows Entries 3, Active 3, Repeated accounts 0, Already in JM Auth 3, In trash 0, Invalid or unsupported 0, Eligible for import 0; No accounts selected; Import accounts disabled." loading="lazy"></a><figcaption>Test backup <code>TestFkight-Backup.2fas</code>: 3 entries, all already in JM — <em>Eligible for import 0</em>.</figcaption></figure><figure class="shot"><a class="shot-zoom" href="images/import-2fas-fixture-existing.png" aria-label="Open the screenshot in full size"><img src="images/import-2fas-fixture-existing.png" width="720" height="1558" alt="Already in JM Authenticator list with Demo Camera, Demo Photos and Demo Files; No accounts selected; Import accounts button disabled." loading="lazy"></a><figcaption><em>Already in JM Authenticator</em>: the 3 demo accounts; <em>Import accounts</em> is disabled.</figcaption></figure></div>
 <fieldset class="tc-result"><legend>Your result for TC-07-03</legend>
 <div class="st-row"><label class="st st-pass"><input type="radio" name="status-tc-07-03" value="PASS"><span>PASS</span></label><label class="st st-fail"><input type="radio" name="status-tc-07-03" value="FAIL"><span>FAIL</span></label><label class="st st-blocked"><input type="radio" name="status-tc-07-03" value="BLOCKED"><span>BLOCKED</span></label><label class="st st-not"><input type="radio" name="status-tc-07-03" value="NOT TESTED" checked><span>NOT TESTED</span></label></div>
 <label class="fld">Actual result, if different from expected (optional)<textarea name="actual-tc-07-03" rows="2"></textarea></label>
@@ -1495,7 +1476,7 @@
 <tr><td data-label="Step">5</td><td data-label="Action">Delete the export file from Files.</td><td data-label="Expected result">The file is gone.</td></tr>
 </tbody></table></div>
 <p class="tc-evidence"><strong>Evidence:</strong> Screenshot of the <em>Import content</em> summary.</p>
-
+<div class="tc-figs"><figure class="shot"><a class="shot-zoom" href="images/import-ente-select.png" aria-label="Open the screenshot in full size"><img src="images/import-ente-select.png" width="720" height="1558" alt="Choose accounts to import: Demo Files, Demo Photos and the JM Test match shown as existing accounts; under Import accounts, JM-Galaxy-Transfer (JM transfer Lab) is selected and Ready; 1 account selected, Import 1 account." loading="lazy"></a><figcaption><em>Choose accounts to import</em> — existing accounts excluded, <em>JM-Galaxy-Transfer</em> selected.</figcaption></figure><figure class="shot"><a class="shot-zoom" href="images/import-ente-confirm.png" aria-label="Open the screenshot in full size"><img src="images/import-ente-confirm.png" width="720" height="1558" alt="Import these accounts? dialog: Add 1 selected account? Existing JM Authenticator accounts and backups will remain unchanged. Buttons Cancel and Import selected accounts." loading="lazy"></a><figcaption><em>Import these accounts?</em> — 1 selected account.</figcaption></figure><figure class="shot"><a class="shot-zoom" href="images/import-ente-complete.png" aria-label="Open the screenshot in full size"><img src="images/import-ente-complete.png" width="720" height="1558" alt="Import from Ente Auth: Import complete, 1 account added. Your existing JM accounts are unchanged. Buttons Done and Choose another file." loading="lazy"></a><figcaption><em>Import complete</em> — 1 account added.</figcaption></figure></div>
 <fieldset class="tc-result"><legend>Your result for TC-07-04</legend>
 <div class="st-row"><label class="st st-pass"><input type="radio" name="status-tc-07-04" value="PASS"><span>PASS</span></label><label class="st st-fail"><input type="radio" name="status-tc-07-04" value="FAIL"><span>FAIL</span></label><label class="st st-blocked"><input type="radio" name="status-tc-07-04" value="BLOCKED"><span>BLOCKED</span></label><label class="st st-not"><input type="radio" name="status-tc-07-04" value="NOT TESTED" checked><span>NOT TESTED</span></label></div>
 <label class="fld">Actual result, if different from expected (optional)<textarea name="actual-tc-07-04" rows="2"></textarea></label>
@@ -1988,6 +1969,5 @@
       });
     })();
   </script>
-  <script type="module" src="/jm-authenticator/navigation.js"></script>
 </body>
 </html>
