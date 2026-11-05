@@ -1318,7 +1318,11 @@
 
 <h3 id="import-fixtures">Import testing — Google, Ente and 2FAS</h3>
 <p>You do not need Google Authenticator, Ente Auth or 2FAS to test the imports. Download the three prepared test files below. They contain <strong>demonstration accounts only</strong>, with public example keys that protect nothing. Never replace them with an export of your own real accounts, and never send real secrets, setup keys or verification codes in feedback.</p>
-<div class="callout warn"><p><strong>Unencrypted export or encrypted backup?</strong> An <em>unencrypted export</em> (the Google QR image and the Ente plain-text file) can be read by anyone who has the file. It needs no password. An <em>encrypted backup</em> (the 2FAS file) is protected by 2FAS encryption. Delete the downloaded Ente and 2FAS files from your iPhone when you have finished testing.</p></div>
+<div class="callout warn"><p><strong>Unencrypted export or encrypted backup?</strong></p>
+<p>An unencrypted export can be read by anyone who has access to the file. It does not require a password.</p>
+<p>Some authenticator apps offer encrypted backups with optional password protection. Whether a password is required depends on the export format and the settings used when creating the backup.</p>
+<p>The supplied Ente test file is unencrypted. The supplied 2FAS test backup is password-protected and requires its corresponding password to unlock.</p>
+<p>These demonstration files contain no real accounts. Delete downloaded test files when testing is complete.</p></div>
 <p>The Google QR code is scanned directly from this page on a computer or second screen. Download the Ente and 2FAS files on the iPhone (they go to <em>Files → Downloads</em>). Record your result in the matching test case below (TC-07-02, TC-07-03 or TC-07-04).</p>
 
 <div class="fixture" id="fixture-google">
@@ -1371,18 +1375,20 @@
 <tr><th scope="row">File name</th><td><code>TestFkight-Backup.2fas</code></td></tr>
 <tr><th scope="row">Format</th><td>Encrypted 2FAS backup file (<code>.2fas</code>)</td></tr>
 <tr><th scope="row">Contents</th><td>Demo accounts only</td></tr>
+<tr><th scope="row">Password</th><td>Required. This backup is password-protected and requires its corresponding password to unlock.</td></tr>
 <tr><th scope="row">Purpose</th><td>Test the 2FAS backup import.</td></tr>
 </tbody></table></div>
-<p>This file is an <strong>encrypted 2FAS backup</strong>, created by the 2FAS Authenticator app and intended for JM Authenticator import testing.</p>
+<p>This file is an <strong>encrypted 2FAS backup</strong>, created by the 2FAS Authenticator app and intended for JM Authenticator import testing. It is password-protected: JM can only read it after you enter its corresponding password.</p>
 <p><a class="fx-download" href="fixtures/TestFkight-Backup.2fas" download="TestFkight-Backup.2fas">Download 2FAS encrypted backup</a></p>
 <p><strong>How to import</strong></p>
 <ol>
 <li>Download the file on the iPhone.</li>
 <li>In JM Authenticator: <em>Settings → Import &amp; Export Accounts → 2FAS Authenticator</em>.</li>
-<li>Pick <em>TestFkight-Backup.2fas</em> in <em>Files → Downloads</em> and continue.</li>
-<li>Select the accounts and tap <em>Import N accounts</em>.</li>
+<li>Pick <em>TestFkight-Backup.2fas</em> in <em>Files → Downloads</em>.</li>
+<li>When JM shows the <em>2FAS backup password</em> field, enter the backup’s corresponding password and continue.</li>
+<li>If any accounts are eligible, select them and tap <em>Import N accounts</em>.</li>
 </ol>
-<p><strong>Expected result:</strong> JM recognises the file as an encrypted 2FAS backup and shows the <em>Import content</em> summary with 3 entries and 0 invalid or unsupported. The backup contains the demo accounts <em>Demo Camera</em>, <em>Demo Photos</em> and <em>Demo Files</em>. If they are already in JM (from chapter 03 or the Google import), they are listed under <em>Already in JM Authenticator</em>, <em>Eligible for import</em> is 0 and <em>Import accounts</em> stays disabled — this duplicate protection is the correct result. Your existing accounts stay unchanged.</p>
+<p><strong>Expected result:</strong> JM recognises the file as an encrypted 2FAS backup and asks for the <em>2FAS backup password</em>. After the correct password is entered, the backup is decrypted and JM shows the <em>Import content</em> summary with 3 entries and 0 invalid or unsupported. The backup contains the demo accounts <em>Demo Camera</em>, <em>Demo Photos</em> and <em>Demo Files</em>. If they are already in JM (from chapter 03 or the Google import), they are listed under <em>Already in JM Authenticator</em>, <em>Eligible for import</em> is 0 and <em>Import accounts</em> stays disabled — this duplicate protection is the correct result. Your existing accounts stay unchanged.</p>
 <p class="fx-record"><strong>Record PASS / FAIL / BLOCKED:</strong> <a href="#tc-07-03">TC-07-03 · Import from 2FAS</a>.</p>
 </div>
 
