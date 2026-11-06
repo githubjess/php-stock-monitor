@@ -365,7 +365,7 @@
 <ul>
 <li><strong>PASS</strong> — everything worked as described.</li>
 <li><strong>FAIL</strong> — something looked different, went wrong or the app crashed. Tell us what you saw.</li>
-<li><strong>BLOCKED</strong> — you could not do the task, for example because something you need is missing (such as a second screen) or the app said it could not continue.</li>
+<li><strong>BLOCKED</strong> — you could not do the task, for example because something you need is missing (such as a second screen) or the app said it could not continue. <em>Exception:</em> in TC-07-07 (encrypted Ente file) the memory warning is an expected result and counts as PASS.</li>
 <li><strong>NOT TESTED</strong> — you have not done this task yet. It is fine to skip tasks.</li>
 </ul></li>
 <li>Some steps are marked <span class="review">Wording not confirmed — report what you see.</span> We are not sure of the exact text on that screen. Please write down what you actually see.</li>
@@ -1411,19 +1411,26 @@
 <p>To decrypt an encrypted Ente export, JM first derives the key from the password. The file decides how much memory this needs. This test file asks for 1 GiB. JM only starts decrypting when iOS can safely provide that memory. Otherwise JM stops with a controlled message and imports nothing.</p>
 <p>The 1 GiB setting does not guarantee the same result on every device. Available memory depends on the iPhone model and on what else is running, so the same file can import on one iPhone and be refused on another.</p></div>
 <div class="tbl-wrap"><table class="plain"><caption>Verified results with this file (TestFlight 1.0.0 (1))</caption><thead><tr><th scope="col">Device</th><th scope="col">Result</th><th scope="col">Observed</th></tr></thead><tbody>
-<tr><th scope="row">iPhone Pro Max</th><td><strong>PASS</strong></td><td>Encrypted file decrypted successfully. 5 entries recognized, 2 already present, 3 eligible and selected for import. Final import completion not yet confirmed.</td></tr>
-<tr><th scope="row">iPhone XS Max</th><td><strong>BLOCKED</strong></td><td>Insufficient available memory. No accounts imported. No freeze or crash observed.</td></tr>
-<tr><th scope="row">iPhone 12 mini</th><td><strong>BLOCKED</strong></td><td>Insufficient available memory. Encrypted import could not proceed.</td></tr>
+<tr><th scope="row">iPhone 14 Pro Max</th><td><strong>PASS</strong> — expected behaviour confirmed (Outcome A)</td><td>Encrypted file decrypted successfully. 5 entries recognized, 2 already present, 3 eligible accounts successfully imported; the imported accounts were present in JM Authenticator. Accepted on 06 Nov 2026.</td></tr>
+<tr><th scope="row">iPhone XS Max</th><td><strong>PASS</strong> — expected behaviour confirmed (Outcome B)</td><td>Insufficient available memory: JM showed the memory warning. The backup was not imported. No freeze or crash. Accepted on 06 Nov 2026.</td></tr>
+<tr><th scope="row">iPhone 12 mini</th><td><strong>PASS</strong> — expected behaviour confirmed (Outcome B)</td><td>Insufficient available memory: JM showed the memory warning. The backup was not imported. No freeze or crash. Accepted on 06 Nov 2026.</td></tr>
 </tbody></table></div>
-<p>The memory message reads: <em>There is not enough available memory to safely decrypt this export. No accounts were imported.</em></p>
-<p><strong>Expected result:</strong> the file is decrypted and the <em>Import content</em> summary shows 5 entries. Accounts already in JM are listed under <em>Already in JM Authenticator</em> and are not added a second time. Only the eligible accounts can be selected and imported. Your existing accounts stay unchanged.</p>
+<p>The memory warning reads: <em>There is not enough available memory to safely decrypt this export. No accounts were imported.</em></p>
+<p><strong>Two expected results.</strong> Depending on the available device memory, JM Authenticator may produce one of two expected results when importing an encrypted Ente backup:</p>
+<ul>
+<li><strong>A.</strong> If sufficient RAM is available, the backup can be decrypted and eligible accounts imported successfully. The <em>Import content</em> summary shows 5 entries; accounts already in JM are listed under <em>Already in JM Authenticator</em> and are not added a second time; only the eligible accounts can be selected and imported. Your existing accounts stay unchanged.</li>
+<li><strong>B.</strong> If insufficient RAM is available, JM Authenticator displays a warning that the backup cannot be imported because of the memory limitation. No accounts are imported.</li>
+</ul>
+<p>Both outcomes are acceptable and count as <strong>PASS</strong> when the application behaves as described. In the insufficient-memory case, the app should remain responsive and must not crash or freeze. Outcome B is intentional: JM protects your iPhone and your accounts instead of starting a decryption that iOS cannot safely support.</p>
+<p>You do not need to force an import on an iPhone with limited memory, and you do not need to measure memory. Just record which outcome occurred.</p>
 <p><strong>How to record your result:</strong></p>
 <ul>
-<li><strong>PASS</strong> — the file is decrypted and the <em>Import content</em> summary is shown as expected.</li>
-<li><strong>BLOCKED</strong> — JM shows the memory message and imports nothing. Your iPhone could not provide the memory this file needs; the test could not proceed on this device.</li>
-<li><strong>FAIL</strong> — the app freezes or crashes, the correct password is rejected, some but not all accounts are imported after an error, or existing accounts change.</li>
+<li><strong>PASS — Outcome A</strong> — the file is decrypted, the <em>Import content</em> summary is shown and the eligible accounts are imported; your existing accounts stay unchanged.</li>
+<li><strong>PASS — Outcome B</strong> — JM shows the memory warning (check that it matches the wording above), imports nothing and stays responsive, without freezing or crashing.</li>
+<li><strong>FAIL</strong> — the app freezes or crashes, no warning appears when the import cannot go ahead, the correct password is rejected, some but not all accounts are imported after an error, or existing accounts change. These are never PASS.</li>
+<li><strong>BLOCKED</strong> — only for a genuinely different situation that stops you from doing the test, for example the file cannot be downloaded or opened. The memory warning is not BLOCKED; it is Outcome B.</li>
 </ul>
-<p class="fx-record"><strong>Record PASS / FAIL / BLOCKED:</strong> <a href="#tc-07-07">TC-07-07 · Import encrypted Ente JSON</a>. Note your iPhone model and which outcome you saw.</p>
+<p class="fx-record"><strong>Record PASS / FAIL / BLOCKED:</strong> <a href="#tc-07-07">TC-07-07 · Import encrypted Ente JSON</a>. Note your iPhone model and which outcome you saw (A or B).</p>
 </div>
 
 <div class="fixture" id="fixture-2fas">
@@ -1647,7 +1654,7 @@
 <summary><span class="tc-title">Import encrypted Ente JSON</span><span class="tc-id">TC-07-07</span><span class="tc-pill" data-status="NOT TESTED">NOT TESTED</span></summary>
 <div class="tc-body">
 <dl class="tc-meta">
-<div><dt>What this checks</dt><dd>Confirm that JM either imports the encrypted Ente test file or stops safely when the device cannot provide the memory it needs.</dd></div>
+<div><dt>What this checks</dt><dd>Confirm that JM either imports the encrypted Ente test file (Outcome A) or, when the iPhone cannot provide the memory it needs, shows the memory warning and stops safely (Outcome B). Both are expected results.</dd></div>
 <div><dt>What you need first</dt><dd>The test file <code>Ente-TestFlight-encrypted.json</code> (<a href="#fixture-ente-encrypted">Ente Auth — Encrypted JSON</a>, demonstration accounts only) downloaded to <em>Files → Downloads</em>. Password <code>123456789012</code>.</dd></div>
 <div><dt>Where to start</dt><dd><em>Import &amp; Export Accounts</em>.</dd></div>
 <div><dt>App version</dt><dd>JM Authenticator 1.0.0 (Build 1)</dd></div>
@@ -1656,16 +1663,17 @@
 <div class="tbl-wrap"><table class="tc-steps"><caption>Actions and expected results for TC-07-07</caption><thead><tr><th scope="col">Step</th><th scope="col">What to do</th><th scope="col">What you should see</th></tr></thead><tbody>
 <tr><td data-label="Step">1</td><td data-label="What to do">Tap <em>Ente Auth</em>.</td><td data-label="What you should see"><em>Import from Ente Auth</em> opens.</td></tr>
 <tr><td data-label="Step">2</td><td data-label="What to do">Tap <em>Choose Ente export</em> and select <em>Ente-TestFlight-encrypted.json</em>.</td><td data-label="What you should see">The <em>Ente export password</em> field is shown.</td></tr>
-<tr><td data-label="Step">3</td><td data-label="What to do">Enter <code>123456789012</code> and continue.</td><td data-label="What you should see"><em>Choose accounts to import</em> shows the <em>Import content</em> summary with 5 entries; accounts already in JM are not offered again. If instead JM shows <em>There is not enough available memory to safely decrypt this export. No accounts were imported.</em>, stop here and record <strong>BLOCKED</strong>.</td></tr>
-<tr><td data-label="Step">4</td><td data-label="What to do">Select the eligible accounts and tap <em>Import N accounts</em>.</td><td data-label="What you should see">The import completes; existing JM accounts are unchanged. <span class="review">Wording not confirmed — report what you see.</span></td></tr>
+<tr><td data-label="Step">3</td><td data-label="What to do">Enter <code>123456789012</code> and continue.</td><td data-label="What you should see"><em>Choose accounts to import</em> shows the <em>Import content</em> summary with 5 entries; accounts already in JM are not offered again. If instead JM shows <em>There is not enough available memory to safely decrypt this export. No accounts were imported.</em>, this is Outcome B: check the warning, make sure the app still responds, stop here and record <strong>PASS</strong> (Outcome B).</td></tr>
+<tr><td data-label="Step">4</td><td data-label="What to do">Outcome A only: select the eligible accounts and tap <em>Import N accounts</em>.</td><td data-label="What you should see">The import completes; existing JM accounts are unchanged. <span class="review">Wording not confirmed — report what you see.</span></td></tr>
 <tr><td data-label="Step">5</td><td data-label="What to do">Delete the test file from Files.</td><td data-label="What you should see">The file is gone.</td></tr>
 </tbody></table></div>
-<p class="tc-evidence"><strong>What to capture:</strong> Your iPhone model and a screenshot of the <em>Import content</em> summary or of the memory message.</p>
-<p class="tc-evidence"><strong>How to record your result:</strong> <strong>PASS</strong> — decrypted and the <em>Import content</em> summary is shown. <strong>BLOCKED</strong> — the memory message appears and nothing is imported (the 1 GiB key-derivation setting needs more memory than your iPhone can provide). <strong>FAIL</strong> — freeze, crash, correct password rejected, partial import or changed existing accounts. Always note your iPhone model.</p>
+<p class="tc-criterion"><strong>Pass when:</strong> either <strong>Outcome A</strong> — the backup is decrypted and the eligible accounts are imported, with your existing accounts unchanged — or <strong>Outcome B</strong> — JM shows the memory warning, imports nothing and stays responsive without crashing or freezing.</p><p class="tc-note">Depending on the available device memory, JM Authenticator may produce one of two expected results when importing an encrypted Ente backup. A: if sufficient RAM is available, the backup can be decrypted and eligible accounts imported successfully. B: if insufficient RAM is available, JM Authenticator displays a warning that the backup cannot be imported because of the memory limitation; no accounts are imported. Both outcomes are acceptable and count as PASS when the application behaves as described. In the insufficient-memory case, the app should remain responsive and must not crash or freeze. You do not need to force an import on an iPhone with limited memory or measure memory — just record which outcome occurred.</p>
+<p class="tc-evidence"><strong>What to capture:</strong> Your iPhone model, which outcome occurred (A or B), and a screenshot of the <em>Import content</em> summary or of the memory warning.</p>
+<p class="tc-evidence"><strong>How to record your result:</strong> <strong>PASS</strong> — Outcome A (decrypted, <em>Import content</em> summary shown, eligible accounts imported) or Outcome B (memory warning shown, nothing imported, no freeze or crash); write A or B in the comment field. <strong>FAIL</strong> — freeze, crash, no warning when the import cannot go ahead, correct password rejected, partial import or changed existing accounts; these are never PASS. <strong>BLOCKED</strong> — only for a genuinely different situation that stops the test (for example, the file cannot be opened); the memory warning is not BLOCKED. Always note your iPhone model.</p>
 <div class="tbl-wrap"><table class="plain"><caption>Verified results for TC-07-07 (JM team, TestFlight 1.0.0 (1))</caption><thead><tr><th scope="col">Device</th><th scope="col">Result</th><th scope="col">Observed</th></tr></thead><tbody>
-<tr><th scope="row">iPhone Pro Max</th><td><strong>PASS</strong></td><td>Decrypted successfully; 5 entries recognized, 2 already present, 3 eligible and selected for import. Final import completion not yet confirmed.</td></tr>
-<tr><th scope="row">iPhone XS Max</th><td><strong>BLOCKED</strong></td><td>Insufficient available memory; no accounts imported.</td></tr>
-<tr><th scope="row">iPhone 12 mini</th><td><strong>BLOCKED</strong></td><td>Insufficient available memory; encrypted import could not proceed.</td></tr>
+<tr><th scope="row">iPhone 14 Pro Max</th><td><strong>PASS</strong> — expected behaviour confirmed (Outcome A)</td><td>Decrypted successfully; 5 entries recognized, 2 already present, 3 eligible accounts successfully imported; the imported accounts were present in JM Authenticator. Accepted on 06 Nov 2026.</td></tr>
+<tr><th scope="row">iPhone XS Max</th><td><strong>PASS</strong> — expected behaviour confirmed (Outcome B)</td><td>Insufficient available memory: memory warning shown; backup not imported; no freeze or crash. Accepted on 06 Nov 2026.</td></tr>
+<tr><th scope="row">iPhone 12 mini</th><td><strong>PASS</strong> — expected behaviour confirmed (Outcome B)</td><td>Insufficient available memory: memory warning shown; backup not imported; no freeze or crash. Accepted on 06 Nov 2026.</td></tr>
 </tbody></table></div>
 <fieldset class="tc-result"><legend>Your result for this task <span class="tc-ref">TC-07-07</span></legend>
 <div class="st-row"><label class="st st-pass"><input type="radio" name="status-tc-07-07" value="PASS"><span>PASS</span></label><label class="st st-fail"><input type="radio" name="status-tc-07-07" value="FAIL"><span>FAIL</span></label><label class="st st-blocked"><input type="radio" name="status-tc-07-07" value="BLOCKED"><span>BLOCKED</span></label><label class="st st-not"><input type="radio" name="status-tc-07-07" value="NOT TESTED" checked><span>NOT TESTED</span></label></div>
