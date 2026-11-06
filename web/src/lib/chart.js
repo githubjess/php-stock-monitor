@@ -16,19 +16,28 @@ export function niceTicks(min, max, count = 4) {
 }
 
 /**
- * Aligns a second series to the main series' timestamps (last known value at or
- * before each main timestamp, within maxGapMs). Used for honest comparison.
+ * Aligns a second series to the main series' timestamps: the last known value at
+ * or before each main timestamp, within maxGapMs. Listings on other continents
+ * rarely share bars, so while the other market is closed its last price is
+ * carried forward (flat). `sourceTimes[i]` is the time of the bar actually used.
  */
 export function alignByTime(mainPoints, otherPoints, maxGapMs) {
-  const other = (otherPoints || []).map((p) => ({ t: Date.parse(p.time), v: p.close })).sort((a, b) => a.t - b.t);
+  const other = (otherPoints || [])
+    .map((p) => ({ t: Date.parse(p.time), v: p.close, time: p.time }))
+    .filter((p) => Number.isFinite(p.t) && p.v != null)
+    .sort((a, b) => a.t - b.t);
+  const values = [];
+  const sourceTimes = [];
   let j = 0;
-  return (mainPoints || []).map((p) => {
+  for (const p of mainPoints || []) {
     const t = Date.parse(p.time);
     while (j + 1 < other.length && other[j + 1].t <= t) j += 1;
     const candidate = other[j];
-    if (!candidate || candidate.t > t || t - candidate.t > maxGapMs) return null;
-    return candidate.v;
-  });
+    const ok = candidate && candidate.t <= t && t - candidate.t <= maxGapMs;
+    values.push(ok ? candidate.v : null);
+    sourceTimes.push(ok ? candidate.time : null);
+  }
+  return { values, sourceTimes };
 }
 
 /** Rebase a series to percent change from its first non-null value. */

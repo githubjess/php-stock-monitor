@@ -17,15 +17,27 @@ import { INTERVAL_MS, alignByTime } from "../lib/chart.js";
 import { getTradeStatus, venueShortName } from "../lib/markets.js";
 import { formatAge, formatAxisTime, formatDayTime, intervalLabel } from "../lib/time.js";
 
+// One colour per compare slot (themed via CSS), plus fixed variants for the light tooltip.
+const COMPARE_COLORS = ["var(--chart-compare)", "var(--chart-compare-2)", "var(--chart-compare-3)"];
+const TIP_COLORS = ["#d97706", "#0d9488", "#a21caf"];
+
 function lastValue(values) {
   for (let i = values.length - 1; i >= 0; i -= 1) if (values[i] != null) return values[i];
   return null;
 }
 
+// How long the compared listing's last price may be carried forward while its
+// market is closed (covers overnight, weekends and short holidays).
 function maxGapFor(interval) {
   const ms = INTERVAL_MS[interval] || 86400000;
-  if (interval === "1d") return ms * 4;
+  if (interval === "1d") return ms * 7;
+  if (ms < 86400000) return 4 * 86400000;
   return ms * 2;
+}
+
+// A compared value older than this is shown as "last trade" in the tooltip.
+function freshGapFor(interval) {
+  return (INTERVAL_MS[interval] || 86400000) * 2;
 }
 
 export default function PricePanel({
@@ -40,10 +52,10 @@ export default function PricePanel({
   fxRates,
   currencyMode,
   onCurrencyMode,
-  compareTicker,
+  compareTickers,
   compareOptions,
   onCompareChange,
-  compareHistory,
+  compareHistories,
   compareLoading,
   viewerZone,
   viewerLabel,
@@ -61,7 +73,10 @@ export default function PricePanel({
     if (points.length < 2) return null;
     const times = points.map((p) => p.time);
     const main = points.map((p) => conv(p.close));
-    const compareActive = Boolean(compareTicker && compareHistory?.points?.length);
+    const picked = compareTickers
+      .map((ticker, slot) => ({ ticker, slot, history: compareHistories[ticker] }))
+      .filter((c) => c.ticker && c.history?.points?.length);
+    const compareActive = picked.length > 0;
     if (!compareActive) {
       const first = main.find((v) => v != null);
       const last = main[main.length - 1];
@@ -78,30 +93,49 @@ export default function PricePanel({
         changePct: last != null && first ? (last / first - 1) * 100 : null,
       };
     }
-    const compareRaw = alignByTime(points, compareHistory.points, maxGapFor(interval));
-    const start = main.findIndex((v, i) => v != null && compareRaw[i] != null);
-    if (start < 0) {
-      return { times, compareActive, noOverlap: true, series: [{ key: "main", values: main, color: "var(--chart-line)", area: true }], main };
+    const alignedAll = picked.map((c) => {
+      const aligned = alignByTime(points, c.history.points, maxGapFor(interval));
+      return { ...c, color: COMPARE_COLORS[c.slot], raw: aligned.values, sourceTimes: aligned.sourceTimes };
+    });
+    // Listings that never overlap the main share in this range cannot be rebased.
+    const compares = alignedAll.filter((c) => c.raw.some((v, i) => v != null && main[i] != null));
+    const noOverlapTickers = alignedAll.filter((c) => !compares.includes(c)).map((c) => c.ticker);
+    if (!compares.length) {
+      return { times, compareActive, noOverlap: true, noOverlapTickers, series: [{ key: "main", values: main, color: "var(--chart-line)", area: true }], main };
     }
-    const mainPct = main.map((v) => (v == null ? null : (v / main[start] - 1) * 100));
-    const comparePct = compareRaw.map((v) => (v == null ? null : (v / compareRaw[start] - 1) * 100));
+    // Common start: first bar where the main share and every compared line have a price.
+    let start = main.findIndex((v, i) => v != null && compares.every((c) => c.raw[i] != null));
+    if (start < 0) start = main.findIndex((v, i) => v != null && compares.some((c) => c.raw[i] != null));
+    const mainPct = main.map((v, i) => (v == null || i < start ? null : (v / main[start] - 1) * 100));
+    for (const c of compares) {
+      const base = c.raw.find((v, i) => i >= start && v != null);
+      c.pct = c.raw.map((v, i) => (v == null || i < start || !base ? null : (v / base - 1) * 100));
+    }
     return {
       times,
       compareActive,
       main,
-      compareRaw,
       start,
+      compares,
+      noOverlapTickers,
       series: [
+        // Compared lines first so they are drawn behind the main line; no area fill.
+        ...compares.map((c) => ({
+          key: `compare-${c.slot}`,
+          values: c.pct,
+          color: c.color,
+          width: 2,
+          opacity: 0.6,
+          endLabel: `${c.ticker} ${formatPercent(lastValue(c.pct), 1)}`,
+        })),
         { key: "main", values: mainPct, color: "var(--chart-line)", endLabel: `${quote?.ticker || ""} ${formatPercent(lastValue(mainPct), 1)}` },
-        { key: "compare", values: comparePct, color: "var(--compare)", area: true, endLabel: `${compareTicker} ${formatPercent(lastValue(comparePct), 1)}` },
       ],
       baseline: { value: 0, label: "0%" },
       mainPct,
-      comparePct,
     };
     // conv depends on useEur/native/fxRates
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [history, compareHistory, compareTicker, useEur, native, fxRates, range, interval, shownCurrency, quote?.ticker]);
+  }, [history, compareHistories, compareTickers, useEur, native, fxRates, range, interval, shownCurrency, quote?.ticker]);
 
   const exchangeZone = status?.timeZone;
   const exchangeCity = status?.city;
@@ -123,18 +157,26 @@ export default function PricePanel({
         </>
       );
     }
-    const compareCurrency = useEur ? "EUR" : compareHistory?.currency;
-    const compareValue = chart.compareRaw[i] != null ? (useEur ? convertToEur(chart.compareRaw[i], compareHistory?.currency, fxRates) : chart.compareRaw[i]) : null;
     return (
       <>
         <span className="tipRow">
           <i className="tipSwatch main" />
           {quote?.ticker} <strong>{formatPercent(chart.mainPct[i])}</strong> {formatMoney(chart.main[i], shownCurrency)}
         </span>
-        <span className="tipRow">
-          <i className="tipSwatch compare" />
-          {compareTicker} <strong>{formatPercent(chart.comparePct[i])}</strong> {compareValue != null ? formatMoney(compareValue, compareCurrency) : "no trade"}
-        </span>
+        {chart.compares.map((c) => {
+          const currency = c.history?.currency;
+          const raw = c.raw[i];
+          const value = raw != null ? (useEur ? convertToEur(raw, currency, fxRates) : raw) : null;
+          const sourceTime = c.sourceTimes[i];
+          const carried = sourceTime && Date.parse(chart.times[i]) - Date.parse(sourceTime) > freshGapFor(interval);
+          return (
+            <span className="tipRow" key={c.ticker}>
+              <i className="tipSwatch" style={{ background: TIP_COLORS[c.slot] }} />
+              {c.ticker} <strong>{formatPercent(c.pct[i])}</strong> {value != null ? formatMoney(value, useEur ? "EUR" : currency) : "no trade"}
+              {carried ? ` · closed, last ${formatDayTime(sourceTime, viewerZone)}` : ""}
+            </span>
+          );
+        })}
         <span>{time}</span>
       </>
     );
@@ -250,18 +292,29 @@ export default function PricePanel({
         ) : (
           <span className="chip static">Prices in {native || "EUR"}</span>
         )}
-        <label className="compareControl" htmlFor="compare-ticker">
-          <span>Compare with</span>
-          <select id="compare-ticker" value={compareTicker} onChange={(e) => onCompareChange(e.target.value)}>
-            <option value="">None</option>
-            {compareOptions.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>
-        </label>
-        {compareLoading ? <span className="small">Loading {compareTicker}…</span> : null}
+        <div className="compareControl" role="group" aria-labelledby="compare-label">
+          <span id="compare-label">Compare with</span>
+          {compareTickers.map((value, slot) => (
+            <span className="compareSlot" key={slot}>
+              <i className="compareSwatch" style={{ background: COMPARE_COLORS[slot] }} aria-hidden="true" />
+              <select
+                aria-label={`Compare share ${slot + 1}`}
+                value={value}
+                onChange={(e) => onCompareChange(slot, e.target.value)}
+              >
+                <option value="">None</option>
+                {compareOptions
+                  .filter((t) => t === value || !compareTickers.includes(t))
+                  .map((t) => (
+                    <option key={t} value={t}>
+                      {t}
+                    </option>
+                  ))}
+              </select>
+            </span>
+          ))}
+        </div>
+        {compareLoading.length ? <span className="small">Loading {compareLoading.join(", ")}…</span> : null}
       </div>
 
       {historyErr ? <div className="error">{historyErr}</div> : null}
@@ -296,14 +349,21 @@ export default function PricePanel({
                   <span>{quote?.ticker}</span>
                   <strong className={directionClass(lastValue(chart.mainPct))}>{formatPercent(lastValue(chart.mainPct))}</strong>
                 </div>
-                <div className="statTile">
-                  <span>{compareTicker}</span>
-                  <strong className={directionClass(lastValue(chart.comparePct))}>{formatPercent(lastValue(chart.comparePct))}</strong>
-                </div>
-                <div className="statTile">
-                  <span>Gap</span>
-                  <strong>{formatNumber(Math.abs((lastValue(chart.mainPct) ?? 0) - (lastValue(chart.comparePct) ?? 0)), 1)} pts</strong>
-                </div>
+                {chart.compares.map((c) => {
+                  const gap = (lastValue(chart.mainPct) ?? 0) - (lastValue(c.pct) ?? 0);
+                  return (
+                    <div className="statTile" key={c.ticker}>
+                      <span>
+                        <i className="compareSwatch" style={{ background: c.color }} aria-hidden="true" />
+                        {c.ticker}
+                      </span>
+                      <strong className={directionClass(lastValue(c.pct))}>{formatPercent(lastValue(c.pct))}</strong>
+                      <em>
+                        Gap {formatNumber(Math.abs(gap), 1)} pts {gap >= 0 ? "behind" : "ahead of"} {quote?.ticker}
+                      </em>
+                    </div>
+                  );
+                })}
               </>
             )}
           </div>
@@ -327,14 +387,17 @@ export default function PricePanel({
                 <i className="legendLine main" />
                 {quote?.ticker}
               </span>
-              <span>
-                <i className="legendLine compare" />
-                {compareTicker}
-              </span>
+              {(chart.compares || []).map((c) => (
+                <span key={c.ticker}>
+                  <i className="legendLine compare" style={{ background: c.color }} />
+                  {c.ticker}
+                </span>
+              ))}
               <span className="small">
                 {chart.noOverlap
-                  ? "These two listings never traded in the same bars for this range."
-                  : "Both lines start at 0% at the first shared bar and are matched by timestamp, so their moves are directly comparable."}
+                  ? "The compared listings never traded in the same period for this range."
+                  : "All lines start at 0% at the first shared bar and are matched by timestamp. While a market is closed, its last price is held flat."}
+                {!chart.noOverlap && chart.noOverlapTickers?.length ? ` No overlap in this range: ${chart.noOverlapTickers.join(", ")}.` : ""}
               </span>
             </div>
           ) : null}

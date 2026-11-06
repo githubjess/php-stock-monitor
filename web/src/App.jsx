@@ -29,6 +29,8 @@ const REFRESH_OPTIONS = [5, 10, 15, 30, 60];
 const CLOSED_REFRESH_SEC = 300;
 const EXTENDED_STATES = ["PRE", "PREPRE", "POST", "POSTPOST"];
 
+const COMPARE_SLOTS = 3;
+
 function readUrlState() {
   try {
     const params = new URLSearchParams(window.location.search);
@@ -36,10 +38,14 @@ function readUrlState() {
       t: normalizeTicker(params.get("t")),
       r: params.get("r") || "",
       tab: params.get("tab") || "",
-      vs: normalizeTicker(params.get("vs")),
+      vs: String(params.get("vs") || "")
+        .split(",")
+        .map(normalizeTicker)
+        .filter(Boolean)
+        .slice(0, COMPARE_SLOTS),
     };
   } catch {
-    return { t: "", r: "", tab: "", vs: "" };
+    return { t: "", r: "", tab: "", vs: [] };
   }
 }
 
@@ -60,7 +66,8 @@ export default function App() {
   const [listingOverride, setListingOverride] = useState("");
   const [selectedRange, setSelectedRange] = useState(RANGE_OPTIONS.includes(urlState.r) ? urlState.r : "1m");
   const [activeTab, setActiveTab] = useState(TABS.some((t) => t.key === urlState.tab) ? urlState.tab : "price");
-  const [compareTicker, setCompareTicker] = useState(urlState.vs || "");
+  // Up to three comparison listings; "" marks an empty slot.
+  const [compareTickers, setCompareTickers] = useState(() => Array.from({ length: COMPARE_SLOTS }, (_, i) => urlState.vs[i] || ""));
 
   const [input, setInput] = useState("");
   const [addStatus, setAddStatus] = useState(null);
@@ -84,8 +91,8 @@ export default function App() {
   const [historyLoading, setHistoryLoading] = useState(false);
   const [historyErr, setHistoryErr] = useState("");
   const [historyTick, setHistoryTick] = useState(0);
-  const [compareHistory, setCompareHistory] = useState(null);
-  const [compareLoading, setCompareLoading] = useState(false);
+  const [compareHistories, setCompareHistories] = useState({});
+  const [compareLoading, setCompareLoading] = useState([]);
 
   const [rawSignalSettings, setRawSignalSettings] = useState(() => loadSignalSettings("1m"));
   const [currencyMode, setCurrencyMode] = useState(() => (loadPref("panel-currency", "eur") === "native" ? "native" : "eur"));
@@ -208,10 +215,16 @@ export default function App() {
 
   const currencyKey = useMemo(
     () =>
-      [...new Set([...(data?.quotes || []).map((q) => q.currency), history?.currency, compareHistory?.currency].filter(Boolean).map((c) => String(c).toUpperCase()))]
+      [
+        ...new Set(
+          [...(data?.quotes || []).map((q) => q.currency), history?.currency, ...Object.values(compareHistories).map((h) => h?.currency)]
+            .filter(Boolean)
+            .map((c) => String(c).toUpperCase()),
+        ),
+      ]
         .sort()
         .join(","),
-    [data, history?.currency, compareHistory?.currency],
+    [data, history?.currency, compareHistories],
   );
 
   useEffect(() => {
@@ -266,29 +279,40 @@ export default function App() {
     [related, activeTicker, quotesByTicker, cleanedTickers, selectedTicker],
   );
 
+  // Drop picks that are no longer valid (e.g. the main share changed) or duplicated.
   useEffect(() => {
-    if (compareTicker && data && !compareOptions.includes(compareTicker)) setCompareTicker("");
-  }, [compareTicker, compareOptions, data]);
+    if (!data) return;
+    setCompareTickers((prev) => {
+      const next = prev.map((t, i) => (t && compareOptions.includes(t) && prev.indexOf(t) === i ? t : ""));
+      return next.every((t, i) => t === prev[i]) ? prev : next;
+    });
+  }, [compareOptions, data]);
 
+  const setCompareSlot = useCallback((slot, ticker) => {
+    setCompareTickers((prev) => prev.map((t, i) => (i === slot ? ticker : t === ticker ? "" : t)));
+  }, []);
+
+  const compareKey = compareTickers.filter(Boolean).join(",");
   const compareRequestRef = useRef(0);
   useEffect(() => {
-    if (!compareTicker) {
-      setCompareHistory(null);
+    const tickers = compareKey ? compareKey.split(",") : [];
+    const requestId = ++compareRequestRef.current;
+    if (!tickers.length) {
+      setCompareHistories({});
+      setCompareLoading([]);
       return;
     }
-    const requestId = ++compareRequestRef.current;
-    setCompareLoading(true);
-    fetchHistory(compareTicker, selectedRange)
-      .then((res) => {
-        if (requestId === compareRequestRef.current) setCompareHistory(res);
-      })
-      .catch(() => {
-        if (requestId === compareRequestRef.current) setCompareHistory(null);
-      })
-      .finally(() => {
-        if (requestId === compareRequestRef.current) setCompareLoading(false);
+    setCompareLoading(tickers);
+    Promise.allSettled(tickers.map((t) => fetchHistory(t, selectedRange))).then((results) => {
+      if (requestId !== compareRequestRef.current) return;
+      const next = {};
+      results.forEach((r, i) => {
+        if (r.status === "fulfilled" && r.value) next[tickers[i]] = r.value;
       });
-  }, [compareTicker, selectedRange, historyTick]);
+      setCompareHistories(next);
+      setCompareLoading([]);
+    });
+  }, [compareKey, selectedRange, historyTick]);
 
   /* ---------- URL keeps the current view shareable ---------- */
 
@@ -299,13 +323,13 @@ export default function App() {
       set("t", selectedTicker);
       set("r", selectedRange);
       set("tab", activeTab === "price" ? "" : activeTab);
-      set("vs", compareTicker);
+      set("vs", compareKey);
       const query = params.toString();
       window.history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`);
     } catch {
       /* history API unavailable */
     }
-  }, [selectedTicker, selectedRange, activeTab, compareTicker]);
+  }, [selectedTicker, selectedRange, activeTab, compareKey]);
 
   /* ---------- Signal settings ---------- */
 
@@ -541,10 +565,10 @@ export default function App() {
               fxRates={fxRates}
               currencyMode={currencyMode}
               onCurrencyMode={setCurrencyMode}
-              compareTicker={compareTicker}
+              compareTickers={compareTickers}
               compareOptions={compareOptions}
-              onCompareChange={setCompareTicker}
-              compareHistory={compareHistory}
+              onCompareChange={setCompareSlot}
+              compareHistories={compareHistories}
               compareLoading={compareLoading}
               viewerZone={viewerZone}
               viewerLabel={viewerLabel}
