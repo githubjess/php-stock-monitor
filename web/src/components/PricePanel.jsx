@@ -128,7 +128,7 @@ export default function PricePanel({
           opacity: 0.6,
           endLabel: `${c.ticker} ${formatPercent(lastValue(c.pct), 1)}`,
         })),
-        { key: "main", values: mainPct, color: "var(--chart-line)", endLabel: `${quote?.ticker || ""} ${formatPercent(lastValue(mainPct), 1)}` },
+        { key: "main", values: mainPct, color: "var(--chart-line)", area: true, endLabel: `${quote?.ticker || ""} ${formatPercent(lastValue(mainPct), 1)}` },
       ],
       baseline: { value: 0, label: "0%" },
       mainPct,

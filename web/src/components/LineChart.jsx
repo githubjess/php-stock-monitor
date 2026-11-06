@@ -231,6 +231,16 @@ export default function LineChart({
             </g>
           ) : null}
 
+          {/* Areas first, so every line is drawn above every shaded area. */}
+          {series.map((s) => {
+            if (!s.area || s.segmentColors) return null;
+            const d = buildPath(s.values, x, y);
+            if (!d) return null;
+            const firstIndex = s.values.findIndex((v) => v != null);
+            const last = lastIndexOf(s.values);
+            return <path key={`area-${s.key}`} d={`${d} L${x(last).toFixed(1)} ${bottom} L${x(firstIndex).toFixed(1)} ${bottom} Z`} fill={`url(#${uid}-${s.key})`} />;
+          })}
+
           {series.map((s) => {
             if (s.segmentColors) {
               return (
@@ -243,11 +253,8 @@ export default function LineChart({
             }
             const d = buildPath(s.values, x, y);
             if (!d) return null;
-            const firstIndex = s.values.findIndex((v) => v != null);
-            const last = lastIndexOf(s.values);
             return (
               <g key={s.key}>
-                {s.area ? <path d={`${d} L${x(last).toFixed(1)} ${bottom} L${x(firstIndex).toFixed(1)} ${bottom} Z`} fill={`url(#${uid}-${s.key})`} /> : null}
                 <path
                   d={d}
                   fill="none"
